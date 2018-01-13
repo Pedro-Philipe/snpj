@@ -10,9 +10,6 @@ from adesao.models import Usuario, Uf
 
 from ckeditor.widgets import CKEditorWidget
 
-from clever_selects.form_fields import ChainedChoiceField
-from clever_selects.forms import ChainedChoicesForm
-
 
 content_types = [
     'image/png',

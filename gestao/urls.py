@@ -17,7 +17,4 @@ urlpatterns = [
             views.AlterarUsuario.as_view(),
             login_url='adesao:login'), name='alterar_usuario'),
 
-    # UF e Município aninhados
-    url(r'^chain/municipio$', staff_member_required(views.MunicipioChain.as_view()), name='municipio_chain')
-
     ]
