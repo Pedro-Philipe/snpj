@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div align="center">
+    <h2>Email confirmado com sucesso</h2>
+    <p>
+      Para acessar o sistema vá para a página de login
+    </p>
+    <p>
+      <a class="btn btn-success" href="{% url 'adesao:login' %}">Login</a>
+    </p>
+  </div>
+</div>
+{% endblock content %}

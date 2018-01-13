@@ -1,0 +1,29 @@
+*.pyc
+snpj/wsgi.py
+*.swp
+*static*
+*staticfiles*
+*pycache*
+*media*
+.project
+.pydevproject
+*.mo
+*.sqlite
+*.json
+*migrations*
+*settings_*
+manage.py
+snpj/wsgi.py
+
+# ignore pycharm files
+*.idea
+
+# ignore visual studio
+*.pyproj
+*.suo
+*.user
+snpj.sln
+
+#ignore sublime
+*.sublime*
+

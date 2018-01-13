@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" dir="ltr">
+
+<head>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Lorem Ipsum</title>
+  {% load staticfiles %}
+  <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="{% static 'img/touch_icon.png' %}">
+
+  <!-- Plone CSS - only for preview, will be removed in rules.xml -->
+  <link media="screen" href="{% static 'css/plone.css' %}" type="text/css" rel="stylesheet" id="plone-css">
+  <!-- Theme CSS - only for preview, will be removed in rules and added in CSS registry -->
+  <link media="all" href="{% static 'css/mainLogin.css' %}" type="text/css" rel="stylesheet" id="main-css">
+  <link media="all" href="{% static 'css/styleLogin.css' %}" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<div id="particle-canvas"></div>
+
+  <div id="wrapper">
+
+    <!-- HEADER -->
+
+    <div id="header" role="banner">
+
+      <div>
+
+        <div id="logo">
+          <a href="{% url 'adesao:index' %}" title="#">
+            <span id="portal-title">Nome da logo</span>
+            <span id="portal-description" style="color:#ffffff">Subtítulo</span>
+          </a>
+
+        </div>
+
+
+        <br />
+        <br />
+        <br />
+        <br />
+
+
+        <div id="social-icons">
+          <ul>
+            <li id="portalredes-facebook" class="portalredes-item">
+              <a href="#" title="Facebook" target="_blank">
+              </a>
+            </li>
+            <li id="portalredes-twitter" class="portalredes-item">
+              <a href="#" title="Twitter" target="_blank">
+              </a>
+            </li>
+            <li id="portalredes-youtube" class="portalredes-item">
+              <a href="#" title="Youtube" target="_blank">
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <div id="sobre">
+        <ul>
+          <li id="link-sobre">
+            <a href="#">Sobre</a>
+          </li>
+          |
+          <li id="link-sobre">
+            <a href="#" target="_blank">Perguntas frequentes</a>
+          </li>
+          |
+          <li id="link-central">
+            <a href="{% url 'adesao:faleconosco' %}">Fale conosco</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- content -->
+
+    <div id="main" role="main">
+      <div id="plone-content">
+
+        <!-- Demo Plone Content -->
+
+        <div id="portal-columns" class="row">
+
+          <div id="viewlet-above-content">
+
+
+
+          </div>
+
+          <!-- Column 1 -->
+
+
+	 <section class="main">
+            <form class="form-2" action="{% url 'adesao:login' %}" method="post">{% csrf_token %}
+              {% if form.errors %}
+                <p style="color:red;">Senha ou CPF incorretos.</p>
+              {% endif %}
+              <h1><span class="log-in">Login</span></h1>
+              <p class="float">
+                <label for="login" style="color:#FFF"><i class="icon-user"></i>CPF:</label>
+                <input type="text" name="username" class="cpf" maxlength="14"/>
+              </p>
+              <p class="float">
+                <label for="password" style="color:#FFF"><i class="icon-lock"></i>Senha:</label>
+                <input type="password" name="password"/>
+              </p>
+              <p>
+                <a href="{% url 'adesao:esqueci_senha' %}" style="color:#FFF"><small>Esqueceu sua senha?</small></a>
+              </p>
+              <p class="clearfix">
+                <a href="{% url 'adesao:usuario' %}" class="log-twitter">Criar Conta</a>
+                <input id="submit" type="submit" name="submit" value="Acessar" />
+              </p>
+            </form>
+          </section>
+          <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+          <!-- Conteudo -->
+          <div id="portal-column-content" class="cell width-1:2 position-1:4">
+            <a name="acontent" id="acontent"></a>
+            <div id="viewlet-below-content"></div>
+
+          </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <!-- Column 2-->
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer" role="contentinfo">
+
+        <div class="clear"></div>
+        <div id="footer-brasil" class="footer-logos">
+            <div>
+                <a href="#" class="logo-right-footer">
+                    <img src="#" alt="Lorem Ipsum" />
+                </a>
+                <a href="#" class="logo-left-footer">
+                    <img src="#" alt="Lorem Ipsum" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- /Footer-->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery.formatter.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/validaCPF.js' %}"></script>
+    <script src="{% static 'js/constelacao.js' %}"></script>
+
+    {% verbatim %}
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $(".cpf").formatter({
+          'pattern': '{{999}}.{{999}}.{{999}}-{{99}}',
+          'persistent': false,
+        });
+
+        $(".form-2").submit(function(){
+          $(".cpf").formatter().resetPattern('{{99999999999}}')
+        });
+      });
+    </script>
+    {% endverbatim %}
+    <!-- Script da Barra do Governo -->
+</body>
+
+</html>
+
+<div id="particles"></div>

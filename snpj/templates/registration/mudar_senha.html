@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container">
+  <div align="center">
+    <h3>Alterar Senha</h3>
+  </div>
+
+  <form class="form-horizontal" method="post">{% csrf_token %}
+    <div class="form-group">
+      <label for="{{ form.old_password.id_for_label }}" class="col-sm-3 control-label">Senha antiga:</label>
+
+      <div class="col-sm-6">
+        {% render_field form.old_password class="form-control" %}
+        {{ form.old_password.errors }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.new_password1.id_for_label }}" class="col-sm-3 control-label">Nova senha:</label>
+
+      <div class="col-sm-6">
+        {% render_field form.new_password1 class="form-control" %}
+        {{ form.new_password1.errors }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.new_password2.id_for_label }}" class="col-sm-3 control-label">Repita a nova senha:</label>
+
+      <div class="col-sm-6">
+        {% render_field form.new_password2 class="form-control "%}
+        {{ form.new_password2.errors }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-9">
+        <input type="submit" class="btn btn-success" value="Confirmar" />
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock content %}

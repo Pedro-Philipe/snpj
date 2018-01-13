@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container">
+  <div class="container">
+    <div align="center">
+      <h3>Acesso</h3>
+      <p>Preencha o formulário abaixo com o seu CPF e sua senha.</p>
+    </div>
+  </div>
+  <form method="post" class="form-horizontal" action="{% url 'adesao:login' %}">{% csrf_token %}
+    <div class="form-group">
+      <label for="{{ form.username.id_for_label }}" class="col-sm-3 control-label">CPF</label>
+
+      <div class="col-sm-4">
+        {% render_field form.username class="form-control cpf" %}
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.password.id_for_label }}" class="col-sm-3 control-label">Senha</label>
+
+      <div class="col-sm-4">
+        {% render_field form.password class="form-control" %}
+        <a href="{% url 'password_reset'%}"><small>Esqueci minha senha</small></a>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-4">
+      {% if form.errors %}
+        <p>Senha ou CPF incorretos, por favor tente novamente.</p>
+      {% endif %}
+    </div>
+
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-10">
+        <input type="submit" class="btn btn-default" value="Entrar" />
+        <a class="btn btn-default" href="{% url 'adesao:index' %}">Voltar</a>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock content %}
+
+{% block js %}
+{% verbatim %}
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".form-horizontal").submit(function(){
+      $(".cpf").formatter().resetPattern('{{99999999999}}');
+    });
+  });
+</script>
+{% endverbatim %}
+{% endblock js %}

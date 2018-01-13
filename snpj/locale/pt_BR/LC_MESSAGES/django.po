@@ -1,0 +1,259 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-23 16:17-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: templates/admin/base_site.html:3
+msgid "Django site admin"
+msgstr ""
+
+#: templates/base.html:10
+msgid "Título do site"
+msgstr "Sistema Nacional de Cultura"
+
+#: templates/base.html:52
+msgid "Início"
+msgstr "Início"
+
+#: templates/base.html:55 templates/base.html.py:57
+msgid "Ente Federado"
+msgstr "Ente Federado"
+
+#: templates/base.html:59
+msgid "Interlocutor"
+msgstr "Interlocutor"
+
+#: templates/base.html:60
+msgid "Responsável"
+msgstr "Responsável"
+
+#: templates/base.html:65
+msgid "Imprimir"
+msgstr "Imprimir "
+
+#: templates/base.html:68
+msgid "Acordo de Cooperação"
+msgstr "Acordo de Cooperação"
+
+#: templates/base.html:69
+msgid "Termo de Solicitação"
+msgstr "Termo de Solicitação"
+
+#: templates/base.html:73
+msgid "Plano de Trabalho"
+msgstr "Plano de Trabalho"
+
+#: templates/base.html:82
+msgid "Alterar Senha"
+msgstr "Alterar Senha"
+
+#: templates/base.html:83
+msgid "Sair"
+msgstr "Sair"
+
+#: templates/base.html:96
+msgid "Ministério da Cultura"
+msgstr "Ministério da Cultura"
+
+#: templates/base.html:97
+msgid "Nome da secretaria"
+msgstr "SAI - Secretaria de Articulação Institucional"
+
+#: templates/base.html:98
+msgid "Endereço do ministério"
+msgstr ""
+"- Edifício Parque Cidade Corporate – SCS, Quadra 09, Lote C, Torre B, 10º "
+"Andar"
+
+#: templates/base.html:99
+msgid "Continuação do endereço do ministério"
+msgstr "CEP: 70308-200 Brasília-DF - (61) 2024-2325|2328|2036 "
+
+#: templates/home.html:5
+msgid "Título da tela home"
+msgstr "Bem vindo ao Sistema Nacional de Cultura"
+
+msgid "Primeiro parágrafo da mensagem da tela home"
+msgstr ""
+"O Sistema Nacional de Cultura (SNC) é um instrumento de gestão "
+"compartilhada de políticas públicas de cultura entre os entes federados e a "
+"sociedade civil. Seu principal objetivo é fortalecer as políticas culturais da "
+"União, Estados, Distrito Federal e Municípios por meio de institucionalização e "
+"ampliação da participação social para promover desenvolvimento – humano "
+"social e econômico – com pleno exercício dos direitos culturais."
+
+msgid "Segundo parágrafo da mensagem da tela home"
+msgstr ""
+"Clique nas abas “Ente Federado”, “Interlocutor” e “Responsável” e preencha as "
+"informações para gerar o Acordo de Cooperação Federativa e a Solicitação de "
+"Integração ao SNC."
+
+#: templates/planotrabalho/plano_trabalho.html:6
+msgid "Primeiro parágrafo da tela inicial do Plano de Trabalho"
+msgstr ""
+"Você está no ambiente do Plano de Trabalho. Nesta fase, será preciso "
+"estabelecer um prazo para a   criação de cada um dos componentes que deverão "
+"ser instituídos."
+
+#: templates/planotrabalho/plano_trabalho.html:9
+msgid "Segundo parágrafo da tela inicial do Plano de Trabalho"
+msgstr ""
+"Lembramos que o prazo limite para a execução de todas as etapas do Plano de "
+"Trabalho é de 2 anos, contados a partir da publicação do Acordo de "
+"Cooperação Federativa no Diário Oficial da União."
+
+#: templates/planotrabalho/plano_trabalho.html:10
+msgid "Terceiro parágrafo da tela inicial do Plano de Trabalho"
+msgstr ""
+"Caso o Plano de Trabalho esteja próximo do prazo final, e as etapas ainda "
+"não estejam totalmente concluídas, será necessário solicitar a prorrogação, "
+"por meio de ofício assinado pelo Chefe do Executivo."
+
+#: templates/planotrabalho/plano_trabalho.html:13
+msgid "Quarto parágrafo da tela inicial do Plano de Trabalho"
+msgstr ""
+"No momento em que as tarefas forem sendo concluídas, será preciso anexar "
+"comprovações de execução de cada uma delas (em campos disponíveis na "
+"plataforma) para serem validadas pela Secretaria de Articulação "
+"Institucional deste Ministério. Com isso, o progresso de execução do Plano "
+"de Trabalho poderá ser acompanhado."
+
+#: templates/planotrabalho/plano_trabalho.html:21
+msgid "Título do primeiro passo do Plano de Trabalho"
+msgstr "I. Institucionalização do Sistema Estadual/Municipal de Cultura"
+
+#: templates/planotrabalho/plano_trabalho.html:24
+msgid "Item 1-a do Plano de Trabalho"
+msgstr "a) Lei de Criação do Sistema de Cultura"
+
+#: templates/planotrabalho/plano_trabalho.html:27
+msgid "Data final lei de cultura"
+msgstr "Data final para sanção da Lei do Sistema de Cultura:"
+
+#: templates/planotrabalho/plano_trabalho.html:28
+#: templates/planotrabalho/plano_trabalho.html:44
+#: templates/planotrabalho/plano_trabalho.html:54
+#: templates/planotrabalho/plano_trabalho.html:64
+#: templates/planotrabalho/plano_trabalho.html:80
+msgid "Modificar"
+msgstr "Modificar"
+
+#: templates/planotrabalho/plano_trabalho.html:30
+#: templates/planotrabalho/plano_trabalho.html:46
+#: templates/planotrabalho/plano_trabalho.html:56
+#: templates/planotrabalho/plano_trabalho.html:66
+#: templates/planotrabalho/plano_trabalho.html:82
+msgid "Preencher"
+msgstr "Preencher"
+
+#: templates/planotrabalho/plano_trabalho.html:36
+msgid "Título do segundo passo do plano de trabalho"
+msgstr "II. Estruturação dos Componentes"
+
+#: templates/planotrabalho/plano_trabalho.html:40
+msgid "item criação Órgão Gestor"
+msgstr "a) Órgão Gestor"
+
+#: templates/planotrabalho/plano_trabalho.html:43
+msgid "Data final para estruturação da Secretaria de Cultura:"
+msgstr "Data final para estruturação da Secretaria de Cultura:"
+
+#: templates/planotrabalho/plano_trabalho.html:50
+msgid "b) Conselho de Política Cultural"
+msgstr "b) Conselho de Política Cultural"
+
+#: templates/planotrabalho/plano_trabalho.html:53
+msgid "Data final para instalação do Conselho de Política Cultural:"
+msgstr "Data final para instalação do Conselho de Política Cultural:"
+
+#: templates/planotrabalho/plano_trabalho.html:60
+msgid "c) Fundo de Cultura"
+msgstr "c) Fundo de Cultura"
+
+#: templates/planotrabalho/plano_trabalho.html:63
+msgid "Data final para instituição do Fundo de Cultura:"
+msgstr "Data final para instituição do Fundo de Cultura:"
+
+#: templates/planotrabalho/plano_trabalho.html:73
+msgid "III. Elaboração do Plano de Cultura"
+msgstr "III. Elaboração do Plano de Cultura"
+
+#: templates/planotrabalho/plano_trabalho.html:76
+msgid "a) Plano de Cultura"
+msgstr "a) Plano de Cultura"
+
+#: templates/planotrabalho/plano_trabalho.html:79
+msgid "Data final para sanção da Lei do Plano de Cultura:"
+msgstr "Data final para sanção da Lei do Plano de Cultura:"
+
+#: templates/prefeitura/mensagem_sucesso_prefeitura.html:4
+msgid "Cadastro/Alteração Realizado com Sucesso!"
+msgstr ""
+
+#: templates/prefeitura/mensagem_sucesso_prefeitura.html:5
+msgid "O Ente Federado foi cadastrado/alterado com sucesso."
+msgstr ""
+
+#: templates/prefeitura/mensagem_sucesso_prefeitura.html:6
+msgid "Próximo"
+msgstr ""
+
+#: templates/prefeitura/mensagem_sucesso_prefeitura.html:7
+msgid "Inicial"
+msgstr ""
+
+#: templates/prefeitura/selecionar_tipo_ente.html:6
+msgid "Cadastro de Ente Federado"
+msgstr "Cadastro de Ente Federado"
+
+#: templates/prefeitura/selecionar_tipo_ente.html:7
+msgid "Escolha de ente federado"
+msgstr ""
+"Selecione uma das opções abaixo, dependendo de qual tipo de Ente Federado "
+"você quer cadastrar."
+
+#: templates/prefeitura/selecionar_tipo_ente.html:8
+msgid "Prefeitura"
+msgstr "Prefeitura"
+
+#: templates/prefeitura/selecionar_tipo_ente.html:9
+msgid "Governo"
+msgstr "Governo Estadual"
+
+#: templates/registration/password_reset_complete.html:7
+msgid "Password reset complete"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:9
+msgid "Sua senha foi alterada com sucesso. Você já pode realizar o acesso."
+msgstr ""
+
+#: templates/registration/password_reset_email.html:2
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+
+#: templates/registration/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:8
+msgid "Your username, in case you've forgotten:"
+msgstr ""
