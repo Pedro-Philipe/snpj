@@ -14,8 +14,66 @@
   <!--<link media="all" href="{% static 'css/mainLogin.css' %}" type="text/css" rel="stylesheet" id="main-css"> -->
   <link media="all" href="{% static 'css/insideLogin.css' %}" type="text/css" rel="stylesheet" id="main-css">
 
-  <link media="all" href="{% static 'css/styleLogin.css' %}" type="text/css" rel="stylesheet">
-</head>
+  <link media="all" href="{% static 'css/styleLogin.css' %}" type="text/css" rel="stylesheet"></head>
+  <link media="all" href="{% static 'css/jquery-ui.min.css'%}" type="text/css" rel="stylesheet"></head>
+  <link media="all" href="http://ericjgagnon.github.io/wickedpicker/wickedpicker/wickedpicker.min.css" type="text/css" rel="stylesheet"></head>
+
+<script src="{% static 'js/jquery.min.js' %}" ></script>
+<script src="{% static 'js/jquery.mask.min.js' %}"></script>
+<script src="{% static 'js/jquery.formatter.min.js' %}"></script>
+<script src="{% static 'js/jquery-ui.min.js' %}"></script>
+<script src="{% static 'js/datepicker.js' %}" ></script>
+<script src="{% static 'js/leaflet.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/wickedpicker.js' %}"></script>
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+
+    $("body").prepend('<div id="overlay" style="height: 100%; width: 100%; opacity: 0.3; z-index: 100; position: fixed; background: url({% static "img/spinner.gif"%}) no-repeat center center; background-color: gray; display: none;"></div>');
+
+    $(".add").click(function() {
+      $(".telefone2").fadeIn();
+    });
+
+    $(".date").datepicker({
+    });
+
+    $('.time').wickedpicker({
+      twentyFour: true,
+      timeSeparator: ':',
+      title:'Escolha o horário'
+    });
+
+    $('#id_confirmar_email').bind("cut copy paste", function(e) {
+      e.preventDefault();
+    });
+
+    {% verbatim %}
+    $(".cnpj").formatter({
+      'pattern': '{{99}}.{{999}}.{{999}}/{{9999}}-{{99}}',
+      'persistent': false,
+    });
+    $(".cpf").formatter({
+      'pattern': '{{999}}.{{999}}.{{999}}-{{99}}',
+      'persistent': false,
+    });
+    $(".cep").formatter({
+      'pattern': '{{99}}.{{999}}-{{999}}',
+      'persistent': false,
+    });
+
+    $(".telefone").mask('(00)00000-0000')
+
+    {% endverbatim %}
+  });
+  $("form").submit(function() {
+    $('.telefone').unmask();
+    $('#overlay').show();
+    return true;
+  });
+</script>
 
 <body>
 <div id="particle-canvas"></div>
@@ -111,8 +169,16 @@
 
                       <ul class="navTree navTreeLevel0">
                         <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
-                          <a href="{% url 'adesao:index' %}" title="" class="state-published navTreeFolderish contenttype-folder">
-                            <span>Inicio</span>
+                            <a href="{% url 'adesao:listar_eventos' %}" title="" class="state-published navTreeFolderish contenttype-folder">
+                            <span>Eventos</span>
+                          </a>
+                        </li>
+                      </ul>
+
+                      <ul class="navTree navTreeLevel0">
+                        <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
+                            <a href="{% url 'adesao:cadastrar_eventos' %}" title="" class="state-published navTreeFolderish contenttype-folder">
+                            <span>Criar evento</span>
                           </a>
                         </li>
                       </ul>
@@ -194,61 +260,7 @@
       </div>
 
     <!-- /Footer-->
-    <!-- Script da Barra do Governo -->
-    <script src="{% static 'js/jquery.mask.min.js' %}"></script>
-    <script src="{% static 'js/jquery.formatter.min.js' %}"></script>
-    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
-    <script src="{% static 'js/datepicker-pt-BR.js' %}"></script>
-    <script src="{% static 'js/leaflet.js' %}"></script>
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $("body").prepend('<div id="overlay" style="height: 100%; width: 100%; opacity: 0.3; z-index: 100; position: fixed; background: url({% static "img/spinner.gif"%}) no-repeat center center; background-color: gray; display: none;"></div>');
 
-        $(".add").click(function() {
-          $(".telefone2").fadeIn();
-        });
-
-        $(".add2").click(function() {
-          $(".telefone3").fadeIn();
-        });
-
-        $(".date").datepicker({
-          showButtonPanel: true,
-          regional: "pt-BR"
-        });
-
-        $('#id_confirmar_email').bind("cut copy paste", function(e) {
-          e.preventDefault();
-        });
-
-        {% verbatim %}
-        $(".cnpj").formatter({
-          'pattern': '{{99}}.{{999}}.{{999}}/{{9999}}-{{99}}',
-          'persistent': false,
-        });
-        $(".cpf").formatter({
-          'pattern': '{{999}}.{{999}}.{{999}}-{{99}}',
-          'persistent': false,
-        });
-        $(".cep").formatter({
-          'pattern': '{{99}}.{{999}}-{{999}}',
-          'persistent': false,
-        });
-        // $(".telefone").formatter({
-        //   'pattern': '({{99}}){{99999}}-{{9999}}',
-        //   'persistent': false,
-        // });
-
-        $(".telefone").mask('(00)00000-0000')
-
-        {% endverbatim %}
-      });
-      $("form").submit(function() {
-        $('.telefone').unmask();
-        $('#overlay').show();
-        return true;
-      });
-    </script>
     {% block js %} {% endblock js %}
 </body>
 

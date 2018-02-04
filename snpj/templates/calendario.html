@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+{% load staticfiles %}
+<link href="{% static 'css/fullcalendar.min.css' %}" rel='stylesheet' />
+<link href="{% static 'css/fullcalendar.print.css' %}" rel='stylesheet' media='print' />
+<link href="{% static 'css/fullcalendar.min.css' %}" rel='stylesheet' />
+
+<script src="{% static 'js/moment.min.js' %}" ></script>
+<script src="{% static 'js/jquery.min.js' %}" ></script>
+<script src="{% static 'js/fullcalendar.min.js' %}" ></script>
+<script src="{% static 'js/locale-all.js' %}" ></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+<link media="screen" href="{% static 'css/plone.css' %}" type="text/css" rel="stylesheet" id="plone-css">
+<link media="all" href="{% static 'css/insideLogin.css' %}" type="text/css" rel="stylesheet" id="main-css">
+<link media="all" href="{% static 'css/styleLogin.css' %}" type="text/css" rel="stylesheet"></head>
+
+<script>
+
+  $(document).ready(function() {
+
+    var url_request = 'http://{{request.META.HTTP_HOST }}/adesao/dados-agenda';
+
+    $.ajax({
+      url: url_request,
+      data : {
+                'csrfmiddlewaretoken': '{{ csrf_token }}',
+        },
+      success: function(data){
+        events = []
+        data.forEach(function(value){
+            events.push({
+              title: value.fields.nome,
+              start: value.fields.data+'T'+value.fields.hora_inicio,
+              end: value.fields.data+'T'+value.fields.hora_fim
+            });
+        });
+        $('#calendar').fullCalendar({
+          locale: 'pt-br',
+          defaultView: 'listWeek',
+          customButtons: {
+            myCustomButton: {
+              text: 'voltar',
+                click: function() {
+                  window.location.replace("{% url 'adesao:listar_eventos' %}");
+              }
+            }
+          },
+          header: {
+            left: 'myCustomButton prev,next today',
+            center: 'title',
+            right: 'agendaDay,month,listWeek'
+          },
+          // defaultDate: '2017-12-12',
+          defaultDate: moment().format('YYYY-MM-DD'),
+          navLinks: true, // can click day/week names to navigate views
+          editable: false,
+          eventLimit: true, // allow "more" link when too many events
+          events: events
+        });
+      }
+    });
+
+  });
+
+</script>
+<style>
+
+  #teste {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    font-size: 14px;
+  }
+
+  #calendar {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+</style>
+</head>
+<body>
+  <div id="header" role="banner">
+
+    <div>
+
+      <div id="logo">
+        <a href="{% url 'adesao:index' %}" title="#">
+          <span id="portal-title">Nome da logo</span>
+          <span id="portal-description" style="color:#ffffff">Subtítulo</span>
+        </a>
+
+      </div>
+
+
+      <br />
+      <br />
+      <br />
+      <br />
+
+
+      <div id="social-icons">
+        <ul>
+          <li id="portalredes-facebook" class="portalredes-item">
+            <a href="#" title="Facebook" target="_blank">
+            </a>
+          </li>
+          <li id="portalredes-twitter" class="portalredes-item">
+            <a href="#" title="Twitter" target="_blank">
+            </a>
+          </li>
+          <li id="portalredes-youtube" class="portalredes-item">
+            <a href="#" title="Youtube" target="_blank">
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+    <div id="sobre">
+      <ul>
+        <li id="link-sobre">
+          <a href="#">Sobre</a>
+        </li>
+        |
+        <li id="link-sobre">
+          <a href="#" target="_blank">Perguntas frequentes</a>
+        </li>
+        |
+        <li id="link-central">
+          <a href="{% url 'adesao:faleconosco' %}">Fale conosco</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</br>
+</br>
+
+
+
+</br>
+
+  <div id="calendar-block">
+    <div id='calendar'></div>
+  </div>
+
+
+</br>
+</br>
+</br>
+
+
+<div id="footer" role="contentinfo">
+
+    <div class="clear"></div>
+    <div id="footer-brasil" class="footer-logos">
+        <div>
+            <a href="#" class="logo-right-footer">
+                <img src="#" alt="Lorem Ipsum" />
+            </a>
+            <a href="#" class="logo-left-footer">
+                <img src="#" alt="Lorem Ipsum" />
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

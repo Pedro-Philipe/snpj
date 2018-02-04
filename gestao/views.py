@@ -15,7 +15,6 @@ from django.conf import settings
 
 
 class GestaoHome(View):
-
     template_name = "gestao/index.html"
 
 

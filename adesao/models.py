@@ -1,9 +1,11 @@
 ﻿from django.db import models
 from django.contrib.auth.models import User
 
-from smart_selects.db_fields import ChainedForeignKey
+# from smart_selects.db_fields import ChainedForeignKey
 
 # Create your models here.
+
+
 class Uf(models.Model):
     codigo_ibge = models.IntegerField(primary_key=True)
     sigla = models.CharField(max_length=2)
@@ -38,3 +40,12 @@ class Usuario(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class Evento(models.Model):
+    nome = models.CharField(max_length=100, null=True)  # @TODO remover os campos nulos
+    descricao = models.CharField(max_length=255, null=True)
+    data = models.DateField()
+    hora_inicio = models.TimeField()
+    hora_fim = models.TimeField()
+    usuario = models.ForeignKey(Usuario)

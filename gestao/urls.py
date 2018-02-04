@@ -16,5 +16,4 @@ urlpatterns = [
         staff_member_required(
             views.AlterarUsuario.as_view(),
             login_url='adesao:login'), name='alterar_usuario'),
-
     ]

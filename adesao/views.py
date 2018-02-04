@@ -1,4 +1,4 @@
-import csv
+import csv, json
 import xlwt
 import xlsxwriter
 from io import BytesIO
@@ -6,7 +6,7 @@ from datetime import timedelta
 from threading import Thread
 
 from django.shortcuts import render, redirect
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView, DetailView
 from django.core.urlresolvers import reverse_lazy, reverse
@@ -16,8 +16,11 @@ from django.utils import timezone
 from django.template.loader import render_to_string
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db.models import Q, Count
+from django.core import serializers
+from django.core.serializers.json import DjangoJSONEncoder
 
-from adesao.models import Usuario, Uf, Cidade
+
+from adesao.models import Usuario, Evento
 from adesao.forms import CadastrarUsuarioForm
 from adesao.utils import enviar_email_conclusao, verificar_anexo
 
@@ -60,8 +63,45 @@ def ativar_usuario(request, codigo):
     return render(request, 'confirmar_email.html')
 
 
+def dados_agenda(request):
+    try:
+        data = serializers.serialize('json', Evento.objects.all())
+        return HttpResponse(data, content_type="application/json")
+
+    except Exception as e:
+        return JsonResponse(data={"erro": True, "response": str(e)})
+
+
 def sucesso_usuario(request):
     return render(request, 'usuario/mensagem_sucesso.html')
+
+
+def calendario(request):
+    return render(request, 'calendario.html')
+
+
+class ListarEventos(ListView):
+    template_name = 'agenda/listar_eventos.html'
+    model = Evento
+    paginate_by = 12
+
+    # def get_queryset(self):
+    #     q = self.request.user.usuario
+    #
+    #     return q
+
+
+class CadastrarEventos(CreateView):
+    template_name = 'agenda/cadastrar_eventos.html'
+    success_url = reverse_lazy('adesao:listar_eventos')
+    model = Evento
+    fields = '__all__'
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateView, self).get_context_data(**kwargs)
+        context['usuarios'] = Usuario.objects.all()
+
+        return context
 
 
 class CadastrarUsuario(CreateView):

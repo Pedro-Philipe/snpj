@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
 
 from . import views
 
@@ -14,7 +14,7 @@ urlpatterns = [
     url(r'^sair/$', 'django.contrib.auth.views.logout',
         {'template_name': 'index.html'}, name='logout'),
     url(r'^esqueci-senha/$', 'django.contrib.auth.views.password_reset',
-        {'template_name': 'password_reset.html', 'post_reset_redirect':'/'}, name='esqueci_senha'),
+        {'template_name': 'password_reset.html', 'post_reset_redirect': '/'}, name='esqueci_senha'),
     url(r'^ativar/usuario/(?P<codigo>[\w]+)/$',
         views.ativar_usuario, name='ativar_usuario'),
 
@@ -23,4 +23,10 @@ urlpatterns = [
     url(r'^usuario/$', views.CadastrarUsuario.as_view(), name='usuario'),
     url(r'^faleconosco/$', views.fale_conosco, name='faleconosco'),
 
+    # calendario
+    url(r'^calendario/$', views.calendario, name='calendario'),
+    url(r'^listar-eventos/$', views.ListarEventos.as_view(), name='listar_eventos'),
+    url(r'^cadastrar-eventos/$', views.CadastrarEventos.as_view(), name='cadastrar_eventos'),
+
+    url(r'^dados-agenda$', views.dados_agenda, name='dados_agenda'),
     ]

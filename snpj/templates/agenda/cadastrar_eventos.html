@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+
+<div class="container">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h3>
+      <strong>Preencha o seguinte formulário para cadastrar um evento:</strong>
+    </h3>
+
+    <div class="form-group">
+      <div class="form-group">
+        <label for="{{ form.nome.id_for_label }}" class="col-sm-3 control-label">Nome do evento</label>
+
+        <div class="col-sm-9">
+          {% render_field form.nome class="form-control" %} {{ form.nome.errors }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-group">
+        <label for="{{ form.data.id_for_label }}" class="col-sm-3 control-label">Data</label>
+
+        <div class="col-sm-9">
+          {% render_field form.data class="form-control date" %} {{ form.data.errors }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-group">
+        <label for="{{ form.hora_inicio.id_for_label }}" class="col-sm-3 control-label">Hora de início</label>
+
+        <div class="col-sm-9">
+          {% render_field form.hora_inicio class="form-control time" %} {{ form.hora_inicio.errors }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-group">
+        <label for="{{ form.hora_fim.id_for_label }}" class="col-sm-3 control-label">Hora de término</label>
+
+        <div class="col-sm-9">
+          {% render_field form.hora_fim class="form-control time" %} {{ form.hora_fim.errors }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-group">
+        <label for="{{ form.descricao.id_for_label }}" class="col-sm-3 control-label">Descrição</label>
+
+        <div class="col-sm-9">
+          <textarea class="form-control" id="id_descricao" maxlength="255" name="descricao" type="text" style="margin: 0px; height: 80px; width: 498px;"></textarea> {{ form.descricao.errors }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-group">
+        <label for="{{ form.usuario_id.id_for_label }}" class="col-sm-3 control-label">Usuario</label>
+
+        <div class="col-sm-9">
+          {% render_field form.usuario_id class="form-control" %}
+          <select class="form-control" id="id_usuario" name="usuario">
+            {% for usuario in usuarios %}
+            <option value="{{usuario.id}}">{{usuario.nome_usuario}}</option>
+            {% endfor %}
+          </select>
+          {{ form.usuario_id.errors }}
+        </div>
+      </div>
+    </div>
+    </div>
+
+  </br>
+  <input type="submit" class="btn btn-success" value="Enviar" />
+  </br>
+  </form>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(function(){
+    $('#dp1').datepicker({
+      format:"dd-M-yy",
+      endDate: "today",
+      todayBtn: true,
+      forceParse: false,
+      autoclose: true,
+      todayHighlight: true
+    });
+  });
+})
+</script>
+
+
+{% endblock content %}
