@@ -1,169 +1,169 @@
 <!DOCTYPE html>
-<head>
+<html>
+  <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
 
-    <title>Sistema Nacional de Cultura</title>
+      <title>Sistema Nacional de Cultura</title>
 
-    {% load staticfiles clever_selects_extras %}
+      {% load staticfiles %}
 
-    <!-- Bootstrap Core CSS -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'css/jquery-ui.min.css' %}" rel="stylesheet">
+      <!-- Bootstrap Core CSS -->
+      <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+      <link href="{% static 'css/jquery-ui.min.css' %}" rel="stylesheet">
 
-    <!-- MetisMenu CSS -->
-    <link href="{% static 'css/metisMenu.min.css' %}" rel="stylesheet">
+      <!-- MetisMenu CSS -->
+      <link href="{% static 'css/metisMenu.min.css' %}" rel="stylesheet">
 
-    <!-- DataTables CSS -->
-    <link href="{% static 'css/dataTables.bootstrap.css' %}" rel="stylesheet">
-    <link href="{% static 'css/dataTables.responsive.css' %}" rel="stylesheet">
+      <!-- DataTables CSS -->
+      <link href="{% static 'css/dataTables.bootstrap.css' %}" rel="stylesheet">
+      <link href="{% static 'css/dataTables.responsive.css' %}" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+      <!-- Custom CSS -->
+      <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+      <!-- Custom Fonts -->
+      <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
 
-    <!-- jQuery -->
-    <script src="{% static 'js/jquery.min.js'%}"></script>
+      <!-- jQuery -->
+      <script src="{% static 'js/jquery.min.js'%}"></script>
 
-</head>
-<body>
+  </head>
 
-  <div id="wrapper">
+  <body>
 
-      <!-- Navigation -->
-      <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-          <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="index.html">SNPJ</a>
-          </div>
-          <!-- /.navbar-header -->
+    <div id="wrapper">
 
-          <ul class="nav navbar-top-links navbar-right">
-              <li class="dropdown">
-                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                      <i class="fa fa-user fa-fw"></i> {{ request.user.usuario.nome_usuario }} <i class="fa fa-caret-down"></i>
-                  </a>
-                  <ul class="dropdown-menu dropdown-user">
-                      <li><a href="{% url 'mudar_senha_gestao' %}"><i class="fa fa-user fa-fw"></i> Alterar Senha</a>
-                      </li>
-                      <li class="divider"></li>
-                      <li><a href="{% url 'adesao:logout' %}"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
-                      </li>
-                  </ul>
-                  <!-- /.dropdown-user -->
-              </li>
-              <!-- /.dropdown -->
-          </ul>
-          <!-- /.navbar-top-links -->
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">SNPJ</a>
+            </div>
+            <!-- /.navbar-header -->
 
-          <div class="navbar-default sidebar" role="navigation">
-              <div class="sidebar-nav navbar-collapse">
-                  <ul class="nav" id="side-menu">
-                      <li>
-                        <a href="">Início</a>
-                      </li>
-                      <li>
-                        <a href="">Usuários</a>
-                      </li>
-
-                      <li class="active">
-                        <a href="#" data-toggle="collapse" data-target="#drop"><i class="fa fa-exchange fa-fw"></i>  Drop<span class="fa arrow"></span></a>
-                        <div class="collapse" id="drop" style="height: 0px;">
-                          <ul class="nav nav-second-level nav-list">
-                            <li>
-                              <a href="">
-                                opção
-                              </a>
-                            </li>
-                          </ul>
-                      </div>
-                      </li>
-
-                      <li>
-                       <a href="#" data-toggle="collapse" data-target="#primeiro_drop"><i class="fa fa-sitemap fa-fw"></i>  Dropdown<span class="fa arrow"></span></a>
-                       <div class="collapse" id="primeiro_drop" style="height: 0px;">
-                       <ul class="nav nav-second-level">
-                         <li>
-                           <a href="#" data-toggle="collapse" data-target="#segundo_drop">  sub dropdown<span class="fa arrow"></span>
-                           </a>
-                           <div class="collapse" id="segundo_drop" style="height: 0px;">
-                             <ul class="nav nav-third-level">
-                               <li><a href="">selection</a></li>
-                             </ul>
-                           </div>
-                         </li>
-
-                       </ul>
-                      </div>
-                     </li>
-
-
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> {{ request.user.usuario.nome_usuario }} <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="{% url 'mudar_senha_gestao' %}"><i class="fa fa-user fa-fw"></i> Alterar Senha</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="{% url 'adesao:logout' %}"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
+                        </li>
                     </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
 
-        <!-- Page Content -->
-        <div id="page-wrapper">
-            <div class="container-fluid">
-              {% block content %}
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">Blank</h1>
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /.row -->
-              {% endblock content %}
-            </div>
-            <!-- /.container-fluid -->
-        </div>
-        <!-- /#page-wrapper -->
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                          <a href="">Início</a>
+                        </li>
+                        <li>
+                          <a href="">Usuários</a>
+                        </li>
 
-    </div>
-    <!-- /#wrapper -->
+                        <li class="active">
+                          <a href="#" data-toggle="collapse" data-target="#drop"><i class="fa fa-exchange fa-fw"></i>  Drop<span class="fa arrow"></span></a>
+                          <div class="collapse" id="drop" style="height: 0px;">
+                            <ul class="nav nav-second-level nav-list">
+                              <li>
+                                <a href="">
+                                  opção
+                                </a>
+                              </li>
+                            </ul>
+                        </div>
+                        </li>
 
-    <!-- Bootstrap JavaScript -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+                        <li>
+                         <a href="#" data-toggle="collapse" data-target="#primeiro_drop"><i class="fa fa-sitemap fa-fw"></i>  Dropdown<span class="fa arrow"></span></a>
+                         <div class="collapse" id="primeiro_drop" style="height: 0px;">
+                         <ul class="nav nav-second-level">
+                           <li>
+                             <a href="#" data-toggle="collapse" data-target="#segundo_drop">  sub dropdown<span class="fa arrow"></span>
+                             </a>
+                             <div class="collapse" id="segundo_drop" style="height: 0px;">
+                               <ul class="nav nav-third-level">
+                                 <li><a href="">selection</a></li>
+                               </ul>
+                             </div>
+                           </li>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="{% static 'js/metisMenu.min.js' %}"></script>
+                         </ul>
+                        </div>
+                       </li>
 
-    <!-- DataTables Javascript -->
-    <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
-    <script src="{% static 'js/dataTables.bootstrap.min.js' %}"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="{% static 'js/dashboard.js' %}"></script>
-    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
-    <script src="{% static 'js/datepicker-pt-BR.js' %}"></script>
+                      </ul>
+                  </div>
+                  <!-- /.sidebar-collapse -->
+              </div>
+              <!-- /.navbar-static-side -->
+          </nav>
 
-    {% clever_selects_js_import %}
+          <!-- Page Content -->
+          <div id="page-wrapper">
+              <div class="container-fluid">
+                {% block content %}
+                  <div class="row">
+                      <div class="col-lg-12">
+                          <h1 class="page-header">Blank</h1>
+                      </div>
+                      <!-- /.col-lg-12 -->
+                  </div>
+                  <!-- /.row -->
+                {% endblock content %}
+              </div>
+              <!-- /.container-fluid -->
+          </div>
+          <!-- /#page-wrapper -->
 
-    <script type="text/javascript">
-      $(document).ready(function(){
-        $(".date").datepicker({
-          showButtonPanel: true,
-          regional: "pt-BR"
+      </div>
+      <!-- /#wrapper -->
+
+      <!-- Bootstrap JavaScript -->
+      <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+      <!-- Metis Menu Plugin JavaScript -->
+      <script src="{% static 'js/metisMenu.min.js' %}"></script>
+
+      <!-- DataTables Javascript -->
+      <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+      <script src="{% static 'js/dataTables.bootstrap.min.js' %}"></script>
+
+      <!-- Custom Theme JavaScript -->
+      <script src="{% static 'js/dashboard.js' %}"></script>
+      <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+      <script src="{% static 'js/datepicker-pt-BR.js' %}"></script>
+
+      <script type="text/javascript">
+        $(document).ready(function(){
+          $(".date").datepicker({
+            showButtonPanel: true,
+            regional: "pt-BR"
+          });
         });
-      });
-    </script>
-    {% block js %}
-    {% endblock js%}
+      </script>
+      {% block js %}
+      {% endblock js%}
 
-</body>
+  </body>
 
 </html>
