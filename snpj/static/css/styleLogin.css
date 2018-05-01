@@ -1594,3 +1594,9 @@ button, input, select, textarea {
     left: 0;
     color: #fff;
 }
+
+#footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
