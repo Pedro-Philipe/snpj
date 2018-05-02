@@ -36,12 +36,12 @@ DJANGO_APPS = (
 )
 THIRD_PARTY_APPS = (
     'wkhtmltopdf',
-    'smart_selects',
+#    'smart_selects',
     'localflavor',
     'django_extensions',
     'ckeditor',
     'widget_tweaks',
-    'piwik',
+#    'piwik',
     'clever_selects',
 )
 
@@ -49,7 +49,6 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'adesao',
     'gestao',
-    'planotrabalho',
     'snpj',
 )
 

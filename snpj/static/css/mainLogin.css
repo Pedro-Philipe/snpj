@@ -236,6 +236,7 @@ p {
 }
 
 #main {
+    min-height: 700px;
     margin: 0 auto;
     padding: 4.104em 0 1.5em;
     max-width: 960px;

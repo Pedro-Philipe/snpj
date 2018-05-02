@@ -24,7 +24,7 @@ from adesao.models import Usuario, Evento
 from adesao.forms import CadastrarUsuarioForm
 from adesao.utils import enviar_email_conclusao, verificar_anexo
 
-from wkhtmltopdf.views import PDFTemplateView
+# from wkhtmltopdf.views import PDFTemplateView
 
 
 # Create your views here.
@@ -99,6 +99,11 @@ class CadastrarEventos(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(CreateView, self).get_context_data(**kwargs)
+
+        if not self.request.user.is_superuser:
+            context['usuarios'] = Usuario.objects.filter(id=self.request.user.id)
+            return context
+
         context['usuarios'] = Usuario.objects.all()
 
         return context

@@ -3189,7 +3189,7 @@ ul.formTabs { padding: 0px !important; }
         margin: 1em;
         max-width: 40%;
     }
-
+    
     .portaltype-collection .tileImage { float: none; }
 
     #extra-footer p { text-align: center; }
@@ -3322,4 +3322,8 @@ body.contraste #doormat-container .doormatColumn {
     }
 
     * { position: relative !important; }
+}
+
+#portal-columns{
+    min-height: 700px
 }

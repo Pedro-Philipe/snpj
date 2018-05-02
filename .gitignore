@@ -1,4 +1,5 @@
 *.pyc
+.vscode
 snpj/wsgi.py
 *.swp
 *static*

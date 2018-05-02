@@ -1,10 +1,7 @@
 ﻿from django.db import models
 from django.contrib.auth.models import User
 
-# from smart_selects.db_fields import ChainedForeignKey
-
 # Create your models here.
-
 
 class Uf(models.Model):
     codigo_ibge = models.IntegerField(primary_key=True)
@@ -49,3 +46,53 @@ class Evento(models.Model):
     hora_inicio = models.TimeField()
     hora_fim = models.TimeField()
     usuario = models.ForeignKey(Usuario)
+    tipo = models.IntegerField(null=True)
+    cpf_assistido = models.CharField(max_length=20, null=True)
+    primeira_visita = models.CharField(
+        blank=True,
+        null=True,
+        max_length=1)
+
+
+class Assistido(models.Model):
+    nome = models.CharField(max_length=200, null=True)
+    representante_legal = models.CharField(max_length=200, null=True)
+    rg = models.CharField(max_length=20, null=True)
+    cpf = models.CharField(max_length=20, null=True)
+    nacionalidade = models.CharField(max_length=200, null=True)
+    estado_civil = models.CharField(max_length=200, null=True)
+    profissao = models.CharField(max_length=200, null=True)
+    renda_familiar = models.CharField(max_length=200, null=True)
+    endereco_residencial = models.CharField(max_length=200, null=True)
+    endereco_trabalho = models.CharField(max_length=200, null=True)
+    cep = models.CharField(max_length=20, null=True)
+    telefone_celular = models.CharField(max_length=20, null=True)
+    telefone_fixo = models.CharField(max_length=20, null=True)
+    telefone_comercial = models.CharField(max_length=200, null=True)
+    email = models.EmailField(max_length=200)
+    observacoes = models.TextField(null=True)
+
+
+class Processo(models.Model):
+    fatos_narrados = models.TextField(null=True)
+    hipossuficiencia = models.FileField(
+        upload_to='hipossuficiencia',
+        max_length=255,
+        blank=True,
+        null=True)
+    procuracao = models.FileField(
+        upload_to='procuracao',
+        max_length=255,
+        blank=True,
+        null=True)
+
+
+#
+# class Processo(models.Model):
+#     rg = models.CharField(max_length=100, null=False)
+#     cpf = models.ForeignKey(User, to_field='username')
+#     tipo = models.ForeignKey(DescricaoProcesso)
+#
+#
+# class DescricaoProcesso(models.Model):
+#     descricao = models.CharField(max_length=100, null=False)  # Guarda e divórcio

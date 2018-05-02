@@ -5,7 +5,7 @@ from django.utils.crypto import get_random_string
 from django.forms import ModelForm
 from django.template.defaultfilters import filesizeformat
 
-from .models import Usuario
+from .models import Usuario, Evento
 from .utils import validar_cpf, validar_cnpj, limpar_mascara
 import re
 
