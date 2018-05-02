@@ -1,3 +1,20 @@
 adesao/static/* linguist-vendored
 snpj/templates/termos/* linguist-vendored
 snpj/templates/emails/* linguist-vendored
+
+# Source files
+# ============
+*.pxd		text
+*.py 		text
+*.py3 		text
+*.pyw 		text
+*.pyx  		text
+
+# Binary files
+# ============
+*.db		binary
+*.p 		binary
+*.pkl 	binary
+*.pyc 	binary
+*.pyd		binary
+*.pyo 	binary
