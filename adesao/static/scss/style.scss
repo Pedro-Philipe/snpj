@@ -1,0 +1,131 @@
+@import "compass/css3";
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+$openSans: 'Open Sans', Helvetica, Arial, sans-serif;
+html, body {
+  font-size: 62.5%;
+  height: 100%;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    font-size: 50%;
+  }
+}
+svg {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  overflow: visible;
+}
+.svg-icon {
+  cursor: pointer;
+
+  path {
+    stroke: rgba(255,255,255,0.9);
+    fill: none;
+    stroke-width: 1;
+  }
+}
+input, button {
+  outline: none;
+  border: none;
+}
+
+.demo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -15rem;
+  margin-top: -26.5rem;
+  width: 30rem;
+  height: 53rem;
+  overflow: hidden;
+}
+.login {
+  position: relative;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(173, 173, 175, 0.8) 0%, rgba(0,0,0,0.6) 100%);
+  transition: opacity 0.1s, transform 0.3s cubic-bezier(0.17, -0.65, 0.665, 1.25);
+  transform: scale(1);
+
+
+  &__logout {
+    position: absolute;
+    bottom: 3.3rem;
+    right: 3.3rem;
+    width: 4.6rem;
+    height: 4.6rem;
+    margin-right: -2.3rem;
+    margin-bottom: -2.3rem;
+    background: #FC3768;
+    color: #fff;
+    font-size: 2rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: bottom 0.4s 0.1s, right 0.4s 0.1s, transform 0.4s 0.4s, opacity 0.1s 0.7s, background-color 0.1s 0.7s;
+    transform: scale(0);
+
+    &.clicked {
+      bottom: 50%;
+      right: 50%;
+      transform: scale(30) !important;
+      opacity: 0.9;
+      //background-color: rgba(255,255,255,0.95);
+
+      svg {
+        opacity: 0;
+      }
+    }
+
+    &-icon {
+      position: absolute;
+      width: 3rem;
+      height: 3rem;
+      top: 50%;
+      left: 50%;
+      margin-left: -1.5rem;
+      margin-top: -1.5rem;
+      transition: opacity 0.1s;
+
+      path {
+        stroke-width: 4px;
+        stroke-dasharray: 64.36235046386719;
+        stroke-dashoffset: 64.36235046386719;
+        animation: animatePath 0.5s 0.5s forwards;
+      }
+    }
+  }
+
+}
+
+.ripple {
+  position: absolute;
+  width: 15rem;
+  height: 15rem;
+  margin-left: -7.5rem;
+  margin-top: -7.5rem;
+  background: rgba(0,0,0,0.4);
+  transform: scale(0);
+  animation: animRipple 0.4s;
+  border-radius: 50%;
+}
+@keyframes animRipple {
+  to {
+    transform: scale(3.5);
+    opacity: 0;
+  }
+}
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes animatePath {
+  to {
+    stroke-dashoffset: 0;
+  }
+}

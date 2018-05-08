@@ -1,0 +1,97 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 200px;
+  background: url('/static/images/background.png');
+}
+.header,
+.marketing,
+.footer {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+#address {
+  margin: 0px auto;
+  max-width: 500px;
+}
+
+.header {
+  padding-bottom: 5px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 970px;
+    background: white;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 5px;
+}
+.jumbotron .btn {
+  padding: 14px 24px;
+  font-size: 21px;
+}
+
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+@media screen and (min-width: 768px) {
+  .header,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .header {
+    margin-bottom: 30px;
+  }
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+#footer-brasil {
+   background: none repeat scroll 0% 0% #0042b1;
+   padding: 1em 0px;
+   max-width: 100%;
+}
+
+.hide {
+  display: none;
+}
+
+.erro input, .erro select {
+  border: 2px red solid;
+}
