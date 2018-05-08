@@ -1,0 +1,677 @@
+/*
+ *
+ * CSS com estilos específicos do tema azul
+ *
+ * @Autores
+ *
+ * - Simples Consultoria - www.simplesconsultoria.com.br
+ * - DESERTO Digital - www.desertodigital.com.br
+ *
+ * @Referencias
+ *
+ * Lista de padrões, convenções e boas praticas CSS que devem ser seguidas.
+ * https: //github.com/necolas/idiomatic-css/tree/master/translations/pt-BR
+ *
+ * Plugins para ordenar os atributos de CSS.
+ * http://csscomb.com/
+ *
+ * Validador de CSS do W3C.
+ * http://jigsaw.w3.org/css-validator/
+ */
+
+
+/* ==========================================================================
+   Cabeçalho do portal
+   ========================================================================== */
+
+#header {
+    padding: 14px 0 0 0;
+    background-color: #7489a9;
+    color: #fff;
+}
+
+/* Menu de Acessibilidade
+   ========================================================================== */
+
+#accessibility a {
+    color: #dcecff;
+}
+
+#accessibility span {
+    background: url("../img/bg-acess-key.gif") center center no-repeat;
+    color: #0a1857;
+}
+
+/* Titulo do portal
+   ========================================================================== */
+
+#portal-logo,
+#portal-title { color: #fff !important; }
+
+/* Menu site actions - Acessibilidade, Alto Contraste, Mapa do site
+   ========================================================================== */
+
+#portal-siteactions,
+#portal-language { border-bottom: 1px dotted #6893cb; }
+
+#portal-siteactions a,
+#portal-siteactions a:hover,
+#portal-language a,
+#portal-language a:hover { color: #dcecff !important; }
+
+/* Menu sobre o portal
+   ========================================================================== */
+
+#sobre { background: #0f4098; }
+
+#sobre a { color: #fff; }
+
+#sobre .portalservicos-item a { border-right: 1px solid #87a0cc; }
+
+/* Formulário de busca
+   ========================================================================== */
+
+#portal-searchbox { border: 1px solid #CCCCCC; }
+
+/* ==========================================================================
+   Sprinte Icons
+   ========================================================================== */
+
+/* icones de redes sociais */
+#social-icons a,
+/* central de conteudo */
+.item-central .link-videos,
+.item-central .link-audios,
+.item-central .link-infograficos,
+.item-central .link-publicacoes,
+.item-central .link-fotos,
+.item-central .link-aplicativos,
+.item-central .link-dadosabertos,
+/* icone do botão de busca */
+#header input.searchButton { background-image: url("../img/sprite.png"); }
+/* icone do botão de relatar erros */
+#content .relatar-erros a { background: url("../img/icon-reportar-erros.png") no-repeat; }
+
+/* Summary view */
+#content .summary-view-icon [class*="icon"] {
+    background-image: url("../img/summary-view-icons-sprite.png");
+}
+
+
+/* ==========================================================================
+   Portles
+   ========================================================================== */
+
+/* Portlet de navegação
+   ========================================================================== */
+
+#portal-column-one > .nav-menu-de-relevancia .first-item-nav a,
+#portal-column-one > .nav-menu-de-relevancia .first-item-nav a span {
+    color: #2c66ce !important;
+}
+
+.portlet-static-contents-central .portletHeader,
+.portlet-static-resource-center .portletHeader,
+.portlet-static-centrales-del-contenido .portletHeader,
+.portlet-static-centrais-de-conteudos .portletHeader,
+.portletNavigationTree .portletHeader {
+    border-top: 4px solid #7489a9;
+    color: #7489a9;
+}
+
+.portletNavigationTree .portletHeader a { color: #7489a9 !important; }
+
+.navTreeLevel0 > li.navTreeItemInPath,
+.navTreeLevel0 > li.navTreeCurrentNode {
+    border-top: 2px solid #7489a9 !important;
+    border-bottom: 2px solid #7489a9 !important;
+}
+
+
+/* ==========================================================================
+   Collective Cover
+   ========================================================================== */
+
+/* Tile Banner Rotativo
+   ========================================================================== */
+
+/* Cores dos botões */
+
+#tile_banner_rotativo li .button-nav,
+.orderTiles .button-nav {
+    border-right: 1px solid #254e8c;
+    background-color: #7489a9;
+}
+
+#tile_banner_rotativo .activeSlide .button-nav,
+#tile_banner_rotativo li .button-nav:hover,
+#tile_banner_rotativo li .button-nav:focus {
+    background-color: #edeff1;
+}
+
+/* ícone do botão */
+
+#content  #tile_banner_rotativo li .button-nav,
+.orderTiles .button-nav {
+    background-image: url("../img/bullet-banner-rotativo.gif");
+}
+
+/* Tiles
+   ========================================================================== */
+
+.tile a { color: #162937 !important; }
+
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+#footer {
+    background: #7489a9;
+    color: #fff;
+}
+
+#footer a { color: #fff; }
+
+#wrapper #footer .footer-logos { background: #0042b1; }
+
+/* Doormat
+   ========================================================================== */
+
+#doormat-container { background: #7489a9; }
+
+#doormat-container dl { border-left: 1px dotted #fff; }
+
+#doormat-container dt { color: #fff; }
+
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+
+/* Smartphone
+   ========================================================================== */
+
+@media only screen and (min-width : 320px) and (max-width : 768px) {
+
+    .menuTrigger {
+        background: #0e4097 url("../img/bg-menu-mobile.png") top right no-repeat;
+    }
+
+    .portlet-static-contents-central .portletHeader,
+    .portlet-static-resource-center .portletHeader,
+    .portlet-static-centrales-del-contenido .portletHeader,
+    .portlet-static-centrais-de-conteudos .portletHeader,
+    .portletNavigationTree .portletHeader {
+        background: #edeff1 url("../img/portlet-header.gif") no-repeat 96% center;
+    }
+
+    .portletNavigationTree .portletHeader.ativo {
+        background: url("../img/portlet-header-expanded.gif") no-repeat 96% center;
+    }
+
+}
+
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+  #header #portal-searchbox .searchButton {
+    background: url("../img/search-button-30px.png") no-repeat;
+  }
+}
+
+
+
+/* ==========================================================================
+   Comentários
+   ========================================================================== */
+
+#viewlet-below-content .discussion {
+  border-top: 4px solid #000000;
+  padding-top: 20px;
+  margin-top: 15px;
+}
+
+#viewlet-below-content .comment a {
+  color: #345179;
+}
+
+#viewlet-below-content .comment .documentByLine {
+  color: #345179;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-left: 10px;
+}
+
+.replyTreeLevel0 {
+    background: #eeeff1;
+    padding: 15px 0px 10px;
+    clear: both;
+}
+
+.replyTreeLevel1 {
+    border-left: 1px solid #eeeff1;
+    margin: 0 0 10px 0;
+    padding-top: 10px;
+    clear: both;
+}
+
+.replyTreeLevel2 {
+    border-left: 1px solid #eeeff1;
+    border-top: 1px solid #eeeff1;
+    margin: 0 0 10px 0;
+    padding-top: 10px;
+    padding-left: 20px;
+    clear: both;
+}
+
+.replyTreeLevel3 {
+    border-left: 1px solid #eeeff1;
+    border-top: 1px solid #eeeff1;
+    margin: 0 0 10px 0;
+    padding-top: 10px;
+    padding-left: 40px;
+    clear: both;
+}
+
+.replyTreeLevel4 {
+    border-left: 1px solid #eeeff1;
+    border-top: 1px solid #eeeff1;
+    margin: 0 0 10px 0;
+    padding-top: 10px;
+    padding-left: 60px;
+    clear: both;
+}
+
+.replyTreeLevel5 {
+    border-left: 1px solid #eeeff1;
+    border-top: 1px solid #eeeff1;
+    margin: 0 0 10px 0;
+    padding-top: 10px;
+    padding-left: 80px;
+    clear: both;
+}
+
+.replyTreeLevel6 {
+    border-left: 1px solid #eeeff1;
+    border-top: 1px solid #eeeff1;
+    margin: 0 0 10px 0;
+    padding-top: 10px;
+    padding-left: 100px;
+    clear: both;
+}
+
+.replyTreeLevel7 {
+    border-left: 1px solid #eeeff1;
+    border-top: 1px solid #eeeff1;
+    margin: 0 0 10px 0;
+    padding-top: 10px;
+    padding-left: 120px;
+    clear: both;
+}
+
+.replyTreeLevel8 {
+    border-left: 1px solid #eeeff1;
+    border-top: 1px solid #eeeff1;
+    margin: 0 0 10px 0;
+    padding-top: 10px;
+    padding-left: 140px;
+    clear: both;
+}
+
+.replyTreeLevel9 {
+    border-left: 1px solid #eeeff1;
+    border-top: 1px solid #eeeff1;
+    margin: 0 0 10px 0;
+    padding-top: 10px;
+    padding-left: 160px;
+    clear: both;
+}
+
+.replyTreeLevel10 {
+    border-left: 1px solid #eeeff1;
+    border-top: 1px solid #eeeff1;
+    margin: 0 0 10px 0;
+    padding-top: 10px;
+    padding-left: 180px;
+    clear: both;
+}
+
+#viewlet-below-content .comment .documentByLine .commentDate {
+  font-size: 1.0em;
+  color: #172a38;
+  font-weight: normal;
+  padding-top: 0;
+}
+
+.commentBody {
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: none;
+    -webkit-border-radius: none;
+    -moz-border-radius: none;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    overflow: visible;
+}
+
+button.context.reply-to-comment-button {
+    margin-left: 20px;
+}
+
+.commentActions {
+    float: left;
+    margin-left: 10px;
+}
+
+.commentBody p {
+    font-size: 1.2em;
+    color: #172a38;
+    padding: 0 10px 10px;
+    border-bottom: 1px solid #FFFFFF;
+    margin-bottom: 10px;
+    float: none;
+}
+
+.row #commenting textarea,
+.row .discussion textarea {
+    font: 1.2em "open_sansregular", Arial, Helvetica, sans-serif;
+    width: 100%;
+    border: 1px solid #eeeff1;
+}
+
+#commenting p {
+    font-size: 1.2em;
+}
+
+.row #commenting label, .row .discussion label {
+    font-size: 1.1em;
+}
+
+.discussion .reply {
+    clear: both;
+    color: #000000;
+    padding-top: 5px;
+}
+
+
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+input {
+  line-height: normal;
+}
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+user agent stylesheetinput:not([type="image" i]), textarea {
+  box-sizing: border-box;
+}
+user agent stylesheetinput:not([type]), input[type="email" i], input[type="number" i], input[type="password" i], input[type="tel" i], input[type="url" i], input[type="text" i] {
+  padding: 1px 0px;
+}
+user agent stylesheetinput, input[type="password" i], input[type="search" i] {
+  -webkit-appearance: textfield;
+  padding: 1px;
+  background-color: white;
+  border: 2px inset;
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  -webkit-rtl-ordering: logical;
+  -webkit-user-select: text;
+  cursor: auto;
+}
+user agent stylesheetinput, textarea, keygen, select, button {
+  margin: 0em;
+  font: normal normal normal 13.3333330154419px/normal Arial;
+  text-rendering: auto;
+  color: initial;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+}
+user agent stylesheetinput, textarea, keygen, select, button, meter, progress {
+  -webkit-writing-mode: horizontal-tb;
+}
+
+
+element.style {
+}
+button, html input[type=button], input[type=reset], input[type=submit] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+.btn-success {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.btn-warning {
+  color: #fff;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+}
+
+.btn-info {
+  color: #fff;
+  background-color: #34a5cf;
+  border-color: #2b8bc7;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+input {
+  line-height: normal;
+}
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+user agent stylesheetinput:not([type="image" i]), textarea {
+  box-sizing: border-box;
+}
+user agent stylesheetinput[type="button" i], input[type="submit" i], input[type="reset" i], input[type="file" i]::-webkit-file-upload-button, button {
+  padding: 1px 6px;
+}
+user agent stylesheetinput[type="button" i], input[type="submit" i], input[type="reset" i], input[type="file" i]::-webkit-file-upload-button, button {
+  align-items: flex-start;
+  text-align: center;
+  cursor: default;
+  color: buttontext;
+  padding: 2px 6px 3px;
+  border: 2px outset buttonface;
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  background-color: buttonface;
+  box-sizing: border-box;
+}
+user agent stylesheetinput[type="button" i], input[type="submit" i], input[type="reset" i] {
+  -webkit-appearance: push-button;
+  -webkit-user-select: none;
+  white-space: pre;
+}
+user agent stylesheetinput, input[type="password" i], input[type="search" i] {
+  -webkit-appearance: textfield;
+  padding: 1px;
+  background-color: white;
+  border: 2px inset;
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  -webkit-rtl-ordering: logical;
+  -webkit-user-select: text;
+  cursor: auto;
+}
+user agent stylesheetinput, textarea, keygen, select, button {
+  margin: 0em;
+  font: normal normal normal 13.3333330154419px/normal Arial;
+  text-rendering: auto;
+  color: initial;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+}
+user agent stylesheetinput, textarea, keygen, select, button, meter, progress {
+  -webkit-writing-mode: horizontal-tb;
+}
+Inherited from
+body {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+  background-color: #fff;
+}
+Inherited from
+html {
+  font-size: 10px;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+Pseudo ::before element
+:after, :before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+Pseudo ::after element
+:after, :before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+element.style {
+}
+.alert-info {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+.alert-info2 {
+  color: #31708f;
+  background-color: #EEE49D;
+  border-color: #bce8f1;
+}
+.alert-info3 {
+  color: #31708f;
+  background-color: #B5E680;
+  border-color: #bce8f1;
+}
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+user agent stylesheetdiv {
+  display: block;
+}
+
+/* botao parecer */
+
+/* CORES */
+
+.but-primary {
+color: #fff;
+background-color: #0068B4;
+}
+
+.but-success {
+color: #fff;
+background-color: #009835;
+}
+
+.but-error {
+color: #fff;
+background-color: #CC0000;
+}
+
+.but-warning {
+color: #fff;
+background-color: #F28E00;
+}
