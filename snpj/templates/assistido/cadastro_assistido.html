@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2 align="center"><strong> Cadastro do Assistido </strong></h2>
+        <div class="form-group">
+            <div class="form-group">
+                <label for="{{ form.nome_assistido.id_for_label }}" class="col-sm-3 control-label">Nome Completo</label>
+
+                <div class="col-sm-9">
+                    {% render_field form.nome_assistido class="form-control" %} {{ form.nome.errors }}
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <label for="{{ form.representante_legal.id_for_label }}" class="col-sm-3 control-label">Representante Legal</label>
+
+                <div class="col-sm-9">
+                    {% render_field form.representante_legal class="form-control" %} {{ form.nome.errors }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group">
+                <label for="{{ form.rg.id_for_label }}" class="col-sm-3 control-label"> RG </label>
+
+                <div class="col-sm-9">
+                    {% render_field form.rg class="form-control" %} {{ form.nome.errors }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group">
+                <label for="{{ form.cpf.id_for_label }}" class="col-sm-3 control-label"> CPF </label>
+
+                <div class="col-sm-9">
+                    {% render_field form.cpf class="form-control" %} {{ form.nome.errors }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group">
+                <label for="{{ form.nacionalidade.id_for_label }}" class="col-sm-3 control-label"> Nacionalidade </label>
+
+                <div class="col-sm-9">
+                    {% render_field form.nacionalidade class="form-control" %} {{ form.nome.errors }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group">
+                <label for="{{ form.estado_civil.id_for_label }}" class="col-sm-3 control-label"> Estado Civil </label>
+
+                <div class="col-sm-9">
+                    {% render_field form.estado_civil class="form-control" %} {{ form.nome.errors }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group">
+                <label for="{{ form.profissao.id_for_label }}" class="col-sm-3 control-label"> Profissão </label>
+
+                <div class="col-sm-9">
+                    {% render_field form.profissao class="form-control" %} {{ form.nome.errors }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group">
+                <label for="{{ form.renda_familiar.id_for_label }}" class="col-sm-3 control-label"> Renda Familiar </label>
+
+                <div class="col-sm-9">
+                    {% render_field form.renda_familiar class="form-control" %} {{ form.nome.errors }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group">
+                <label for="{{ form.endereco_residencial.id_for_label }}" class="col-sm-3 control-label"> Endereço </label>
+
+                <div class="col-sm-9">
+                    {% render_field form.endereco_residencial  class="form-control" %} {{ form.nome.errors }}
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <label for="{{ form.endereco_trabalho.id_for_label }}" class="col-sm-3  control-label"> Endereço do Trabalho </label>
+                <div class="col-sm-9">
+                    {% render_field form.endereco_trabalho class="form-control" %} {{ form.nome.errors }}
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <label for="{{ form.cep.id_for_label }}" class="col-sm-3 control-label"> CEP </label>
+            </div>
+            <div class="col-sm-9">
+                {% render_field form.cep class="form-control" %} {{ form.nome.errors }}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <label for="{{ form.telefone_celular.id_for_label }}" class="col-sm-3 control-label"> CELULAR </label>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            {% render_field form.telefone_celular class="form-control" %} {{ form.nome.errors }}
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <label for="{{ form.telefone_fixo.id_for_label }}" class="col-sm-3 control-label"> TELEFONE FIXO </label>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            {% render_field form.telefone_fixo class="form-control" %} {{ form.nome.errors }}
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <label for="{{ form.telefone_comercial.id_for_label }}" class="col-sm-3 control-label"> TELEFONE COMERCIAL</label>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            {% render_field form.telefone_comercial class="form-control"%} {{ form.nome.errors }}
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}" class="col-sm-3 control-label"> EMAIL </label>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            {% render_field form.email class="form-control"%} {{ form.nome.errors }}
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <label for="{{ form.observacoes.id_for_label }}" class="col-sm-3 control-label"> OBSERVAÇÃO </label>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            {% render_field form.observacoes class="form-control" %} {{ form.nome.errors }}
+        </div>
+        <br/>
+        <input type="submit" class="btn btn-success" value="SALVAR">
+        <br/>
+    </form>
+</div>
+
+{% endblock content%}

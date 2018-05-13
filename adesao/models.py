@@ -52,13 +52,14 @@ class Evento(models.Model):
         blank=True,
         null=True,
         max_length=1)
+    pass
 
 
 class Assistido(models.Model):
-    nome = models.CharField(max_length=200, null=True)
+    nome_assistido = models.CharField(max_length=200, null=True)
     representante_legal = models.CharField(max_length=200, null=True)
     rg = models.CharField(max_length=20, null=True)
-    cpf = models.CharField(max_length=20, null=True)
+    cpf = models.CharField(max_length=11, null=True)
     nacionalidade = models.CharField(max_length=200, null=True)
     estado_civil = models.CharField(max_length=200, null=True)
     profissao = models.CharField(max_length=200, null=True)
