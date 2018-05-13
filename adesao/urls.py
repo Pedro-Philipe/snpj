@@ -25,7 +25,10 @@ urlpatterns = [
 
     # calendario
     url(r'^calendario/$', views.calendario, name='calendario'),
+
     url(r'^listar-eventos/$', views.ListarEventos.as_view(), name='listar_eventos'),
+    url(r'^listar-assistidos/$', views.ListarAssistidos.as_view(), name='listar_assistidos'),
+
     url(r'^cadastrar-eventos/$', views.CadastrarEventos.as_view(), name='cadastrar_eventos'),
     url(r'^cadastrar-assistido/$', views.CadastrarAssistido.as_view(), name='cadastrar_assistido'),
 

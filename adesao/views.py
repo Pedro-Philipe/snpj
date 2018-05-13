@@ -6,7 +6,7 @@ from datetime import timedelta
 from threading import Thread
 
 from django.shortcuts import render, redirect
-from django.http import Http404, HttpResponse, JsonResponse
+from django.http import Http404, HttpResponse, JsonResponse, HttpResponseRedirect
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView, DetailView
 from django.core.urlresolvers import reverse_lazy, reverse
@@ -83,11 +83,12 @@ class ListarEventos(ListView):
     template_name = 'agenda/listar_eventos.html'
     model = Evento
     paginate_by = 12
+    
 
-    # def get_queryset(self):
-    #     q = self.request.user.usuario
-    #
-    #     return q
+class ListarAssistidos(ListView):
+    template_name = 'assistido/listar_assistidos.html'
+    model = Assistido
+    paginate_by = 12
 
 
 class CadastrarEventos(CreateView):
@@ -98,7 +99,7 @@ class CadastrarEventos(CreateView):
     # fields = '__all__'
 
     def get_context_data(self, **kwargs):
-        context = super(CreateView, self).get_context_data(**kwargs)
+        context = super(CadastrarEventos, self).get_context_data(**kwargs)
 
         if not self.request.user.is_superuser:
             context['usuarios'] = Usuario.objects.filter(id=self.request.user.id)
@@ -114,16 +115,8 @@ class CadastrarAssistido(CreateView):
     model = Assistido
     fields = '__all__'
 
-    def get_context_data(self, **kwargs):
-        context = super(CreateView, self).get_context_data(**kwargs)
-
-        if not self.request.user.is_superuser:
-            context['usuarios'] = Usuario.objects.filter(id=self.request.user.id)
-            return context
-
-        context['usuarios'] = Usuario.objects.all()
-
-        return context
+    def form_valid(self, form):
+        return HttpResponseRedirect(self.get_success_url())
 
 class CadastrarUsuario(CreateView):
     form_class = CadastrarUsuarioForm

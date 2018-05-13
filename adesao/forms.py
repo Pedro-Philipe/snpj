@@ -110,7 +110,6 @@ class CadastrarUsuarioForm(UserCreationForm):
 
 
 class CadastrarEventosForm(ModelForm):
-
     class Meta:
         model = Evento
         fields = '__all__'
@@ -119,23 +118,27 @@ class CadastrarEventosForm(ModelForm):
         if not validar_cpf(self.cleaned_data['cpf_assistido']):
             raise forms.ValidationError('Por favor, digite um CPF válido!')
 
-        usuario_mesmo_cpf = Assistido.objects.get(cpf=self.cleaned_data['cpf_assistido'])        
-        if usuario_mesmo_cpf:
+        usuario_mesmo_cpf = Assistido.objects.filter(cpf=self.cleaned_data['cpf_assistido'])        
+
+        if usuario_mesmo_cpf.count() > 0:
             raise forms.ValidationError('CPF já cadastrado!')
 
         return self.cleaned_data['cpf_assistido']        
 
     def clean(self):
+        super(CadastrarEventosForm, self).clean()
         if self.cleaned_data['hora_fim'] <= self.cleaned_data['hora_inicio']:
              self.add_error('hora_fim', 'O horário de fim precisa ser maior que o de início.')
 
-    def save(self, commit=True):
-        usuario_mesmo_cpf = Assistido.objects.get(cpf=self.cleaned_data['cpf_assistido'])
+    def save(self, commit=True, *args, **kwargs):
+        form = super(CadastrarEventosForm, self).save(commit=False)
+        usuario_mesmo_cpf = Assistido.objects.filter(cpf=self.cleaned_data['cpf_assistido'])        
 
-        if not usuario_mesmo_cpf:
+        if usuario_mesmo_cpf.count() == 0:
             assistido = Assistido()
             assistido.nome = self.cleaned_data['nome']
             assistido.cpf = self.cleaned_data['cpf_assistido']
 
             if commit:
                 assistido.save()
+        return form
