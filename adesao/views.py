@@ -21,7 +21,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 
 from adesao.models import Usuario, Evento
-from adesao.forms import CadastrarUsuarioForm
+from adesao.forms import CadastrarUsuarioForm, CadastrarEventosForm
 from adesao.utils import enviar_email_conclusao, verificar_anexo
 
 # from wkhtmltopdf.views import PDFTemplateView
@@ -95,7 +95,8 @@ class CadastrarEventos(CreateView):
     template_name = 'agenda/cadastrar_eventos.html'
     success_url = reverse_lazy('adesao:listar_eventos')
     model = Evento
-    fields = '__all__'
+    form_class = CadastrarEventosForm
+    # fields = '__all__'
 
     def get_context_data(self, **kwargs):
         context = super(CreateView, self).get_context_data(**kwargs)
@@ -118,7 +119,7 @@ class CadastrarUsuario(CreateView):
         Thread(target=send_mail, args=(
             'Unidesc - SNPJ - CREDENCIAIS DE ACESSO',
             'Prezad@ ' + self.object.usuario.nome_usuario + ',\n' +
-            'Recebemos o seu cadastro no Sistema de Núcleos de Processos Jurídicos. ' +
+            'Recebemos o seu cadastro no Sistema do Núcleos de Processos Jurídicos. ' +
             'Por favor confirme seu e-mail clicando no endereço abaixo:\n\n' +
             self.request.build_absolute_uri(reverse(
                 'adesao:ativar_usuario',

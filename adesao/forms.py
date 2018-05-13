@@ -5,9 +5,10 @@ from django.utils.crypto import get_random_string
 from django.forms import ModelForm
 from django.template.defaultfilters import filesizeformat
 
-from .models import Usuario, Evento
+from .models import Usuario, Evento, Assistido
 from .utils import validar_cpf, validar_cnpj, limpar_mascara
 import re
+import pdb
 
 content_types = [
     'image/png',
@@ -106,3 +107,35 @@ class CadastrarUsuarioForm(UserCreationForm):
             usuario.save()
 
         return user
+
+
+class CadastrarEventosForm(ModelForm):
+
+    class Meta:
+        model = Evento
+        fields = '__all__'
+
+    def clean_cpf_assistido(self):
+        if not validar_cpf(self.cleaned_data['cpf_assistido']):
+            raise forms.ValidationError('Por favor, digite um CPF válido!')
+
+        usuario_mesmo_cpf = Assistido.objects.get(cpf=self.cleaned_data['cpf_assistido'])        
+        if usuario_mesmo_cpf:
+            raise forms.ValidationError('CPF já cadastrado!')
+
+        return self.cleaned_data['cpf_assistido']        
+
+    def clean(self):
+        if self.cleaned_data['hora_fim'] <= self.cleaned_data['hora_inicio']:
+             self.add_error('hora_fim', 'O horário de fim precisa ser maior que o de início.')
+
+    def save(self, commit=True):
+        usuario_mesmo_cpf = Assistido.objects.get(cpf=self.cleaned_data['cpf_assistido'])
+
+        if not usuario_mesmo_cpf:
+            assistido = Assistido()
+            assistido.nome = self.cleaned_data['nome']
+            assistido.cpf = self.cleaned_data['cpf_assistido']
+
+            if commit:
+                assistido.save()

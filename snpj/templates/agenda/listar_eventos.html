@@ -12,10 +12,10 @@
     <p align="center" ><a href="{% url 'adesao:calendario' %}">Clique aqui</a> para visualizar no calendário.</p>
     <thead>
       <tr>
-        <th>Evento</th>
+        <th>Nome</th>
         <th align="left">Data</th>
         <th align="left">Horário</th>
-        <th align="center">Descrição</th>
+        <th align="center">Detalhar</th>
       </tr>
     </thead>
     <tbody>
@@ -24,7 +24,11 @@
             <td width="35%" ><a title-data="{{evento.nome}}" class="tooltip" >{{evento.nome}}</a></td>
             <td width="35%">{{evento.data|date:"SHORT_DATE_FORMAT"}}</td>
             <td width="35%">{{evento.hora_inicio}} - {{evento.hora_fim}}</td>
-            <td>{{evento.descricao}}</td>
+            <td align="center">
+              <button type="button" class="btn btn-default btn-sm">
+                Detalhar <span class="glyphicon glyphicon-asterisk"></span>
+              </button>
+            </td>
         </tr>
       {% endfor %}
     </tbody>

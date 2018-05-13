@@ -71,7 +71,7 @@
 
     <div class="form-group">
       <div class="form-group">
-        <label for="{{ form.usuario_id.id_for_label }}" class="col-sm-3 control-label">Responsável pelo atendimento</label>
+        <label for="{{ form.usuario_id.id_for_label }}" class="col-sm-3 control-label">Responsável pelo cadastro</label>
 
         <div class="col-sm-9">
           {% render_field form.usuario_id class="form-control" %}
@@ -81,6 +81,21 @@
             {% endfor %}
           </select>
           {{ form.usuario_id.errors }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-group">
+        <label for="{{ form.tipo.id_for_label }}" class="col-sm-3 control-label">Tipologia processual</label>
+        <div class="col-sm-9">
+          <select class="form-control" id="tipo" name="tipo">
+            <option value="0" selected="selected">Cível</option>
+            <option value="1">Criminal</option>
+            <option value="2">Familiar</option>
+            <option value="3">Trabalhista</option>
+          </select>
+          {{ form.tipo.errors }}
         </div>
       </div>
     </div>
@@ -97,21 +112,6 @@
         </div>
       </div>
     </div>
-
-    <div class="form-group">
-        <div class="form-group">
-          <label for="{{ form.tipo.id_for_label }}" class="col-sm-3 control-label">Tipologia processual</label>
-          <div class="col-sm-9">
-            <select class="form-control" id="tipo" name="tipo">
-              <option value="0" selected="selected">Cível</option>
-              <option value="1">Criminal</option>
-              <option value="2">Família</option>
-              <option value="3">Trabalhista</option>
-            </select>
-            {{ form.tipo.errors }}
-          </div>
-        </div>
-      </div>
   </div>
 
   </br>
