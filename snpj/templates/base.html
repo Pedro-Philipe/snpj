@@ -13,6 +13,7 @@
   <!-- Theme CSS - only for preview, will be removed in rules and added in CSS registry -->
   <!--<link media="all" href="{% static 'css/mainLogin.css' %}" type="text/css" rel="stylesheet" id="main-css"> -->
   <link media="all" href="{% static 'css/insideLogin.css' %}" type="text/css" rel="stylesheet" id="main-css">
+{#  <link media="all" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" rel="stylesheet">#}
 
   <link media="all" href="{% static 'css/styleLogin.css' %}" type="text/css" rel="stylesheet"></head>
   <link media="all" href="{% static 'css/jquery-ui.min.css'%}" type="text/css" rel="stylesheet"></head>
@@ -164,13 +165,6 @@
                         </li>
                       </ul>
 
-                      <ul class="navTree navTreeLevel0">
-                        <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
-                            <a href="{% url 'adesao:listar_eventos' %}" title="" class="state-published navTreeFolderish contenttype-folder">
-                            <span>Eventos</span>
-                          </a>
-                        </li>
-                      </ul>
 
                       <ul class="navTree navTreeLevel0">
                         <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
@@ -181,11 +175,11 @@
                       </ul>
 
                       <ul class="navTree navTreeLevel0">
-                        <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
-                            <a href="{% url 'adesao:listar_assistidos'%}" title="" class="state-published navTreeFolderish contenttype-folder">
-                            <span>Assistidos</span>
-                          </a>
-                        </li>
+                          <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
+                              <a href="{% url 'adesao:listar_eventos' %}" title="" class="state-published navTreeFolderish contenttype-folder">
+                                  <span>Eventos</span>
+                              </a>
+                          </li>
                       </ul>
 
                       <ul class="navTree navTreeLevel0">
@@ -196,6 +190,13 @@
                         </li>
                       </ul>
 
+                      <ul class="navTree navTreeLevel0">
+                          <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
+                              <a href="{% url 'adesao:listar_assistidos'%}" title="" class="state-published navTreeFolderish contenttype-folder">
+                                  <span>Assistidos</span>
+                              </a>
+                          </li>
+                      </ul>
 
                     <span class="portletBottomLeft"></span>
                     <span class="portletBottomRight"></span>
