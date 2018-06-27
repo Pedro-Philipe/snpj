@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load gestao_tags %}
+{% csrf_token %}
+{% block content %}
+    <div class="col-sm-5">
+        <h1 class="text-center">SOBRE O ASSISTIDO</h1>
+    </div>
+    <div class="list-group">
+            <a href="#" class="list-group-item active">
+                <h4 class="list-group-item-heading">NOME : {{ assistido.nome}}</h4>
+                <p class="list-group-item-text">Documento Scanner</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">REPRESENTANTE LEGAL : {{ assistido.representante_legal}}</h4>
+                <p class="list-group-item-text">Documento Scanner</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">RG : {{ assistido.rg}}</h4>
+                <p class="list-group-item-text">Documento Scanner</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">CPF : {{ assistido.cpf}}</h4>
+                <p class="list-group-item-text">Documento Scanner</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">NACIONALIDADE : {{ assistido.nacionalidade}}</h4>
+                <p class="list-group-item-text">Documento Scanner</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">ESTADO CIVIL : {{ assistido.estado_civil}}</h4>
+                <p class="list-group-item-text">Documento Scanner</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">PROFESSIONAL : {{ assistido.profissao}}</h4>
+                <p class="list-group-item-text">Documento Scanner</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">RENDA FAMILIAR : {{ assistido.renda_familiar}}</h4>
+                <p class="list-group-item-text">Documento Scanner</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">ENDEREÇO RESIDENCIAL : {{ assistido.endereco_residencial}}</h4>
+                <p class="list-group-item-text">Documento Scanner</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">ENDEREÇO TRABALHO : {{ assistido.endereco_trabalho}}</h4>
+                <p class="list-group-item-text">Documento Scanner</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">CEP : {{ assistido.cep}}</h4>
+                <p class="list-group-item-text">Documento Scanner</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">TELEFONE CELULAR : {{ assistido.telefone_celular}}</h4>
+                <p class="list-group-item-text">Documento Scanner</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">TELEFONE FIXO : {{ assistido.telefone_fixo}}</h4>
+                <p class="list-group-item-text">Documento Scanner</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">TELEFONE COMERCIAL : {{ assistido.telefone_comercial}}</h4>
+                <p class="list-group-item-text">Documento Scanner</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">EMAIL : {{ assistido.email}}</h4>
+                <p class="list-group-item-text">Documento Scanner</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">OBSERVAÇÕES : </h4>
+                <textarea>{{ assistido.observacoes}}</textarea>
+            </a>
+    </div>
+    <br/>
+</div>
+{% endblock content %}
