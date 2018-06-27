@@ -1,6 +1,6 @@
 from django.conf.urls import url
 # from django.contrib.auth.decorators import login_required
-
+from adesao.views import detalhar_assistido
 from . import views
 
 
@@ -28,6 +28,7 @@ urlpatterns = [
 
     url(r'^listar-eventos/$', views.ListarEventos.as_view(), name='listar_eventos'),
     url(r'^listar-assistidos/$', views.ListarAssistidos.as_view(), name='listar_assistidos'),
+    url(r'^detalhes/(?P<id>\d+)/$', detalhar_assistido, name='detalhar_assistido'),
 
     url(r'^cadastrar-eventos/$', views.CadastrarEventos.as_view(), name='cadastrar_eventos'),
     url(r'^cadastrar-assistido/$', views.CadastrarAssistido.as_view(), name='cadastrar_assistido'),
