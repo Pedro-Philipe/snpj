@@ -78,6 +78,9 @@ def sucesso_usuario(request):
 def calendario(request):
     return render(request, 'calendario.html')
 
+def detalhar_assistido(request, id):
+    assistido = Assistido.objects.get(id=id)
+    return render(request, 'assistido/detalhar.html', context={'assistido':assistido})
 
 class ListarEventos(ListView):
     template_name = 'agenda/listar_eventos.html'
@@ -90,6 +93,8 @@ class ListarAssistidos(ListView):
     model = Assistido
     paginate_by = 12
 
+class DetalheAssistido(ListView):
+    model = Assistido
 
 class CadastrarEventos(CreateView):
     template_name = 'agenda/cadastrar_eventos.html'
@@ -111,12 +116,20 @@ class CadastrarEventos(CreateView):
 
 class CadastrarAssistido(CreateView):
     template_name = 'assistido/cadastro_assistido.html'
-    success_url = reverse_lazy('adesao:home')
+    success_url = reverse_lazy('adesao:listar_assistidos')
     model = Assistido
     fields = '__all__'
 
-    def form_valid(self, form):
-        return HttpResponseRedirect(self.get_success_url())
+    def get_context_data(self, **kwargs):
+        context = super(CreateView, self).get_context_data(**kwargs)
+
+        if not self.request.user.is_superuser:
+            context['usuarios'] = Usuario.objects.filter(id=self.request.user.id)
+            return context
+
+        context['usuarios'] = Usuario.objects.all()
+
+        return context
 
 class CadastrarUsuario(CreateView):
     form_class = CadastrarUsuarioForm
