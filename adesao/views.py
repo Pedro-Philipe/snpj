@@ -82,6 +82,10 @@ def detalhar_assistido(request, id):
     assistido = Assistido.objects.get(id=id)
     return render(request, 'assistido/detalhar.html', context={'assistido':assistido})
 
+def upload_arquivos(request, id):
+    assistido = Assistido.objects.get(id=id)
+    return render(request, 'assistido/upload_doc.html', context={'assistido':assistido})
+
 class ListarEventos(ListView):
     template_name = 'agenda/listar_eventos.html'
     model = Evento
@@ -95,6 +99,10 @@ class ListarAssistidos(ListView):
 
 class DetalheAssistido(ListView):
     model = Assistido
+
+# class UploadDocAssistido(ListView):
+#     model = Assistido
+#     template_name = 'assistido/upload_doc.html'
 
 class CadastrarEventos(CreateView):
     template_name = 'agenda/cadastrar_eventos.html'
@@ -130,6 +138,27 @@ class CadastrarAssistido(CreateView):
         context['usuarios'] = Usuario.objects.all()
 
         return context
+
+# Alterar o Model depois que estiver com a tabela Processo criada
+class CriarProcesso(ListView):
+    template_name = 'processo/criar_processo.html'
+    success_url = reverse_lazy('adesao:lista_processos')
+    model = Assistido
+
+class ListaProcesso(ListView):
+    template_name = 'processo/lista_processos.html'
+    model = Assistido
+    paginate_by = 12
+
+# Também deve se trocar o Model aqui, e a variavél como também troca na página de listar processo.
+# Usei o Assistido como exemplo, apenas para vc ter uma ideia do fluxo
+def upload_processo(request, id):
+    assistido = Assistido.objects.get(id=id)
+    return render(request, 'processo/upload_processo.html', context={'assistido':assistido})
+
+def gestao_processo(request, id):
+    processo = Assistido.objects.get(id=id)
+    return render(request, 'processo/gestao_processo.html', context={'processo':processo})
 
 class CadastrarUsuario(CreateView):
     form_class = CadastrarUsuarioForm
