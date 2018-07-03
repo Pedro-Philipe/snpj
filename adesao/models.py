@@ -1,5 +1,6 @@
 ﻿from django.db import models
 from django.contrib.auth.models import User
+from adesao.extra import ContentTypeRestrictedFileField
 
 # Create your models here.
 
@@ -68,6 +69,34 @@ class Assistido(models.Model):
     email = models.EmailField(max_length=200)
     observacoes = models.TextField(null=True)
 
+class UploadDoc(models.Model):
+    id_assistido = models.ForeignKey(Assistido)
+    descricao = models.CharField(max_length=200, null=True)
+    file = ContentTypeRestrictedFileField(
+        upload_to='pdf',
+        content_types=['application/pdf'],
+        max_upload_size=15242880
+    )
+    data_upload = models.DateTimeField(auto_now_add=True)
+
+# Modelo Básico para View de Cadastro de Processo!
+# Esse Model term que herdar a FK do Assistido, para efetuar o cadastro do processo
+class CriarProcesso(models.Model):
+    cpf_fk = models.ForeignKey(Assistido)
+    tipo_processo = models.IntegerField(null=True)
+    data = models.DateField(auto_now_add=True)
+    descricao = models.TextField(max_length=1000, null=True)
+    status = models.TextField(null=False)
+
+class UploadAnexoProcesso(models.Model):
+    id_assistido = models.ForeignKey(Assistido)
+    file = ContentTypeRestrictedFileField(
+        upload_to='pdf',
+        content_types=['application/pdf'],
+        max_upload_size=15242880
+    )
+    data_upload = models.DateTimeField(auto_now_add=True)
+    ##Todos input files
 
 class Processo(models.Model):
     fatos_narrados = models.TextField(null=True)
