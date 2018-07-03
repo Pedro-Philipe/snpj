@@ -22,7 +22,7 @@
                 <div class="form-group">
                     <div class="col-sm-7">
                         <label for="{{ form.rg.id_for_label }}"> RG </label>
-                            {% render_field form.rg class="form-control"  maxlength=7 %} {{ form.nome.errors }}
+                            {% render_field form.rg class="form-control rg"  maxlength=7 %} {{ form.nome.errors }}
                     </div>
                 </div>
 
@@ -57,7 +57,7 @@
                 <div class="form-group">
                     <div class="col-sm-7">
                         <label for="{{ form.renda_familiar.id_for_label }}"> Renda Familiar </label>
-                            {% render_field form.renda_familiar class="form-control"%} {{ form.nome.errors }}
+                            {% render_field form.renda_familiar class="form-control renda"%} {{ form.nome.errors }}
                     </div>
                 </div>
 
@@ -127,11 +127,11 @@
   $(document).ready(function(){
     $(".form-horizontal").submit(function(){
       $(".cpf").formatter().resetPattern('{{99999999999}}');
-       $(".cep").formatter({
+      $(".cep").formatter({
           'pattern': '{{99}}.{{999}}-{{999}}',
           'persistent': false,
         });
-       $(".telefone").mask('(00)00000-0000');
+      $(".telefone").mask('(00)00000-0000');
     });
   });
 </script>
