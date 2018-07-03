@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+    <h2>ACOMPANHAMENTO DO PROCESSO</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div>
+{#            Ação desse butão é baixar todos os doc's que foram importados no Processo, e deve baixar todos eles, em .ZIP#}
+            <button class="btn btn-primary btn-lg">DOWNLOAD DOCUMENTOS</button>
+        </div>
+        <div>
+            <label for="{{ form.id_.id_for_label }}">NUMERO DO PROCESSO</label>
+            <input type="text" class="form-control" value="{{ assistido.id }}">
+        </div>
+        <div>
+            <label for="{{ form.id_.id_for_label }}">ASSISTIDO</label>
+            <input type="text" class="form-control" value="{{ assistido.nome }}">
+        </div>
+        <div>
+            <label for="{{ form.id_.id_for_label }}">DESCRIÇÃO SOBRE O PROCESSO</label>
+                <textarea class="form-control" id="id_descricao" maxlength="1000" name="descricao" type="text" style="margin: 0px; height: 80px; width: 498px;" disabled>{{ processo.descricao }}</textarea> {{ form.descricao.errors }}
+        </div>
+        <div class="form-group">
+              <div class="form-group">
+                <label for="{{ form.tipo.id_for_label }}" class="col-sm-3 control-label">TIPOLOGIA PROCESSUAL</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" value="{{ processo.status }}" disabled>
+                </div>
+              </div>
+        </div>
+        <div class="form-group">
+              <div class="form-group">
+                <label for="{{ form.tipo.id_for_label }}" class="col-sm-3 control-label">TIPOLOGIA PROCESSUAL</label>
+                <div class="col-sm-9">
+                  <select class="form-control" id="tipo" name="tipo">
+                    <option value="0" selected="selected">CÍVIL</option>
+                    <option value="1">CRIMINAL</option>
+                    <option value="2">FAMILIAR</option>
+                    <option value="3">TRABALHISTA</option>
+                  </select>
+                    {{ form.tipo.errors }}
+                </div>
+              </div>
+        </div>
+    </form>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".form-horizontal").submit(function(){
+      $(".cpf").formatter().resetPattern('{{99999999999}}');
+      $(".cep").formatter({
+          'pattern': '{{99}}.{{999}}-{{999}}',
+          'persistent': false,
+        });
+      $(".telefone").mask('(00)00000-0000');
+    });
+  });
+</script>
+{% endblock %}

@@ -78,6 +78,13 @@ def sucesso_usuario(request):
 def calendario(request):
     return render(request, 'calendario.html')
 
+def detalhar_assistido(request, id):
+    assistido = Assistido.objects.get(id=id)
+    return render(request, 'assistido/detalhar.html', context={'assistido':assistido})
+
+def upload_arquivos(request, id):
+    assistido = Assistido.objects.get(id=id)
+    return render(request, 'assistido/upload_doc.html', context={'assistido':assistido})
 
 class ListarEventos(ListView):
     template_name = 'agenda/listar_eventos.html'
@@ -90,6 +97,12 @@ class ListarAssistidos(ListView):
     model = Assistido
     paginate_by = 12
 
+class DetalheAssistido(ListView):
+    model = Assistido
+
+# class UploadDocAssistido(ListView):
+#     model = Assistido
+#     template_name = 'assistido/upload_doc.html'
 
 class CadastrarEventos(CreateView):
     template_name = 'agenda/cadastrar_eventos.html'
@@ -111,12 +124,41 @@ class CadastrarEventos(CreateView):
 
 class CadastrarAssistido(CreateView):
     template_name = 'assistido/cadastro_assistido.html'
-    success_url = reverse_lazy('adesao:home')
+    success_url = reverse_lazy('adesao:listar_assistidos')
     model = Assistido
     fields = '__all__'
 
-    def form_valid(self, form):
-        return HttpResponseRedirect(self.get_success_url())
+    def get_context_data(self, **kwargs):
+        context = super(CreateView, self).get_context_data(**kwargs)
+
+        if not self.request.user.is_superuser:
+            context['usuarios'] = Usuario.objects.filter(id=self.request.user.id)
+            return context
+
+        context['usuarios'] = Usuario.objects.all()
+
+        return context
+
+# Alterar o Model depois que estiver com a tabela Processo criada
+class CriarProcesso(ListView):
+    template_name = 'processo/criar_processo.html'
+    success_url = reverse_lazy('adesao:lista_processos')
+    model = Assistido
+
+class ListaProcesso(ListView):
+    template_name = 'processo/lista_processos.html'
+    model = Assistido
+    paginate_by = 12
+
+# Também deve se trocar o Model aqui, e a variavél como também troca na página de listar processo.
+# Usei o Assistido como exemplo, apenas para vc ter uma ideia do fluxo
+def upload_processo(request, id):
+    assistido = Assistido.objects.get(id=id)
+    return render(request, 'processo/upload_processo.html', context={'assistido':assistido})
+
+def gestao_processo(request, id):
+    processo = Assistido.objects.get(id=id)
+    return render(request, 'processo/gestao_processo.html', context={'processo':processo})
 
 class CadastrarUsuario(CreateView):
     form_class = CadastrarUsuarioForm
