@@ -88,6 +88,8 @@ class CriarProcesso(models.Model):
     descricao = models.TextField(max_length=1000, null=True)
     status = models.TextField(null=False)
 
+## Esse model deve ser usado tanto no upload de doc de Processo, com também no upload de gestão !!
+## E na hora de baixar deve baixar tudo com referêcia o ID do processo, pois ambos os upload de Cadastro de Processo, e Gestão de Upload são os mesmo
 class UploadAnexoProcesso(models.Model):
     id_assistido = models.ForeignKey(Assistido)
     file = ContentTypeRestrictedFileField(
