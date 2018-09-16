@@ -1,0 +1,63 @@
+{% extends "gestao/base_gestao.html" %}
+{% load gestao_tags %}
+{% block content %}
+    <div class="dataTable_wrapper">
+        <h1 class="header text-center">Lista de Processos</h1>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Lista de processos para acompanhamento</div>
+            <div class="panel-body">
+            <table class="table table-bordered" id="dataTables-example">
+                {% if object_list %}
+                    <thead >
+                    <tr>
+                        <th>COD</th>
+                        <th>ASSISTIDO</th>
+                        <th>TIPOLOGIA</th>
+                        <th>STATUS</th>
+                        <th>DATA DE RETORNO</th>
+                        <th>DETALHES</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for processo in object_list %}
+                        <tr class="odd gradeX">
+                            <td>{{ processo.id }}</td>
+                            <td>{{ processo.cpf_assistido }}</td>
+                            <td>{{ processo.tipologia }}</td>
+                            <td>{{ processo.status_processo }}</td>
+                            <td>{{ processo.data }}</td>
+                            <td align="center">
+                                <a href="http://127.0.0.1:8000/gestao/processos/detalhes/{{ processo.id }}">
+                                    <button type="button" class="btn btn-default btn-sm"> Mais sobre <span
+                                            class="glyphicon glyphicon-asterisk"></span></button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                {% else %}
+                    <div align="center">
+                        <p>Nenhum dado cadastrado.</p>
+                    </div>
+                {% endif %}
+
+            </table>
+            {% if is_paginated %}
+                <div style="float:right;">
+                    {% if page_obj.has_previous %}
+                        <a class="paginate_button previous"
+                           href="?{% url_replace 'page' page_obj.previous_page_number %}">Anterior</a>
+                    {% endif %}
+                    <a>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</a>
+                    {% if page_obj.has_next %}
+                        <a class="paginate_button next"
+                           href="?{% url_replace 'page' page_obj.next_page_number %}">Próximo</a>
+                    {% endif %}
+                </div>
+                </div>
+            {% endif %}
+            </div>
+            <br>
+        </div>
+    </div>
+{% endblock content %}

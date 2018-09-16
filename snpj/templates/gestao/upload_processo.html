@@ -1,0 +1,31 @@
+{% extends "gestao/base_gestao.html" %}
+{% load gestao_tags %}
+{% block content %}
+    <div class="dataTable_wrapper">
+        <h1 class="header text-center">UPLOAD DE DOCUMENTOS</h1>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Upload de arquivos do assistido no decorrer do processo</div>
+            <div class="panel-body">
+                <h2>ANEXAR DOCUMENTOS DO PROCESSO</h2>
+                <div>
+                    <label for="{{ form.id_.id_for_label }}">NUMERO DO PROCESSO</label>
+                    <input type="text" class="form-control" value="{{ detalhe.id }}">
+                </div>
+                <div>
+                    <label for="{{ form.id_.id_for_label }}">ASSISTIDO</label>
+                    <input type="text" class="form-control" value="{{ detalhe.nome }}">
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label for="caixa1">Opção 01 : </label>
+                    <input type="file" class="form-control-file" id="caixa1">
+                </div>
+                <br/>
+                <div class="form-group">
+                    <input type="button" class="btn btn-success btn-lg center-block" value="SALVAR">
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+{% endblock content %}
