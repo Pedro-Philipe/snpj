@@ -20,7 +20,7 @@ from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
 
 from adesao.forms import CadastrarUsuarioForm, CadastrarEventosForm
-from adesao.models import Usuario, Evento, Assistido
+from adesao.models import Usuario, Evento, Assistido, Processo
 from adesao.utils import enviar_email_conclusao, verificar_anexo
 
 # from wkhtmltopdf.views import PDFTemplateView
@@ -140,14 +140,26 @@ class CadastrarAssistido(CreateView):
         return context
 
 # Alterar o Model depois que estiver com a tabela Processo criada
-class CriarProcesso(ListView):
+class CadastrarProcesso(CreateView):
     template_name = 'processo/criar_processo.html'
     success_url = reverse_lazy('adesao:lista_processos')
-    model = Assistido
+    model = Processo
+    fields = '__all__'
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateView, self).get_context_data(**kwargs)
+
+        if not self.request.user.is_superuser:
+            context['usuarios'] = Processo.objects.filter(id=self.request.user.id)
+            return context
+
+        context['usuarios'] = Processo.objects.all()
+
+        return context
 
 class ListaProcesso(ListView):
     template_name = 'processo/lista_processos.html'
-    model = Assistido
+    model = Processo
     paginate_by = 12
 
 # Também deve se trocar o Model aqui, e a variavél como também troca na página de listar processo.
