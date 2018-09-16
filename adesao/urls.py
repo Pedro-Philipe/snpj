@@ -32,11 +32,10 @@ urlpatterns = [
     url(r'^upload-doc/(?P<id>\d+)/$', upload_arquivos, name='upload_arquivos'),
 
     # Fazer mudanças nas Class's quando o model estiver okay
-    url(r'^criar-processos/$', views.CriarProcesso.as_view(), name='criar_processo'),
+    url(r'^criar-processos/$', views.CadastrarProcesso.as_view(), name='criar_processo'),
     url(r'^lista-processos/$', views.ListaProcesso.as_view(), name='lista_processos'),
-    url(r'^upload-processo/(?P<id>\d+)/$', upload_processo, name='upload_processo'),
-    url(r'^gestao-processo/(?P<id>\d+)/$', gestao_processo, name='gestao_processo'),
-
+    # url(r'^upload-processo/(?P<id>\d+)/$', upload_processo, name='upload_processo'),
+    # url(r'^gestao-processo/(?P<id>\d+)/$', gestao_processo, name='gestao_processo'),
 
     url(r'^cadastrar-eventos/$', views.CadastrarEventos.as_view(), name='cadastrar_eventos'),
     url(r'^cadastrar-assistido/$', views.CadastrarAssistido.as_view(), name='cadastrar_assistido'),
