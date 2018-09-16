@@ -1,6 +1,8 @@
-﻿from django.db import models
+﻿import datetime
+from django.db import models
 from django.contrib.auth.models import User
 from adesao.extra import ContentTypeRestrictedFileField
+
 
 # Create your models here.
 
@@ -37,7 +39,8 @@ class Usuario(models.Model):
     data_cadastro = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.user.username
+        aux_user = self.user.username
+        return aux_user
 
 
 class Evento(models.Model):
@@ -53,7 +56,7 @@ class Evento(models.Model):
 
 class Assistido(models.Model):
     nome = models.CharField(max_length=200, null=True)
-    representante_legal = models.CharField(max_length=200, null=True)
+    representante_legal = models.CharField(max_length=200)
     rg = models.CharField(max_length=20, null=True)
     cpf = models.CharField(max_length=20, null=True)
     nacionalidade = models.CharField(max_length=200, null=True)
@@ -61,65 +64,28 @@ class Assistido(models.Model):
     profissao = models.CharField(max_length=200, null=True)
     renda_familiar = models.CharField(max_length=200, null=True)
     endereco_residencial = models.CharField(max_length=200, null=True)
-    endereco_trabalho = models.CharField(max_length=200, null=True)
+    endereco_trabalho = models.CharField(max_length=200)
     cep = models.CharField(max_length=20, null=True)
     telefone_celular = models.CharField(max_length=20, null=True)
-    telefone_fixo = models.CharField(max_length=20, null=True)
-    telefone_comercial = models.CharField(max_length=200, null=True)
+    telefone_fixo = models.CharField(max_length=20)
+    telefone_comercial = models.CharField(max_length=200)
     email = models.EmailField(max_length=200)
     observacoes = models.TextField(null=True)
 
-class UploadDoc(models.Model):
-    id_assistido = models.ForeignKey(Assistido)
-    descricao = models.CharField(max_length=200, null=True)
-    file = ContentTypeRestrictedFileField(
-        upload_to='pdf',
-        content_types=['application/pdf'],
-        max_upload_size=15242880
-    )
-    data_upload = models.DateTimeField(auto_now_add=True)
+
+##Model para Armezenar os Documentos dos Assistidos, são os documentos pessoais
+
+
+## Esse model deve ser usado tanto no upload de doc de Processo!! Esse Model é para anexar os documentos no decorrer do processo
+## E na hora de baixar deve baixar tudo com referêcia o ID do processo, pois ambos os upload de Cadastro de Processo, e Gestão de Upload são os mesmo
+
 
 # Modelo Básico para View de Cadastro de Processo!
 # Esse Model term que herdar a FK do Assistido, para efetuar o cadastro do processo
-class CriarProcesso(models.Model):
-    cpf_fk = models.ForeignKey(Assistido)
-    tipo_processo = models.IntegerField(null=True)
-    data = models.DateField(auto_now_add=True)
-    descricao = models.TextField(max_length=1000, null=True)
-    status = models.TextField(null=False)
-
-## Esse model deve ser usado tanto no upload de doc de Processo, com também no upload de gestão !!
-## E na hora de baixar deve baixar tudo com referêcia o ID do processo, pois ambos os upload de Cadastro de Processo, e Gestão de Upload são os mesmo
-class UploadAnexoProcesso(models.Model):
-    id_assistido = models.ForeignKey(Assistido)
-    file = ContentTypeRestrictedFileField(
-        upload_to='pdf',
-        content_types=['application/pdf'],
-        max_upload_size=15242880
-    )
-    data_upload = models.DateTimeField(auto_now_add=True)
-    ##Todos input files
-
 class Processo(models.Model):
-    fatos_narrados = models.TextField(null=True)
-    hipossuficiencia = models.FileField(
-        upload_to='hipossuficiencia',
-        max_length=255,
-        blank=True,
-        null=True)
-    procuracao = models.FileField(
-        upload_to='procuracao',
-        max_length=255,
-        blank=True,
-        null=True)
-
-
-#
-# class Processo(models.Model):
-#     rg = models.CharField(max_length=100, null=False)
-#     cpf = models.ForeignKey(User, to_field='username')
-#     tipo = models.ForeignKey(DescricaoProcesso)
-#
-#
-# class DescricaoProcesso(models.Model):
-#     descricao = models.CharField(max_length=100, null=False)  # Guarda e divórcio
+    cpf_assistido = models.CharField(max_length=20, null=False)
+    tipologia = models.IntegerField(null=True)
+    data = models.DateField()
+    descricao = models.TextField(max_length=1500, null=False)
+    status_processo = models.CharField(max_length=20, null=False)
+    responsavel_processo = models.CharField(max_length=50, null=False)
