@@ -1,0 +1,99 @@
+{% extends "gestao/base_gestao.html" %}
+{% load gestao_tags %}
+{% block content %}
+    <div class="dataTable_wrapper">
+        <h1 class="header text-center">DETALHES ASSISTIDO</h1>
+        <br/>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Detalhes do assistido, e página para upload de documentos pessoais</div>
+            <div class="panel-body">
+                <div class="col-md-6">
+                    <div class="col-xs-12">
+                        <div>
+                            <label for="{{ form.id_.id_for_label }}">MATRICULA</label>
+                            <input type="text" class="form-control" value="{{ assistido.id }}" disabled>
+                        </div>
+                        <div>
+                            <label for="{{ form.id_.id_for_label }}">NOME</label>
+                            <input type="text" class="form-control" value="{{ assistido.nome }}" disabled>
+                        </div>
+                        <div>
+                            <label for="{{ form.id_.id_for_label }}">CPF</label>
+                            <input type="text" class="form-control" value="{{ assistido.cpf }}" disabled>
+                        </div>
+                        <div>
+                            <label for="{{ form.id_.id_for_label }}">RG</label>
+                            <input type="text" class="form-control" value="{{ assistido.rg }}" disabled>
+                        </div>
+                        <div>
+                            <label for="{{ form.id_.id_for_label }}">E-MAIL</label>
+                            <input type="text" class="form-control" value="{{ assistido.email }}" disabled>
+                        </div>
+                        <div>
+                            <label for="{{ form.id_.id_for_label }}">NACIONALIDADE</label>
+                            <input type="text" class="form-control" value="{{ assistido.nacionalidade }}" disabled>
+                        </div>
+                        <div>
+                            <label for="{{ form.id_.id_for_label }}">ESTADO CIVIL</label>
+                            <input type="text" class="form-control" value="{{ assistido.estado_civil }}" disabled>
+                        </div>
+                        <div>
+                            <label for="{{ form.id_.id_for_label }}">PROFISSÃO</label>
+                            <input type="text" class="form-control" value="{{ assistido.profissao }}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-xs-12">
+                        <div>
+                            <label for="{{ form.id_.id_for_label }}">RENDA FAMILIAR</label>
+                            <input type="text" class="form-control" value="{{ assistido.renda_familiar }}" disabled>
+                        </div>
+                        <div>
+                            <label for="{{ form.id_.id_for_label }}">ENDEREÇO</label>
+                            <input type="text" class="form-control" value="{{ assistido.endereco_residencial }}"
+                                   disabled>
+                        </div>
+                        <div>
+                            <label for="{{ form.id_.id_for_label }}">ENDEREÇO TRABALHO</label>
+                            <input type="text" class="form-control" value="{{ assistido.endereco_trabalho }}" disabled>
+                        </div>
+                        <div>
+                            <label for="{{ form.id_.id_for_label }}">CEP</label>
+                            <input type="text" class="form-control" value="{{ assistido.cep }}" disabled>
+                        </div>
+                        <div>
+                            <label for="{{ form.id_.id_for_label }}">TELEFONE CELULAR</label>
+                            <input type="text" class="form-control" value="{{ assistido.telefone_celular }}" disabled>
+                        </div>
+                        <div>
+                            <label for="{{ form.id_.id_for_label }}">TELEFONE FIXO</label>
+                            <input type="text" class="form-control" value="{{ assistido.telefone_fixo }}" disabled>
+                        </div>
+                        <div>
+                            <label for="{{ form.id_.id_for_label }}">TELEFONE COMERCIAL</label>
+                            <input type="text" class="form-control" value="{{ assistido.telefone_comercial }}" disabled>
+                        </div>
+                        <div>
+                            <label for="{{ form.id_.id_for_label }}">OBSERVAÇÕES</label>
+                            <input type="text" class="form-control" value="{{ assistido.observacoes }}" disabled>
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <label for="caixa1">ANEXAR DOCUMENTOS: </label>
+                    <input type="file" class="form-control-file center-block" id="caixa1">
+                    <br/>
+                    <span> OBS: Os documentos devem ser compactados .zip, e importados</span>
+                </div>
+                <div class="form-group">
+                <div class="col-sm-12 center-block">
+                    <br/>
+                    <input type="submit" class="btn btn-success btn-lg center-block" value="SALVAR">
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
