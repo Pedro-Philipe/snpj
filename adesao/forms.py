@@ -5,7 +5,7 @@ from django.utils.crypto import get_random_string
 from django.forms import ModelForm
 from django.template.defaultfilters import filesizeformat
 
-from .models import Usuario, Evento, Assistido
+from .models import Usuario, Evento, Assistido, Processo
 from .utils import validar_cpf, validar_cnpj, limpar_mascara
 import re
 import pdb
@@ -112,11 +112,26 @@ class CadastrarAssistidoForm(forms.ModelForm):
 
 class CadastroProcessoForm(forms.ModelForm):
     cpf_assistido = forms.CharField(max_length=20, required=True)
-    tipologia = forms.IntegerField(required=True)
+    tipologia = forms.CharField(required=True)
     data = forms.DateField()
     descricao = forms.CharField(max_length=1500, widget=forms.Textarea(), required=True)
     status_processo = forms.CharField(max_length=20, required=True)
     responsavel_processo = forms.CharField(max_length=50, required=True)
+
+    class Meta:
+        model = Processo
+        fields = ('cpf_assistido', 'tipologia', 'data', 'descricao', 'status_processo', 'responsavel_processo')
+
+    def clean_cpf(self):
+        if not validar_cpf(self.cleaned_data['cpf_assistido']):
+            raise forms.ValidationError('Por favor, digite um CPF válido!')
+
+        usuario_mesmo_cpf = Assistido.objects.filter(cpf_assistido=self.cleaned_data['cpf_assistido'])
+
+        if usuario_mesmo_cpf.count() == 0:
+            raise forms.ValidationError('CPF não cadastrado no sistema')
+
+        return self.cleaned_data['cpf_assistido']
 
 class CadastrarUsuarioForm(UserCreationForm):
     username = forms.CharField(max_length=14, required=True)
