@@ -11,7 +11,7 @@
                 <div class="alert alert-danger">
                     {{ form.cpf.errors }}
                 </div>
-                {% endif %}
+            {% endif %}
             </div>
             <br/>
             <div class="form-group">
@@ -20,10 +20,10 @@
                         PROCESSUAL</label>
                     <div class="col-sm-9">
                         <select class="form-control" id="tipologia" name="tipologia">
-                            <option value="0" selected="selected">Cível</option>
-                            <option value="1">Criminal</option>
-                            <option value="2">Familiar</option>
-                            <option value="3">Trabalhista</option>
+                            <option value="Civel" selected="selected">Cível</option>
+                            <option value="Criminal">Criminal</option>
+                            <option value="Familiar">Familiar</option>
+                            <option value="Trabalhista">Trabalhista</option>
                         </select>
                         {{ form.tipologia.errors }}
                     </div>
@@ -51,7 +51,7 @@
             <div class="form-group">
                 <div class="form-group">
                     <label for="{{ form.status_processo.id_for_label }}" class="col-sm-3 control-label">STATUS</label>
-                    {% render_field form.status_processo class="form-control" %} {{ form.nome.errors }}
+                    {% render_field form.status_processo class="form-control" %} {{ form.status_processo.errors }}
                 </div>
             </div>
             <br/>
