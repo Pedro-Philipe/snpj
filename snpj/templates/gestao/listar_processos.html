@@ -14,6 +14,7 @@
                         <th>ASSISTIDO</th>
                         <th>TIPOLOGIA</th>
                         <th>STATUS</th>
+                        <th>RESPOSAVEL</th>
                         <th>DATA DE RETORNO</th>
                         <th>DETALHES</th>
                     </tr>
@@ -25,6 +26,7 @@
                             <td>{{ processo.cpf_assistido }}</td>
                             <td>{{ processo.tipologia }}</td>
                             <td>{{ processo.status_processo }}</td>
+                            <td>{{ processo.responsavel_processo }}</td>
                             <td>{{ processo.data }}</td>
                             <td align="center">
                                 <a href="http://127.0.0.1:8000/gestao/detalhes/processo/{{ processo.id }}">
