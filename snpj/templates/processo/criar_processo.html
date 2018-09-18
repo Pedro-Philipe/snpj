@@ -49,18 +49,19 @@
             </div>
             <br/>
             <div class="form-group">
-                <div class="form-group">
+                <div class="col-sm-7">
                     <label for="{{ form.status_processo.id_for_label }}" class="col-sm-3 control-label">STATUS</label>
                     {% render_field form.status_processo class="form-control" %} {{ form.status_processo.errors }}
                 </div>
             </div>
             <br/>
             <div class="form-group">
-                <div class="form-group">
-                    <label for="{{ form.responsavel_processo.id_for_label }}" class="col-sm-3 control-label">RESPONSAVÉL
-                        PELO CADASTRO
-                    </label>
-                    {% render_field form.responsavel_processo class="form-control" %} {{ form.nome.errors }}
+                <label class="col-sm-3 ">Responsável pelo cadastro</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="responsavel_processo" name="responsavel_processo">
+                        <option value="{{ request.user.usuario.nome_usuario }}">{{ request.user.usuario.nome_usuario }}</option>
+                    </select>
+                    {{ form.responsavel_processo.errors }}
                 </div>
             </div>
             <div class="form-group">
