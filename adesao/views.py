@@ -19,7 +19,11 @@ from django.db.models import Q, Count
 from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
 
-from adesao.forms import CadastrarUsuarioForm, CadastrarEventosForm
+from adesao.forms import CadastrarUsuarioForm,\
+                         CadastrarEventosForm,\
+                         CadastrarAssistidoForm,\
+                         CadastroProcessoForm
+
 from adesao.models import Usuario, Evento, Assistido, Processo
 from adesao.utils import enviar_email_conclusao, verificar_anexo
 
@@ -126,25 +130,14 @@ class CadastrarAssistido(CreateView):
     template_name = 'assistido/cadastro_assistido.html'
     success_url = reverse_lazy('adesao:listar_assistidos')
     model = Assistido
-    fields = '__all__'
-
-    def get_context_data(self, **kwargs):
-        context = super(CreateView, self).get_context_data(**kwargs)
-
-        if not self.request.user.is_superuser:
-            context['usuarios'] = Usuario.objects.filter(id=self.request.user.id)
-            return context
-
-        context['usuarios'] = Usuario.objects.all()
-
-        return context
+    form_class = CadastrarAssistidoForm
 
 # Alterar o Model depois que estiver com a tabela Processo criada
 class CadastrarProcesso(CreateView):
     template_name = 'processo/criar_processo.html'
     success_url = reverse_lazy('adesao:lista_processos')
     model = Processo
-    fields = '__all__'
+    form_class = CadastroProcessoForm
 
     def get_context_data(self, **kwargs):
         context = super(CreateView, self).get_context_data(**kwargs)
