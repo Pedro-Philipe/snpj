@@ -84,7 +84,7 @@ class Assistido(models.Model):
 # Esse Model term que herdar a FK do Assistido, para efetuar o cadastro do processo
 class Processo(models.Model):
     cpf_assistido = models.CharField(max_length=20, null=False)
-    tipologia = models.IntegerField(null=True)
+    tipologia = models.CharField(max_length=50, null=True)
     data = models.DateField()
     descricao = models.TextField(max_length=1500, null=False)
     status_processo = models.CharField(max_length=20, null=False)
