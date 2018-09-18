@@ -60,7 +60,7 @@ class Assistido(models.Model):
     rg = models.CharField(max_length=20, null=True)
     cpf = models.CharField(max_length=20, null=True)
     nacionalidade = models.CharField(max_length=200, null=True)
-    estado_civil = models.CharField(max_length=200, null=True)
+    estado_civil = models.CharField(max_length=50, null=True)
     profissao = models.CharField(max_length=200, null=True)
     renda_familiar = models.CharField(max_length=200, null=True)
     endereco_residencial = models.CharField(max_length=200, null=True)
