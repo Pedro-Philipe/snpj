@@ -9,16 +9,32 @@
                 <h2>ANEXAR DOCUMENTOS DO PROCESSO</h2>
                 <div>
                     <label for="{{ form.id_.id_for_label }}">NUMERO DO PROCESSO</label>
-                    <input type="text" class="form-control" value="{{ detalhe.id }}">
+                    <input type="text" class="form-control" value="{{ processo.id }}">
                 </div>
                 <div>
                     <label for="{{ form.id_.id_for_label }}">ASSISTIDO</label>
-                    <input type="text" class="form-control" value="{{ detalhe.nome }}">
+                    <input type="text" class="form-control" value="{{ processo.cpf_assistido }}">
+                </div>
+                <div>
+                    <label for="{{ form.id_.id_for_label }}">TIPOLOGIA</label>
+                    <input type="text" class="form-control" value="{{ processo.tipologia }}">
+                </div>
+                <div>
+                    <label for="{{ form.id_.id_for_label }}">DATA DE RETORNO</label>
+                    <input type="text" class="form-control" value="{{ processo.data }}">
+                </div>
+                <div>
+                    <label for="{{ form.id_.id_for_label }}">STATUS</label>
+                    <input type="text" class="form-control" value="{{ processo.status_processo }}">
+                </div>
+                <div>
+                    <label for="{{ form.id_.id_for_label }}">RESPONSAVÉL PELO CADASTRO</label>
+                    <input type="text" class="form-control" value="{{ processo.responsavel_processo }}">
                 </div>
                 <br/>
                 <div class="form-group">
                     <label for="caixa1">DOCUMENTOS ASSISTIDO : </label>
-                    <button>BAIXAR DOCUMENTOS</button>
+                    <button class="btn btn-success">BAIXAR DOCUMENTOS</button>
                     <br/>
                 </div>
                 <div class="form-group">
