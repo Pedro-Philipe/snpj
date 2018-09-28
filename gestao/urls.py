@@ -3,8 +3,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 from . import views
 
 urlpatterns = [
-    url(r'^$', staff_member_required(
-        views.ListarUsuarios.as_view(),
+    url(r'^inicio/', staff_member_required(
+        views.ListarProcesso.as_view(),
         login_url='adesao:login'), name='index'),
 
     url(r'^usuarios/',
