@@ -49,9 +49,15 @@
             </div>
             <br/>
             <div class="form-group">
-                <div class="col-sm-7">
-                    <label for="{{ form.status_processo.id_for_label }}" class="col-sm-3 control-label">STATUS</label>
-                    {% render_field form.status_processo class="form-control" %} {{ form.status_processo.errors }}
+                <div class="form-group">
+                    <label for="{{ form.status_processo.id_for_label }}" class="col-sm-3 control-label">Tipologia
+                        processual</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" id="status_processo" name="status_processo">
+                            <option value="NOVO" selected="selected">NOVO</option>
+                        </select>
+                        {{ form.tipo.errors }}
+                    </div>
                 </div>
             </div>
             <br/>
