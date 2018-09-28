@@ -86,6 +86,13 @@ class Processo(models.Model):
     cpf_assistido = models.CharField(max_length=20, null=False)
     tipologia = models.CharField(max_length=50, null=True)
     data = models.DateField()
+    data_create = models.DateTimeField(auto_now_add=True)
     descricao = models.TextField(max_length=1500, null=False)
     status_processo = models.CharField(max_length=20, null=False)
     responsavel_processo = models.CharField(max_length=50, null=False)
+
+    def __str__(self):
+        return self.data
+
+    class Meta:
+        ordering = ['data']
