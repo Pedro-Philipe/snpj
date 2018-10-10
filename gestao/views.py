@@ -6,17 +6,15 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, DetailView, View
 from django.views.generic.edit import FormView, UpdateView
 
-from adesao.models import Usuario, Cidade
+from adesao.models import Usuario, Assistido, Processo
 
 from .forms import AlterarUsuarioForm
 
 import os
 from django.conf import settings
 
-
 class GestaoHome(View):
-    template_name = "gestao/index.html"
-
+    template_name = "gestao/acompanhar_prazo.html"
 
 def alterar_situacao(request, id):
     if request.method == "POST":
@@ -28,6 +26,17 @@ def alterar_situacao(request, id):
 
     return redirect('gestao:detalhar', pk=id)
 
+def detalhar_processo(request, id):
+    processo = Processo.objects.get(id=id)
+    return render(request, 'gestao/upload_processo.html', context={'processo':processo})
+
+def detalhesUsuario(request, id):
+    usuario = Usuario.objects.get(id=id)
+    return render(request, 'gestao/detalhe_usuario.html', context={'usuario':usuario})
+
+def detalhesAssistido(request, id):
+    assistido = Assistido.objects.get(id=id)
+    return render(request, 'gestao/detalhe_assistidos.html', context={'assistido': assistido})
 
 class AcompanharPrazo(ListView):
     template_name = 'gestao/acompanhar_prazo.html'
@@ -46,11 +55,10 @@ class AcompanharPrazo(ListView):
         return Usuario.objects.filter(estado_processo='6', data_publicacao_acordo__isnull=False).order_by(
             'municipio__estado__nome_uf')
 
-
 class ListarUsuarios(ListView):
     model = Usuario
-    template_name = 'gestao/index.html'
-    paginate_by = 10
+    template_name = 'gestao/listar_usuarios.html'
+    paginate_by = 15
 
     def get_queryset(self):
         q = self.request.GET.get('q', None)
@@ -61,7 +69,27 @@ class ListarUsuarios(ListView):
 
         return usuarios
 
+class ListarAssistido(ListView):
+    model = Assistido
+    template_name = 'gestao/listar_assistidos.html'
+    paginate_by = 15
 
+    def get_queryset(self):
+        q = self.request.GET.get('q', None)
+        assistido = Assistido.objects.all()
+
+        return assistido
+
+class ListarProcesso(ListView):
+    model = Processo
+    template_name = 'gestao/listar_processos.html'
+    paginate_by = 15
+
+    def get_queryset(self):
+        q = self.request.GET.get('q', None)
+        processo = Processo.objects.all()
+
+        return processo
 class AlterarUsuario(UpdateView):
     model = User
     form_class = AlterarUsuarioForm

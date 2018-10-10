@@ -6,70 +6,92 @@
         {% csrf_token %}
         <div class="form-group">
             <div class="col-sm-7">
-                <label>CPF</label>
-                <input type="text" class="form-control cpf">
-            </div>
-        </div>
-
-        <div class="form-group">
-              <div class="form-group">
-                <label for="{{ form.tipo.id_for_label }}" class="col-sm-3 control-label">TIPOLOGIA PROCESSUAL</label>
-                <div class="col-sm-9">
-                  <select class="form-control" id="tipo" name="tipo">
-                    <option value="0" selected="selected">CÍVEL</option>
-                    <option value="1">CRIMINAL</option>
-                    <option value="2">FAMILIAR</option>
-                    <option value="3">TRABALHISTA</option>
-                  </select>
-                    {{ form.tipo.errors }}
+                <label for="{{ form.cpf_assistido.id_for_label }}"> CPF DO ASSISTIDO </label>
+                {% render_field form.cpf_assistido class="form-control cpf" %} {% if form.cpf_assistido.errors %}
+                <div class="alert alert-danger">
+                    {{ form.cpf.errors }}
                 </div>
-              </div>
-        </div>
-
-        <div class="form-group">
-          <div class="form-group">
-            <label for="{{ form.descricao.id_for_label }}" class="col-sm-3 control-label">DESCRIÇÃO</label>
-            <div class="col-sm-9">
-              <textarea class="form-control" id="id_descricao" maxlength="1000" name="descricao" type="text" style="margin: 0px; height: 80px; width: 498px;">{{ processo.descricao }}</textarea> {{ form.descricao.errors }}
+            {% endif %}
             </div>
-          </div>
-        </div>
+            <br/>
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="{{ form.tipologia.id_for_label }}" class="col-sm-3 control-label">TIPOLOGIA
+                        PROCESSUAL</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" id="tipologia" name="tipologia">
+                            <option value="Civel" selected="selected">Cível</option>
+                            <option value="Criminal">Criminal</option>
+                            <option value="Familiar">Familiar</option>
+                            <option value="Trabalhista">Trabalhista</option>
+                        </select>
+                        {{ form.tipologia.errors }}
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="{{ form.data.id_for_label }}" class="col-sm-3 control-label">DATA DE RETORNO</label>
 
-{#        <div class="form-group">#}
-{#          <div class="form-group">#}
-{#            <label for="{{ form.data.id_for_label }}" class="col-sm-3 control-label">DATA DE RETORNO</label>#}
-{##}
-{#            <div class="col-sm-9">#}
-{#              {% render_field form.data class="form-control date" %} {{ form.data.errors }}#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-        <div class="form-group">
-            <label>DATA DE RETORNO</label>
-                <input type="date" class="form-control">
-            <span>OBS:CADASTRAR DIA DE RETORNO NA AGENDA</span>
-        </div>
-        <br/>
-        <div class="form-group">
-            <label>STATUS</label>
-                <input type="text" class="form-control" value="ANDAMENTO" disabled>
-        </div>
-        <br/>
-
-        <div class="form-group">
-            <input type="button" class="btn btn-success btn-lg center-block" value="SALVAR">
-        </div>
+                    <div class="col-sm-9">
+                        {% render_field form.data class="form-control date" %} {{ form.data.errors }}
+                        <span>OBS:CADASTRAR DIA DE RETORNO NA AGENDA</span>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <label for="{{ form.descricao.id_for_label }}"> DESCRIÇÃO </label>
+                    {% render_field form.descricao class="form-control" %} {{ form.nome.errors }}
+                </div>
+            </div>
+            <br/>
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="{{ form.status_processo.id_for_label }}" class="col-sm-3 control-label">Tipologia
+                        processual</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" id="status_processo" name="status_processo">
+                            <option value="NOVO" selected="selected">NOVO</option>
+                        </select>
+                        {{ form.tipo.errors }}
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label class="col-sm-3 ">Responsável pelo cadastro</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="responsavel_processo" name="responsavel_processo">
+                        <option value="{{ request.user.usuario.nome_usuario }}">{{ request.user.usuario.nome_usuario }}</option>
+                    </select>
+                    {{ form.responsavel_processo.errors }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-7" align="center">
+                    <br/>
+                    <input type="submit" class="btn btn-success btn-lg center-block" value="SALVAR">
+                </div>
+            </div>
     </form>
-<script type="text/javascript">
-  $(document).ready(function(){
-    $(".form-horizontal").submit(function(){
-      $(".cpf").formatter().resetPattern('{{99999999999}}');
-      $(".cep").formatter({
-          'pattern': '{{99}}.{{999}}-{{999}}',
-          'persistent': false,
-        });
-      $(".telefone").mask('(00)00000-0000');
-    });
-  });
-</script>
 {% endblock %}
+
+{% block js %}
+    {% verbatim %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".form-horizontal").submit(function () {
+                $(".cpf").formatter().resetPattern('{{99999999999}}');
+                $(".cep").formatter({
+                    'pattern': '{{99}}.{{999}}-{{999}}',
+                    'persistent': false,
+                });
+                $(".telefone").mask('(00)00000-0000');
+            });
+        });
+    </script>
+    {% endverbatim %}
+{% endblock js %}

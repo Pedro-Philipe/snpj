@@ -1,0 +1,32 @@
+{% extends "gestao/base_gestao.html" %}
+{% load gestao_tags %}
+{% block content %}
+    <div class="dataTable_wrapper">
+        <h1 class="header text-center">DETALHES USUARIO</h1>
+        <br/>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Detalhes do assistido, e página para upload de documentos pessoais</div>
+            <div class="panel-body">
+                <div>
+                    <label for="{{ form.id_.id_for_label }}">MATRICULA</label>
+                    <input type="text" class="form-control" value="{{ usuario.id }}" disabled>
+                </div>
+                <div>
+                    <label for="{{ form.id_.id_for_label }}">NOME</label>
+                    <input type="text" class="form-control" value="{{ usuario.nome_usuario }}" disabled>
+                </div>
+                <div>
+                    <label for="{{ form.id_.id_for_label }}">DATA DE CADASTRO</label>
+                    <input type="text" class="form-control" value="{{ usuario.data_cadastro }}" disabled>
+                </div>
+                <br/>
+                <div>
+                    <button class="btn btn-warning">DESATIVAR</button>
+                    <br/>
+                    <br/>
+                    <span>OBS: Isso desativará o usuário</span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

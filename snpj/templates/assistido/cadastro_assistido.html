@@ -1,139 +1,147 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
 {% block content %}
-<div class="container">
-    <form method="post" enctype="multipart/form-data">
+    <div class="container">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <h2 align="center"><strong> Cadastro do Assistido </strong></h2>
-                <br/>
-                <div class="form-group">
-                    <div class="col-sm-7">
-                        <label for="{{ form.nome_assistido.id_for_label }}">Nome Completo</label>
-                            {% render_field form.nome class="form-control" %} {{ form.nome.errors }}
-                    </div>
+            <br/>
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <label for="{{ form.nome_assistido.id_for_label }}">Nome Completo</label>
+                    {% render_field form.nome class="form-control" %} {{ form.nome.errors }}
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-7">
-                        <label for="{{ form.representante_legal.id_for_label }}">Representante Legal</label>
-                            {% render_field form.representante_legal class="form-control" %} {{ form.nome.errors }}
-                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <label for="{{ form.representante_legal.id_for_label }}">Representante Legal</label>
+                    {% render_field form.representante_legal class="form-control" %} {{ form.representante_legal.errors }}
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <div class="col-sm-7">
-                        <label for="{{ form.rg.id_for_label }}"> RG </label>
-                            {% render_field form.rg class="form-control rg"  maxlength=7 %} {{ form.nome.errors }}
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <label for="{{ form.rg.id_for_label }}"> RG </label>
+                    {% render_field form.rg class="form-control rg" maxlength=7 %} {% if form.rg.errors %}
+                    <div class="alert alert-danger">
+                        {{ form.rg.errors }}
                     </div>
+                    {% endif %}
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <div class="col-sm-7">
-                        <label for="{{ form.cpf.id_for_label }}"> CPF </label>
-                            {% render_field form.cpf class="form-control cpf"%} {{ form.nome.errors }}
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <label for="{{ form.cpf.id_for_label }}"> CPF </label>
+                    {% render_field form.cpf class="form-control cpf" %} {% if form.cpf.errors %}
+                    <div class="alert alert-danger">
+                        {{ form.cpf.errors }}
                     </div>
+                    {% endif %}
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <div class="col-sm-7">
-                        <label for="{{ form.nacionalidade.id_for_label }}"> Nacionalidade </label>
-                            {% render_field form.nacionalidade class="form-control" %} {{ form.nome.errors }}
-                    </div>
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <label for="{{ form.nacionalidade.id_for_label }}"> Nacionalidade </label>
+                    {% render_field form.nacionalidade class="form-control" %} {{ form.nacionalidade.errors }}
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <div class="col-sm-7">
-                        <label for="{{ form.estado_civil.id_for_label }}"> Estado Civil </label>
-                            {% render_field form.estado_civil class="form-control" %} {{ form.nome.errors }}
-                    </div>
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <label for="{{ form.estado_civil.id_for_label }}"> Estado Civil </label>
+                    {% render_field form.estado_civil class="form-control" %} {{ form.estado_civilerrors }}
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <div class="col-sm-7">
-                        <label for="{{ form.profissao.id_for_label }}"> Profissão </label>
-                            {% render_field form.profissao class="form-control" %} {{ form.nome.errors }}
-                    </div>
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <label for="{{ form.profissao.id_for_label }}"> Profissão </label>
+                    {% render_field form.profissao class="form-control" %} {{ form.profissao.errors }}
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <div class="col-sm-7">
-                        <label for="{{ form.renda_familiar.id_for_label }}"> Renda Familiar </label>
-                            {% render_field form.renda_familiar class="form-control renda"%} {{ form.nome.errors }}
-                    </div>
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <label for="{{ form.renda_familiar.id_for_label }}"> Renda Familiar </label>
+                    {% render_field form.renda_familiar class="form-control renda" %} {{ form.renda_familiar.errors }}
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <div class="col-sm-7">
-                        <label for="{{ form.endereco_residencial.id_for_label }}"> Endereço </label>
-                            {% render_field form.endereco_residencial  class="form-control" %} {{ form.nome.errors }}
-                    </div>
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <label for="{{ form.endereco_residencial.id_for_label }}"> Endereço </label>
+                    {% render_field form.endereco_residencial class="form-control" %} {{ form.endereco_residencial.errors }}
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-7">
-                        <label for="{{ form.endereco_trabalho.id_for_label }}"> Endereço do Trabalho </label>
-                            {% render_field form.endereco_trabalho class="form-control" %} {{ form.nome.errors }}
-                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <label for="{{ form.endereco_trabalho.id_for_label }}"> Endereço do Trabalho </label>
+                    {% render_field form.endereco_trabalho class="form-control" %} {{ form.endereco_trabalho.errors }}
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-7">
-                        <label for="{{ form.cep.id_for_label }}"> CEP </label>
-                            {% render_field form.cep class="form-control cep" %} {{ form.nome.errors }}
-                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <label for="{{ form.cep.id_for_label }}"> CEP </label>
+                    {% render_field form.cep class="form-control cep" %} {{ form.cep.errors }}
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-7">
-                        <label for="{{ form.telefone_celular.id_for_label }}"> CELULAR </label>
-                            {% render_field form.telefone_celular class="form-control telefone" %} {{ form.nome.errors }}
-                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <label for="{{ form.telefone_celular.id_for_label }}"> CELULAR </label>
+                    {% render_field form.telefone_celular class="form-control telefone" %} {{ form.telefone_celular.errors }}
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-7">
-                        <label for="{{ form.telefone_fixo.id_for_label }}"> TELEFONE FIXO </label>
-                            {% render_field form.telefone_fixo class="form-control telefone" %} {{ form.nome.errors }}
-                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <label for="{{ form.telefone_fixo.id_for_label }}"> TELEFONE FIXO </label>
+                    {% render_field form.telefone_fixo class="form-control telefone" %} {{ form.telefone_fixo.errors }}
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-7">
-                        <label for="{{ form.telefone_comercial.id_for_label }}"> TELEFONE COMERCIAL</label>
-                            {% render_field form.telefone_comercial class="form-control telefone"%} {{ form.nome.errors }}
-                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <label for="{{ form.telefone_comercial.id_for_label }}"> TELEFONE COMERCIAL</label>
+                    {% render_field form.telefone_comercial class="form-control telefone" %} {{ form.telefone_comercial.errors }}
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-7">
-                        <label for="{{ form.email.id_for_label }}"> EMAIL </label>
-                            {% render_field form.email class="form-control"%} {{ form.nome.errors }}
-                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <label for="{{ form.email.id_for_label }}"> EMAIL </label>
+                    {% render_field form.email class="form-control" %} {{ form.email.errors }}
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <div class="col-sm-7">
-                        <label for="{{ form.observacoes.id_for_label }}"> OBSERVAÇÃO </label>
-                            {% render_field form.observacoes class="form-control" %} {{ form.nome.errors }}
-                    </div>
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <label for="{{ form.observacoes.id_for_label }}"> OBSERVAÇÃO </label>
+                    {% render_field form.observacoes class="form-control" %} {{ form.observacoes.errors }}
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-7" align="center">
-                        <br/>
-                        <input type="submit" class="btn btn-success btn-lg center-block" value="SALVAR">
-                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-7" align="center">
+                    <br/>
+                    <input type="submit" class="btn btn-success btn-lg center-block" value="SALVAR">
                 </div>
-                <br/>
-    </form>
-</div>
-{% endblock content%}
+            </div>
+            <br/>
+        </form>
+    </div>
+{% endblock content %}
 
 {% block js %}
-{% verbatim %}
-<script type="text/javascript">
-  $(document).ready(function(){
-    $(".form-horizontal").submit(function(){
-      $(".cpf").formatter().resetPattern('{{99999999999}}');
-      $(".cep").formatter({
-          'pattern': '{{99}}.{{999}}-{{999}}',
-          'persistent': false,
+    {% verbatim %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".form-horizontal").submit(function () {
+                $(".cpf").formatter().resetPattern('{{99999999999}}');
+                $(".cep").formatter({
+                    'pattern': '{{99}}.{{999}}-{{999}}',
+                    'persistent': false,
+                });
+                $(".telefone").mask('(00)00000-0000');
+            });
         });
-      $(".telefone").mask('(00)00000-0000');
-    });
-  });
-</script>
-{% endverbatim %}
+    </script>
+    {% endverbatim %}
 {% endblock js %}

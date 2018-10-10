@@ -1,0 +1,58 @@
+{% extends "gestao/base_gestao.html" %}
+{% load gestao_tags %}
+{% block content %}
+    <div class="dataTable_wrapper">
+        <h1 class="header text-center">UPLOAD DE DOCUMENTOS</h1>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Upload de arquivos do assistido no decorrer do processo</div>
+            <div class="panel-body">
+                <h2>ANEXAR DOCUMENTOS DO PROCESSO</h2>
+                <div>
+                    <label for="{{ form.id_.id_for_label }}">NUMERO DO PROCESSO</label>
+                    <input type="text" class="form-control" value="{{ processo.id }}">
+                </div>
+                <div>
+                    <label for="{{ form.id_.id_for_label }}">ASSISTIDO</label>
+                    <input type="text" class="form-control" value="{{ processo.cpf_assistido }}">
+                </div>
+                <div>
+                    <label for="{{ form.id_.id_for_label }}">TIPOLOGIA</label>
+                    <input type="text" class="form-control" value="{{ processo.tipologia }}">
+                </div>
+                <div>
+                    <label for="{{ form.id_.id_for_label }}">DATA DE RETORNO</label>
+                    <input type="text" class="form-control" value="{{ processo.data }}">
+                </div>
+                <div>
+                    <label for="{{ form.id_.id_for_label }}">STATUS</label>
+                    <select class="form-control" id="status_processo" name="status_processo">
+                        <option value="{{ processo.status_processo }}" selected="selected"
+                                disabled>{{ processo.status_processo }}</option>
+                        <option value="ANDAMENTO">ANDAMENTO</option>
+                        <option value="EM AGUARDO">EM AGUARDO</option>
+                        <option value="FINALIZADO">FINALIZADO</option>
+                    </select>
+                    {{ form.tipo.errors }}
+                </div>
+                <div>
+                    <label for="{{ form.id_.id_for_label }}">RESPONSAVÉL PELO CADASTRO</label>
+                    <input type="text" class="form-control" value="{{ processo.responsavel_processo }}">
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label for="caixa1">DOCUMENTOS ASSISTIDO : </label>
+                    <button class="btn btn-success">BAIXAR DOCUMENTOS</button>
+                    <br/>
+                </div>
+                <div class="form-group">
+                    <label for="caixa1">ANEXAR DOCUMENTO : </label>
+                    <input type="file" class="form-control-file" id="caixa1">
+                    <br/>
+                    <span> OBS: Os documentos devem ser compactados .zip, e importados</span>
+                </div>
+                <br/>
+            </div>
+            <br>
+        </div>
+    </div>
+{% endblock content %}
