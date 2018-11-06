@@ -10,73 +10,73 @@
                 <div class="col-md-6">
                     <div class="col-xs-12">
                         <div>
-                            <label for="{{ form.id_.id_for_label }}">MATRICULA</label>
+                            <label for="{{ form.id_.id_for_label }}">Matricula</label>
                             <input type="text" class="form-control" value="{{ assistido.id }}" disabled>
                         </div>
                         <div>
-                            <label for="{{ form.id_.id_for_label }}">NOME</label>
+                            <label for="{{ form.id_.id_for_label }}">Nome</label>
                             <input type="text" class="form-control" value="{{ assistido.nome }}" disabled>
                         </div>
                         <div>
                             <label for="{{ form.id_.id_for_label }}">CPF</label>
-                            <input type="text" class="form-control" value="{{ assistido.cpf }}" disabled>
+                            <input type="text" class="form-control" value="{{ assistido.cpf | default_if_none:'Não informado'}}" disabled>
                         </div>
                         <div>
                             <label for="{{ form.id_.id_for_label }}">RG</label>
-                            <input type="text" class="form-control" value="{{ assistido.rg }}" disabled>
+                            <input type="text" class="form-control" value="{{ assistido.rg | default_if_none:'Não informado'}}" disabled>
                         </div>
                         <div>
-                            <label for="{{ form.id_.id_for_label }}">E-MAIL</label>
-                            <input type="text" class="form-control" value="{{ assistido.email }}" disabled>
+                            <label for="{{ form.id_.id_for_label }}">Email</label>
+                            <input type="text" class="form-control" value="{{ assistido.email | default_if_none:'Não informado'}}" disabled>
                         </div>
                         <div>
-                            <label for="{{ form.id_.id_for_label }}">NACIONALIDADE</label>
-                            <input type="text" class="form-control" value="{{ assistido.nacionalidade }}" disabled>
+                            <label for="{{ form.id_.id_for_label }}">Nacionalidade</label>
+                            <input type="text" class="form-control" value="{{ assistido.nacionalidade | default_if_none:'Não informado'}}" disabled>
                         </div>
                         <div>
-                            <label for="{{ form.id_.id_for_label }}">ESTADO CIVIL</label>
-                            <input type="text" class="form-control" value="{{ assistido.estado_civil }}" disabled>
+                            <label for="{{ form.id_.id_for_label }}">Estado Civil</label>
+                            <input type="text" class="form-control" value="{{ assistido.estado_civil | default_if_none:'Não informado'}}" disabled>
                         </div>
                         <div>
-                            <label for="{{ form.id_.id_for_label }}">PROFISSÃO</label>
-                            <input type="text" class="form-control" value="{{ assistido.profissao }}" disabled>
+                            <label for="{{ form.id_.id_for_label }}">Profissão</label>
+                            <input type="text" class="form-control" value="{{ assistido.profissao | default_if_none:'Não informado'}}" disabled>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="col-xs-12">
                         <div>
-                            <label for="{{ form.id_.id_for_label }}">RENDA FAMILIAR</label>
-                            <input type="text" class="form-control" value="{{ assistido.renda_familiar }}" disabled>
+                            <label for="{{ form.id_.id_for_label }}">Renda Familiar</label>
+                            <input type="text" class="form-control" value="{{ assistido.renda_familiar | default_if_none:'Não informado'}}" disabled>
                         </div>
                         <div>
-                            <label for="{{ form.id_.id_for_label }}">ENDEREÇO</label>
-                            <input type="text" class="form-control" value="{{ assistido.endereco_residencial }}"
+                            <label for="{{ form.id_.id_for_label }}">Endereço</label>
+                            <input type="text" class="form-control" value="{{ assistido.endereco_residencial | default_if_none:'Não informado'}}"
                                    disabled>
                         </div>
                         <div>
-                            <label for="{{ form.id_.id_for_label }}">ENDEREÇO TRABALHO</label>
-                            <input type="text" class="form-control" value="{{ assistido.endereco_trabalho }}" disabled>
+                            <label for="{{ form.id_.id_for_label }}">Endereço Trabalho</label>
+                            <input type="text" class="form-control" value="{{ assistido.endereco_trabalho | default_if_none:'Não informado'}}" disabled>
                         </div>
                         <div>
                             <label for="{{ form.id_.id_for_label }}">CEP</label>
-                            <input type="text" class="form-control" value="{{ assistido.cep }}" disabled>
+                            <input type="text" class="form-control" value="{{ assistido.cep | default_if_none:'Não informado'}}" disabled>
                         </div>
                         <div>
-                            <label for="{{ form.id_.id_for_label }}">TELEFONE CELULAR</label>
-                            <input type="text" class="form-control" value="{{ assistido.telefone_celular }}" disabled>
+                            <label for="{{ form.id_.id_for_label }}">Telfone Celular</label>
+                            <input type="text" class="form-control" value="{{ assistido.telefone_celular | default_if_none:'Não informado'}}" disabled>
                         </div>
                         <div>
-                            <label for="{{ form.id_.id_for_label }}">TELEFONE FIXO</label>
-                            <input type="text" class="form-control" value="{{ assistido.telefone_fixo }}" disabled>
+                            <label for="{{ form.id_.id_for_label }}">Telefone Fixo</label>
+                            <input type="text" class="form-control" value="{{ assistido.telefone_fixo | default_if_none:'Não informado'}}" disabled>
                         </div>
                         <div>
-                            <label for="{{ form.id_.id_for_label }}">TELEFONE COMERCIAL</label>
-                            <input type="text" class="form-control" value="{{ assistido.telefone_comercial }}" disabled>
+                            <label for="{{ form.id_.id_for_label }}">Telefone Comerial</label>
+                            <input type="text" class="form-control" value="{{ assistido.telefone_comercial | default_if_none:'Não informado'}}" disabled>
                         </div>
                         <div>
-                            <label for="{{ form.id_.id_for_label }}">OBSERVAÇÕES</label>
-                            <input type="text" class="form-control" value="{{ assistido.observacoes }}" disabled>
+                            <label for="{{ form.id_.id_for_label }}">Observações</label>
+                            <input type="text" class="form-control" value="{{ assistido.observacoes | default_if_none:'Não informado'}}" disabled>
                         </div>
                         <br/>
                     </div>

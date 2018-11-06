@@ -28,7 +28,7 @@ urlpatterns = [
 
     url(r'^listar-eventos/$', views.ListarEventos.as_view(), name='listar_eventos'),
     url(r'^listar-assistidos/$', views.ListarAssistidos.as_view(), name='listar_assistidos'),
-    url(r'^detalhes/(?P<id>\d+)/$', detalhar_assistido, name='detalhar_assistido'),
+    url(r'^detalhes/(?P<id>\d+)/$', views.DetalheAssistido.as_view(), name='detalhar_assistido'),
     url(r'^upload-doc/(?P<id>\d+)/$', upload_arquivos, name='upload_arquivos'),
 
     # Fazer mudanças nas Class's quando o model estiver okay

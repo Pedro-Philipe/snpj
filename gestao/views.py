@@ -32,28 +32,12 @@ def detalhar_processo(request, id):
 
 def detalhesUsuario(request, id):
     usuario = Usuario.objects.get(id=id)
-    return render(request, 'gestao/detalhe_usuario.html', context={'usuario':usuario})
+    user = User.objects.get(id=id)
+    return render(request, 'gestao/detalhe_usuario.html', context={'usuario':usuario, 'user':user})
 
 def detalhesAssistido(request, id):
     assistido = Assistido.objects.get(id=id)
     return render(request, 'gestao/detalhe_assistidos.html', context={'assistido': assistido})
-
-class AcompanharPrazo(ListView):
-    template_name = 'gestao/acompanhar_prazo.html'
-    paginate_by = 10
-
-    def get_queryset(self):
-        ente_federado = self.request.GET.get('municipio', None)
-        if ente_federado:
-            municipio = Usuario.objects.filter(
-                municipio__cidade__nome_municipio__icontains=ente_federado).order_by('municipio__estado__nome_uf')
-            estado = Usuario.objects.filter(
-                municipio__cidade__isnull=True,
-                municipio__estado__nome_uf__icontains=ente_federado).order_by('municipio__estado__nome_uf')
-
-            return municipio | estado
-        return Usuario.objects.filter(estado_processo='6', data_publicacao_acordo__isnull=False).order_by(
-            'municipio__estado__nome_uf')
 
 class ListarUsuarios(ListView):
     model = Usuario
@@ -63,9 +47,6 @@ class ListarUsuarios(ListView):
     def get_queryset(self):
         q = self.request.GET.get('q', None)
         usuarios = Usuario.objects.all()
-
-        if q:
-            usuarios = usuarios.filter(Q(user__username__icontains=q) | Q(user__email__icontains=q))
 
         return usuarios
 
@@ -90,6 +71,7 @@ class ListarProcesso(ListView):
         processo = Processo.objects.all()
 
         return processo
+
 class AlterarUsuario(UpdateView):
     model = User
     form_class = AlterarUsuarioForm
