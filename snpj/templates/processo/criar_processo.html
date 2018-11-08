@@ -1,18 +1,25 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
 {% block content %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <h2>CADASTRAR PROCESSO</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
             <div class="col-sm-7">
                 <label for="{{ form.cpf_assistido.id_for_label }}"> CPF DO ASSISTIDO </label>
-                {% render_field form.cpf_assistido class="form-control cpf" %} {% if form.cpf_assistido.errors %}
+                <select class="form-control" id="assistidos" name="responsavel_processo">
+                    {{oi}}
+                        {% for assistido in assistidos %}
+                        <option value="{{ assistido.cpf }}">{{ assistido.cpf }}</option>
+                        {% endfor %}
+                </select>
                 <div class="alert alert-danger">
                     {{ form.cpf.errors }}
                 </div>
-            {% endif %}
             </div>
+        </div>
             <br/>
             <div class="form-group">
                 <div class="form-group">
@@ -36,7 +43,6 @@
 
                     <div class="col-sm-9">
                         {% render_field form.data class="form-control date" %} {{ form.data.errors }}
-                        <span>OBS:CADASTRAR DIA DE RETORNO NA AGENDA</span>
                     </div>
                 </div>
             </div>
@@ -45,19 +51,6 @@
                 <div class="col-sm-7">
                     <label for="{{ form.descricao.id_for_label }}"> DESCRIÇÃO </label>
                     {% render_field form.descricao class="form-control" %} {{ form.nome.errors }}
-                </div>
-            </div>
-            <br/>
-            <div class="form-group">
-                <div class="form-group">
-                    <label for="{{ form.status_processo.id_for_label }}" class="col-sm-3 control-label">Tipologia
-                        processual</label>
-                    <div class="col-sm-9">
-                        <select class="form-control" id="status_processo" name="status_processo">
-                            <option value="NOVO" selected="selected">NOVO</option>
-                        </select>
-                        {{ form.tipo.errors }}
-                    </div>
                 </div>
             </div>
             <br/>
@@ -76,6 +69,7 @@
                     <input type="submit" class="btn btn-success btn-lg center-block" value="SALVAR">
                 </div>
             </div>
+        </div>
     </form>
 {% endblock %}
 
@@ -83,6 +77,7 @@
     {% verbatim %}
     <script type="text/javascript">
         $(document).ready(function () {
+            $('#assistidos').select2();
             $(".form-horizontal").submit(function () {
                 $(".cpf").formatter().resetPattern('{{99999999999}}');
                 $(".cep").formatter({

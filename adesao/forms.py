@@ -86,10 +86,37 @@ class CadastrarAssistidoForm(forms.ModelForm):
 
         usuario_mesmo_cpf = Assistido.objects.filter(cpf=self.cleaned_data['cpf'])
 
-        if usuario_mesmo_cpf.count() > 0:
-            raise forms.ValidationError('CPF já cadastrado!')
+        if usuario_mesmo_cpf.count() == 0:
+            raise forms.ValidationError('É necessário iniciar o cadastro do CPF gerando um evento')
 
         return self.cleaned_data['cpf']
+
+    def save(self, commit=True, *args, **kwargs):
+        assistido = super(CadastrarAssistidoForm, self).save(commit=False)
+
+        assistido = Assistido.objects.get(cpf=self.cleaned_data['cpf'])
+        assistido.representante_legal = self.cleaned_data['representante_legal']
+        assistido.endereco_residencial = self.cleaned_data['endereco_residencial']
+        assistido.cep = self.cleaned_data['cep']
+        assistido.email = self.cleaned_data['email']
+        assistido.endereco_trabalho = self.cleaned_data['endereco_trabalho']
+        assistido.estado_civil = self.cleaned_data['estado_civil']
+        assistido.nacionalidade = self.cleaned_data['nacionalidade']
+        assistido.observacoes = self.cleaned_data['observacoes']
+        assistido.profissao = self.cleaned_data['profissao']
+        assistido.renda_familiar = self.cleaned_data['renda_familiar']
+        assistido.rg = self.cleaned_data['rg']
+        assistido.telefone_celular = self.cleaned_data['telefone_celular']
+        assistido.telefone_comercial = self.cleaned_data['telefone_comercial']
+        assistido.telefone_fixo = self.cleaned_data['telefone_fixo']
+        assistido.nome = self.cleaned_data['nome']
+
+
+        if commit:
+            assistido.save()
+
+        return assistido
+        
 
     # def clean_telefone_celular(self):
     #     if (self.cleaned_data['telefone_celular']):
@@ -217,9 +244,19 @@ class CadastrarEventosForm(ModelForm):
 
         if usuario_mesmo_cpf.count() == 0:
             assistido = Assistido()
-            assistido.nome = self.cleaned_data['nome']
             assistido.cpf = self.cleaned_data['cpf_assistido']
 
+            evento = Evento()
+            evento.nome = self.cleaned_data['nome']
+            evento.hora_inicio = self.cleaned_data['hora_inicio']
+            evento.hora_fim = self.cleaned_data['hora_fim']
+            evento.data = self.cleaned_data['data']
+            evento.usuario_id = self.cleaned_data['usuario'].id
+            evento.tipo = self.cleaned_data['tipo']
+            evento.cpf_assistido = self.cleaned_data['cpf_assistido']
+            evento.descricao = self.cleaned_data['descricao']
+
             if commit:
+                evento.save()
                 assistido.save()
         return form

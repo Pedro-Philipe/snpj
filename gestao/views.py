@@ -48,6 +48,9 @@ class ListarUsuarios(ListView):
         q = self.request.GET.get('q', None)
         usuarios = Usuario.objects.all()
 
+        if q:
+            usuarios = usuarios.filter(Q(user__username__icontains=q) | Q(user__email__icontains=q))
+
         return usuarios
 
 class ListarAssistido(ListView):

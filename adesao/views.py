@@ -18,6 +18,7 @@ from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db.models import Q, Count
 from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
+import pdb
 
 from adesao.forms import CadastrarUsuarioForm,\
                          CadastrarEventosForm,\
@@ -140,7 +141,9 @@ class CadastrarProcesso(CreateView):
     form_class = CadastroProcessoForm
 
     def get_context_data(self, **kwargs):
-        context = super(CreateView, self).get_context_data(**kwargs)
+        context = super(CadastrarProcesso, self).get_context_data(**kwargs)
+
+        context['assistidos'] = Assistido.objects.all()
 
         if not self.request.user.is_superuser:
             context['usuarios'] = Processo.objects.filter(id=self.request.user.id)
