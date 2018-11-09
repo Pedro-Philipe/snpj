@@ -132,32 +132,40 @@ class CadastrarAssistidoForm(forms.ModelForm):
 
 
 class CadastroProcessoForm(forms.ModelForm):
-    cpf_assistido = forms.CharField(max_length=20, required=True)
     tipologia = forms.CharField(required=True)
     data = forms.DateField(required=True)
     descricao = forms.CharField(max_length=1500, widget=forms.Textarea(), required=True)
-    status_processo = forms.CharField(max_length=20, required=True)
-    responsavel_processo = forms.CharField(max_length=50, required=True)
     documentos = RestrictedFileField(
         content_types=compressed_content_types,
         max_upload_size=5242880,
         required=True,
         widget=FileInput)
+    hora_inicio = forms.TimeField(required=True)
+    hora_fim = forms.TimeField(required=True)
 
     class Meta:
         model = Processo
         fields = '__all__'
 
-    def clean_cpf(self):
-        if not validar_cpf(self.cleaned_data['cpf_assistido']):
-            raise forms.ValidationError('Por favor, digite um CPF válido!')
+    def save(self, commit=True, *args, **kwargs):
+        form = super(CadastroProcessoForm, self).save(commit=False)
 
-        usuario_mesmo_cpf = Assistido.objects.filter(cpf_assistido=self.cleaned_data['cpf_assistido'])
 
-        if usuario_mesmo_cpf.count() == 0:
-            raise forms.ValidationError('CPF não cadastrado no sistema')
+        processo = Processo()
+        processo.tipologia = self.cleaned_data['tipologia']
+        processo.hora_inicio = self.cleaned_data['hora_inicio']
+        processo.hora_fim = self.cleaned_data['hora_fim']
+        processo.data = self.cleaned_data['data']
+        processo.descricao = self.cleaned_data['descricao']
+        processo.status_processo = True
+        processo.assistido = self.cleaned_data['assistido']        
+        processo.usuario = self.cleaned_data['usuario']
+        processo.documentos = self.cleaned_data['documentos']
 
-        return self.cleaned_data['cpf_assistido']
+        if commit:
+            processo.save()
+
+        return form
 
 class CadastrarUsuarioForm(UserCreationForm):
     username = forms.CharField(max_length=14, required=True)

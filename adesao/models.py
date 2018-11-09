@@ -38,9 +38,6 @@ class Usuario(models.Model):
     codigo_ativacao = models.CharField(max_length=12, unique=True)
     data_cadastro = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        aux_user = self.user.username
-        return aux_user
 
 
 class Evento(models.Model):
@@ -77,25 +74,21 @@ class Assistido(models.Model):
         null=True,
         upload_to='documentos_assistido')
 
-
-
-##Model para Armezenar os Documentos dos Assistidos, são os documentos pessoais
-
-
-## Esse model deve ser usado tanto no upload de doc de Processo!! Esse Model é para anexar os documentos no decorrer do processo
-## E na hora de baixar deve baixar tudo com referêcia o ID do processo, pois ambos os upload de Cadastro de Processo, e Gestão de Upload são os mesmo
-
-
-# Modelo Básico para View de Cadastro de Processo!
-# Esse Model term que herdar a FK do Assistido, para efetuar o cadastro do processo
 class Processo(models.Model):
     assistido = models.ForeignKey(Assistido)
     tipologia = models.CharField(max_length=50, null=True)
     data = models.DateField(null=True)
     descricao = models.TextField(max_length=1500, null=True)
-    status_processo = models.CharField(max_length=20, null=True)
-    responsavel_processo = models.CharField(max_length=50, null=False)
-    documentos = models.FileField(upload_to='documentos_processo')
+    status_processo = models.NullBooleanField(null=True)
+    usuario = models.ForeignKey(Usuario)
+    documentos = models.FileField(
+        max_length=255,
+        blank=True,
+        null=True,
+        upload_to='documentos_assistido')
+    hora_inicio = models.TimeField(null=True)
+    hora_fim = models.TimeField(null=True)
+    
 
     class Meta:
         ordering = ['data']

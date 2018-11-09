@@ -172,6 +172,7 @@ class CadastrarAssistido(CreateView):
     model = Assistido
     form_class = CadastrarAssistidoForm
 
+
 class CadastrarProcesso(CreateView):
     template_name = 'processo/criar_processo.html'
     success_url = reverse_lazy('adesao:lista_processos')
@@ -184,12 +185,24 @@ class CadastrarProcesso(CreateView):
         context['assistidos'] = Assistido.objects.all()
 
         if not self.request.user.is_superuser:
-            context['usuarios'] = Processo.objects.filter(id=self.request.user.id)
+            context['usuarios'] = Usuario.objects.filter(id=self.request.user.id)
             return context
 
         context['usuarios'] = Processo.objects.all()
 
         return context
+
+class EditarProcesso(UpdateView):
+    template_name = 'processo/editar_processo.html'
+    model = Processo
+    fields = '__all__'
+
+    def get_success_url(self):
+        return reverse('adesao:detalhar_processo', args=[self.kwargs['pk']])
+
+class DetalharProcesso(DetailView):
+    template_name = 'agenda/detalhar_processo.html'
+    model = Processo
 
 class ListaProcesso(ListView):
     template_name = 'processo/lista_processos.html'

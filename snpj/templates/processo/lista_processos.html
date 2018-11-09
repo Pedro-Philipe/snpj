@@ -9,18 +9,22 @@
         {% if object_list %}
             <thead>
             <tr>
-                <th>CODIGO</th>
-                <th>NOME</th>
+                <th>Cod. Proc.</th>
+                <th>Nome</th>
                 <th>CPF</th>
-                <th>STATUS</th>
+                <th>&nbsp;</th>
             </tr>
             </thead>
             <tbody>
             {% for processo in object_list %}
                 <tr class="odd gradeX">
-                    <td width="30%">{{ processo.id }}</td>
-                    <td width="40%">{{ processo.nome_assistido }}</td>
-                    <td width="50%">{{ processo.cpf_assistido }}</td>
+                    <td width="20%">{{ processo.id }}</td>
+                    <td width="35%">{{ processo.assistido.nome }}</td>
+                    <td width="21%">{{ processo.assistido.cpf }}</td>
+                    <td width="23%">
+                        <a href="{% url 'adesao:editar_processo' processo.id %}">Editar</a> | 
+                        <a href="{% url 'adesao:detalhar_processo' processo.id %}">Visualizar</a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
