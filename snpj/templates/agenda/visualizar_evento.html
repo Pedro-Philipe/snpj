@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+
+<div class="container">
+    <h3>
+      <strong>Informações do Evento:</strong>
+    </h3>
+
+    <div class="form-group">
+      <div class="form-group">
+        <label for="{{ form.nome.id_for_label }}" class="col-sm-3 control-label">Descrição do encontro</label>
+        <div class="col-sm-9">
+            {{ object.nome }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-group">
+        <label class="col-sm-3 control-label">CPF assistido</label>
+
+        <div class="col-sm-9">
+            {{ object.cpf_assistido }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Data</label>
+
+        <div class="col-sm-9">
+          {{ object.data }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Hora de início:</label>
+
+        <div class="col-sm-9">
+          {{ object.hora_inicio }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Hora de término:</label>
+
+        <div class="col-sm-9">
+          {{ object.hora_fim }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Descrição:</label>
+
+        <div class="col-sm-9">
+         <p>
+             {{object.descricao}}
+         </p>
+        </div>
+      </div>
+    </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Tipologia processual:</label>
+        <div class="col-sm-9">
+          {%if object.tipo == 0%}
+          Cível
+          {%endif%}
+          {%if object.tipo == 1%}
+          Criminal
+          {%endif%}
+          {%if object.tipo == 2%}
+          Familiar
+          {%endif%}
+          {%if object.tipo == 3%}
+          Trabalhista
+          {%endif%}
+        </div>
+      </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(function(){
+    $('#dp1').datepicker({
+      format:"dd-M-yy",
+      endDate: "today",
+      todayBtn: true,
+      forceParse: false,
+      autoclose: true,
+      todayHighlight: true
+    });
+  });
+})
+</script>
+
+
+{% endblock content %}

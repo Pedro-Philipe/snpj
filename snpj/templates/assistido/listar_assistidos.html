@@ -7,28 +7,39 @@
       <div align="center">
           <h3>LISTA DE ASSISTIDOS</h3>
       </div>
+    </br>
+    <div align="left">
+        <input id="searchInput" type="text" class="cpf form-control input-lg" placeholder="Digite o CPF" />
+        <a id="pesquisar" href="#">Buscar</a> | <a href="{{ request.path }}">Limpar</a>
+    </div>
+    </br>
     {% if object_list%}
     <thead>
       <tr>
         <th>NOME</th>
         <th align="left">CPF</th>
-        <th align="center">DETALHES</th>
+        <th align="center">&nbsp;</th>
       </tr>
     </thead>
     <tbody>
       {% for assistido in object_list %}
         <tr class="odd gradeX">
-            <td width="60%">{{assistido.nome}}</td>
-            <td width="60%">{{assistido.cpf}}</td>
+            <td width="43%">{{assistido.nome}}</td>
+            <td width="35%">{{assistido.cpf}}</td>
             <td align="center">
-              <a href="http://127.0.0.1:8000/adesao/detalhes/{{ assistido.id }}"><button type="button" class="btn btn-default btn-sm"> Detalhar <span class="glyphicon glyphicon-asterisk"></span></button></a>
+              <a 
+                type="button"
+                class="btn btn-info"
+                href="{% url 'adesao:editar_assistido' assistido.id %}">
+                Editar
+              </a> | <a href="{% url 'adesao:detalhar_assistido' assistido.id %}">Visualizar</a>
             </td>
         </tr>
       {% endfor %}
     </tbody>
       {% else %}
     <div align="center">
-        <p>Nenhum dado cadastrado.</p>
+        <p>Nenhum dado encontrado.</p>
     </div>
     {% endif%}
 
@@ -48,3 +59,19 @@
   <br>
 </div>
 {% endblock content %}
+{% block js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+          {% verbatim %}
+          $(".cpf").formatter({
+            'pattern': '{{999}}.{{999}}.{{999}}-{{99}}',
+            'persistent': false,
+          });
+          {% endverbatim %}
+
+          $("#pesquisar").click(function () {
+              location.href = '{{ request.path }}?q='+ $('#searchInput').val();
+          });
+        });
+    </script>
+{% endblock js %}

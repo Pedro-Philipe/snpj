@@ -46,9 +46,9 @@ class Usuario(models.Model):
 class Evento(models.Model):
     nome = models.CharField(max_length=100, null=True)  # @TODO remover os campos nulos
     descricao = models.CharField(max_length=255, null=True)
-    data = models.DateField()
-    hora_inicio = models.TimeField()
-    hora_fim = models.TimeField()
+    data = models.DateField(null=True)
+    hora_inicio = models.TimeField(null=True)
+    hora_fim = models.TimeField(null=True)
     usuario = models.ForeignKey(Usuario)
     tipo = models.IntegerField(null=True)
     cpf_assistido = models.CharField(max_length=20, null=True)
@@ -64,13 +64,19 @@ class Assistido(models.Model):
     profissao = models.CharField(max_length=200, null=True)
     renda_familiar = models.CharField(max_length=200, null=True)
     endereco_residencial = models.CharField(max_length=200, null=True)
-    endereco_trabalho = models.CharField(max_length=200)
+    endereco_trabalho = models.CharField(max_length=200, null=True)
     cep = models.CharField(max_length=20, null=True)
     telefone_celular = models.CharField(max_length=20, null=True)
     telefone_fixo = models.CharField(max_length=20)
     telefone_comercial = models.CharField(max_length=200)
     email = models.EmailField(max_length=200)
     observacoes = models.TextField(null=True)
+    documentos = models.FileField(
+        max_length=255,
+        blank=True,
+        null=True,
+        upload_to='documentos_assistido')
+
 
 
 ##Model para Armezenar os Documentos dos Assistidos, são os documentos pessoais
@@ -83,16 +89,19 @@ class Assistido(models.Model):
 # Modelo Básico para View de Cadastro de Processo!
 # Esse Model term que herdar a FK do Assistido, para efetuar o cadastro do processo
 class Processo(models.Model):
-    cpf_assistido = models.CharField(max_length=20, null=False)
+    assistido = models.ForeignKey(Assistido)
     tipologia = models.CharField(max_length=50, null=True)
-    data = models.DateField()
-    data_create = models.DateTimeField(auto_now_add=True)
-    descricao = models.TextField(max_length=1500, null=False)
-    status_processo = models.CharField(max_length=20, null=False)
+    data = models.DateField(null=True)
+    descricao = models.TextField(max_length=1500, null=True)
+    status_processo = models.CharField(max_length=20, null=True)
     responsavel_processo = models.CharField(max_length=50, null=False)
-
-    def __str__(self):
-        return self.data
+    documentos = models.FileField(upload_to='documentos_processo')
 
     class Meta:
         ordering = ['data']
+
+class Historico(models.Model):
+    descricao = models.TextField(max_length=1500, null=True)
+    data = models.DateTimeField(auto_now_add=True)
+    processo = models.ForeignKey(Processo)
+

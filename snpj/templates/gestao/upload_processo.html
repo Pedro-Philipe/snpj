@@ -24,17 +24,6 @@
                     <input type="text" class="form-control" value="{{ processo.data }}">
                 </div>
                 <div>
-                    <label for="{{ form.id_.id_for_label }}">STATUS</label>
-                    <select class="form-control" id="status_processo" name="status_processo">
-                        <option value="{{ processo.status_processo }}" selected="selected"
-                                disabled>{{ processo.status_processo }}</option>
-                        <option value="ANDAMENTO">ANDAMENTO</option>
-                        <option value="EM AGUARDO">EM AGUARDO</option>
-                        <option value="FINALIZADO">FINALIZADO</option>
-                    </select>
-                    {{ form.tipo.errors }}
-                </div>
-                <div>
                     <label for="{{ form.id_.id_for_label }}">RESPONSAVÉL PELO CADASTRO</label>
                     <input type="text" class="form-control" value="{{ processo.responsavel_processo }}">
                 </div>

@@ -4,11 +4,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.utils.crypto import get_random_string
 from django.forms import ModelForm
 from django.template.defaultfilters import filesizeformat
+from django.forms.widgets import FileInput
 
 from .models import Usuario, Evento, Assistido, Processo
 from .utils import validar_cpf, validar_cnpj, limpar_mascara
 import re
-import pdb
 
 content_types = [
     'image/png',
@@ -23,6 +23,13 @@ content_types = [
     'application/zip',
     'application/octet-stream',
     'text/plain']
+
+compressed_content_types = [
+    'application/x-compressed',
+    'application/x-zip-compressed',
+    'application/zip',
+    'multipart/x-zip'
+]
 
 
 class RestrictedFileField(forms.FileField):
@@ -50,8 +57,9 @@ class RestrictedFileField(forms.FileField):
                 pass
 
         return data
+
 class CadastrarAssistidoForm(forms.ModelForm):
-    nome = forms.CharField(max_length=14, required=True)
+    nome = forms.CharField(max_length=200, required=True)
     representante_legal = forms.CharField(max_length=150)
     rg = forms.CharField(max_length=20, required=True)
     cpf = forms.CharField(max_length=20, required=True)
@@ -67,6 +75,11 @@ class CadastrarAssistidoForm(forms.ModelForm):
     telefone_comercial = forms.CharField(max_length=200)
     email = forms.EmailField(max_length=200)
     observacoes = forms.CharField(widget=forms.Textarea())
+    documentos = RestrictedFileField(
+        content_types=compressed_content_types,
+        max_upload_size=5242880,
+        required=True,
+        widget=FileInput)
 
     class Meta:
         model = Assistido
@@ -116,38 +129,24 @@ class CadastrarAssistidoForm(forms.ModelForm):
             assistido.save()
 
         return assistido
-        
 
-    # def clean_telefone_celular(self):
-    #     if (self.cleaned_data['telefone_celular']):
-    #         raise forms.ValidationError('Por favor, digite um CELULAR válido!')
-    #
-    #     usuario_mesmo_telefone_celular = Assistido.objects.filter(telefone_celular=self.cleaned_data['telefone_celular'])
-    #
-    #     return self.cleaned_data['telefone_celular']
-
-    # def clean_rg(self):
-    #     if not validar_cpf(self.cleaned_data['rg']):
-    #         raise forms.ValidationError('Por favor, digite um RG válido!')
-    #
-    #     usuario_mesmo_rg = Assistido.objects.filter(rg=self.cleaned_data['rg'])
-    #
-    #     if usuario_mesmo_rg.count() > 0:
-    #         raise forms.ValidationError('RG já cadastrado!')
-    #
-    #     return self.cleaned_data['rg']
 
 class CadastroProcessoForm(forms.ModelForm):
     cpf_assistido = forms.CharField(max_length=20, required=True)
     tipologia = forms.CharField(required=True)
-    data = forms.DateField()
+    data = forms.DateField(required=True)
     descricao = forms.CharField(max_length=1500, widget=forms.Textarea(), required=True)
     status_processo = forms.CharField(max_length=20, required=True)
     responsavel_processo = forms.CharField(max_length=50, required=True)
+    documentos = RestrictedFileField(
+        content_types=compressed_content_types,
+        max_upload_size=5242880,
+        required=True,
+        widget=FileInput)
 
     class Meta:
         model = Processo
-        fields = ('cpf_assistido', 'tipologia', 'data', 'descricao', 'status_processo', 'responsavel_processo')
+        fields = '__all__'
 
     def clean_cpf(self):
         if not validar_cpf(self.cleaned_data['cpf_assistido']):
@@ -260,3 +259,13 @@ class CadastrarEventosForm(ModelForm):
                 evento.save()
                 assistido.save()
         return form
+
+class EditarEventoForm(ModelForm):
+    class Meta:
+        model = Evento
+        fields = ('data', 'hora_inicio', 'hora_fim', 'descricao', 'tipo')
+
+    def clean(self):
+        super(EditarEventoForm, self).clean()
+        if self.cleaned_data['hora_fim'] <= self.cleaned_data['hora_inicio']:
+             self.add_error('hora_fim', 'O horário de fim precisa ser maior que o de início.')

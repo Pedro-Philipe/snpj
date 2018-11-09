@@ -18,10 +18,10 @@ from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db.models import Q, Count
 from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
-import pdb
 
 from adesao.forms import CadastrarUsuarioForm,\
                          CadastrarEventosForm,\
+                         EditarEventoForm,\
                          CadastrarAssistidoForm,\
                          CadastroProcessoForm
 
@@ -87,27 +87,49 @@ def detalhar_assistido(request, id):
     assistido = Assistido.objects.get(id=id)
     return render(request, 'assistido/detalhar.html', context={'assistido':assistido})
 
-def upload_arquivos(request, id):
-    assistido = Assistido.objects.get(id=id)
-    return render(request, 'assistido/upload_doc.html', context={'assistido':assistido})
-
 class ListarEventos(ListView):
     template_name = 'agenda/listar_eventos.html'
     model = Evento
     paginate_by = 12
     
+    def get_queryset(self):
+        q = self.request.GET.get('q', None)
+        eventos = Evento.objects.all()
+
+        if q:
+            eventos = eventos.filter(Q(cpf_assistido=q))
+
+        return eventos
 
 class ListarAssistidos(ListView):
     template_name = 'assistido/listar_assistidos.html'
     model = Assistido
     paginate_by = 12
 
-class DetalheAssistido(ListView):
+    def get_queryset(self):
+        q = self.request.GET.get('q', None)
+        assistidos = Assistido.objects.all()
+
+        if q:
+            assistidos = assistidos.filter(Q(cpf=q))
+
+        return assistidos
+
+class DetalheAssistido(DetailView):
+    template_name = 'assistido/detalhar.html'
     model = Assistido
 
-# class UploadDocAssistido(ListView):
-#     model = Assistido
-#     template_name = 'assistido/upload_doc.html'
+class VisualizarEvento(DetailView):
+    template_name = 'agenda/visualizar_evento.html'
+    model = Evento
+
+class EditarAssistido(UpdateView):
+    template_name = 'assistido/cadastro_assistido.html'
+    model = Assistido
+    fields = '__all__'
+
+    def get_success_url(self):
+        return reverse('adesao:detalhar_assistido', args=[self.kwargs['pk']])
 
 class CadastrarEventos(CreateView):
     template_name = 'agenda/cadastrar_eventos.html'
@@ -119,7 +141,24 @@ class CadastrarEventos(CreateView):
     def get_context_data(self, **kwargs):
         context = super(CadastrarEventos, self).get_context_data(**kwargs)
 
-        if not self.request.user.is_superuser:
+        if not self.request.user.is_staff:
+            context['usuarios'] = Usuario.objects.filter(id=self.request.user.id)
+            return context
+
+        context['usuarios'] = Usuario.objects.all()
+
+        return context
+
+class EditarEvento(UpdateView):
+    template_name = 'agenda/editar_evento.html'
+    model = Evento
+    success_url = reverse_lazy('adesao:listar_eventos')
+    form_class = EditarEventoForm
+
+    def get_context_data(self, **kwargs):
+        context = super(EditarEvento, self).get_context_data(**kwargs)
+
+        if not self.request.user.is_staff:
             context['usuarios'] = Usuario.objects.filter(id=self.request.user.id)
             return context
 
@@ -133,7 +172,6 @@ class CadastrarAssistido(CreateView):
     model = Assistido
     form_class = CadastrarAssistidoForm
 
-# Alterar o Model depois que estiver com a tabela Processo criada
 class CadastrarProcesso(CreateView):
     template_name = 'processo/criar_processo.html'
     success_url = reverse_lazy('adesao:lista_processos')

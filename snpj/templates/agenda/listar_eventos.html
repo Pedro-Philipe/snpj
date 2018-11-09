@@ -8,26 +8,30 @@
       <div align="center">
           <h3>Lista de Eventos</h3>
       </div>
+    <p align="center" ><a href="{% url 'adesao:calendario' %}">Clique aqui</a> para visualizar no calendário.</p>      
+    </br>
+    <div align="left">
+        <input id="searchInput" type="text" class="cpf form-control input-lg" placeholder="Digite o CPF" />
+        <a id="pesquisar" href="#">Buscar</a> | <a href="{{ request.path }}">Limpar</a>
+    </div>
+    </br>
     {% if object_list%}
-    <p align="center" ><a href="{% url 'adesao:calendario' %}">Clique aqui</a> para visualizar no calendário.</p>
     <thead>
       <tr>
         <th>Nome</th>
         <th align="left">Data</th>
         <th align="left">Horário</th>
-        <th align="center">Detalhar</th>
+        <th align="center">&nbsp;</th>
       </tr>
     </thead>
     <tbody>
       {% for evento in object_list %}
         <tr class="odd gradeX">
             <td width="35%" ><a title-data="{{evento.nome}}" class="tooltip" >{{evento.nome}}</a></td>
-            <td width="35%">{{evento.data|date:"SHORT_DATE_FORMAT"}}</td>
-            <td width="35%">{{evento.hora_inicio}} - {{evento.hora_fim}}</td>
+            <td>{{evento.data|date:"SHORT_DATE_FORMAT"}}</td>
+            <td>{{evento.hora_inicio}} - {{evento.hora_fim}}</td>
             <td align="center">
-              <button type="button" class="btn btn-default btn-sm">
-                Detalhar <span class="glyphicon glyphicon-asterisk"></span>
-              </button>
+                <a href="{% url 'adesao:editar_evento' evento.id %}" type="button">Editar</a> | <a href="{% url 'adesao:visualizar_evento' evento.id %}" type="button">Visualizar</a>
             </td>
         </tr>
       {% endfor %}
@@ -58,9 +62,13 @@
       </button>
   </a>
 </div>
-
-
-
-
-
 {% endblock content %}
+{% block js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+          $("#pesquisar").click(function () {
+              location.href = '{{ request.path }}?q='+ $('#searchInput').val();
+          });
+        });
+    </script>
+{% endblock js %}
