@@ -9,7 +9,7 @@
         {{form.errors}}
         <div class="form-group">
             <div class="col-sm-7">
-                <label for="{{ form.cpf_assistido.id_for_label }}">CPF do Assistido </label>
+                <label for="{{ form.cpf_assistido.id_for_label }}" class="required">CPF do Assistido </label>
                 <select class="form-control" id="assistidos" name="assistido">
                         <option value=""> -- Selecione um CPF -- </option>
                         {% for assistido in assistidos %}
@@ -24,7 +24,7 @@
             <br/>
             <div class="form-group">
                 <div class="form-group">
-                    <label for="{{ form.tipologia.id_for_label }}" class="col-sm-3 control-label">Tipologia Processual</label>
+                    <label for="{{ form.tipologia.id_for_label }}" class="col-sm-3 control-label required">Tipologia Processual</label>
                     <div class="col-sm-9">
                         <select class="form-control" id="tipologia" name="tipologia">
                             <option value="0" selected="selected">Cível</option>
@@ -39,7 +39,7 @@
             <br/>
             <div class="form-group">
                 <div class="form-group">
-                    <label for="{{ form.data.id_for_label }}" class="col-sm-3 control-label">Data de Retorno</label>
+                    <label for="{{ form.data.id_for_label }}" class="col-sm-3 control-label required">Data de Retorno</label>
 
                     <div class="col-sm-9">
                         {% render_field form.data class="form-control date" %} {{ form.data.errors }}
@@ -49,7 +49,7 @@
             <br/>
             <div class="form-group">
                 <div class="form-group">
-                    <label for="{{ form.hora_inicio.id_for_label }}" class="col-sm-3 control-label">Hora de início</label>
+                    <label for="{{ form.hora_inicio.id_for_label }}" class="col-sm-3 control-label required">Hora de início</label>
             
                     <div class="col-sm-9">
                     {% render_field form.hora_inicio class="form-control time" %} {{ form.hora_inicio.errors }}
@@ -68,7 +68,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-7">
-                    <label for="{{ form.descricao.id_for_label }}"> Descrição </label>
+                    <label for="{{ form.descricao.id_for_label }}" class="required"> Descrição </label>
                     {% render_field form.descricao class="form-control" %} {{ form.nome.errors }}
                 </div>
             </div>
@@ -86,7 +86,7 @@
             </div>
             <div class="form-group">
                     <div class="col-sm-7">
-                        <label for="{{ form.documentos.id_for_label }}">Anexar Documentos do processo : </label>
+                        <label for="{{ form.documentos.id_for_label }}" class="required">Anexar Documentos do processo : </label>
                         <p>{% render_field form.documentos %}</p>
                         {{ form.documentos.errors }}
                     </div>
@@ -116,5 +116,8 @@
             });
         });
     </script>
+     <style>
+        label.required:after {content: " *"; color: red;}
+    </style>
     {% endverbatim %}
 {% endblock js %}

@@ -11,7 +11,7 @@
 
     <div class="form-group">
       <div class="form-group">
-        <label for="{{ form.nome.id_for_label }}" class="col-sm-3 control-label">Descrição do encontro</label>
+        <label for="{{ form.nome.id_for_label }}" class="col-sm-3 control-label required" >Descrição do encontro</label>
         </br>        
         <span>exemplo: 'Checagem de status do José Roberto Filho'</span>
         <div class="col-sm-9">
@@ -22,7 +22,7 @@
 
     <div class="form-group">
       <div class="form-group">
-        <label for="{{ form.cpf_assistido.id_for_label }}" class="col-sm-3 control-label">CPF assistido</label>
+        <label for="{{ form.cpf_assistido.id_for_label }}" class="col-sm-3 control-label required">CPF assistido</label>
 
         <div class="col-sm-9">
           {% render_field form.cpf_assistido class="form-control cpf" %} {{ form.cpf_assistido.errors }}
@@ -32,7 +32,7 @@
 
     <div class="form-group">
       <div class="form-group">
-        <label for="{{ form.data.id_for_label }}" class="col-sm-3 control-label">Data</label>
+        <label for="{{ form.data.id_for_label }}" class="col-sm-3 control-label required">Data</label>
 
         <div class="col-sm-9">
           {% render_field form.data class="form-control date" %} {{ form.data.errors }}
@@ -42,7 +42,7 @@
 
     <div class="form-group">
       <div class="form-group">
-        <label for="{{ form.hora_inicio.id_for_label }}" class="col-sm-3 control-label">Hora de início</label>
+        <label for="{{ form.hora_inicio.id_for_label }}" class="col-sm-3 control-label required">Hora de início</label>
 
         <div class="col-sm-9">
           {% render_field form.hora_inicio class="form-control time" %} {{ form.hora_inicio.errors }}
@@ -62,7 +62,7 @@
 
     <div class="form-group">
       <div class="form-group">
-        <label for="{{ form.descricao.id_for_label }}" class="col-sm-3 control-label">Descrição</label>
+        <label for="{{ form.descricao.id_for_label }}" class="col-sm-3 control-label required">Descrição</label>
 
         <div class="col-sm-9">
           <textarea class="form-control" id="id_descricao" maxlength="255" name="descricao" type="text" style="margin: 0px; height: 80px; width: 498px;"></textarea> {{ form.descricao.errors }}
@@ -134,6 +134,8 @@ $(document).ready(function(){
   });
 })
 </script>
-
+  <style>
+       label.required:after {content: " *"; color: red;}
+   </style>
 
 {% endblock content %}
