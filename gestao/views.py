@@ -13,6 +13,9 @@ from .forms import AlterarUsuarioForm
 import os
 from django.conf import settings
 
+def calendario(request):
+    return render(request, 'gestao/calendario.html')
+
 class GestaoHome(View):
     template_name = "gestao/acompanhar_prazo.html"
 
