@@ -7,6 +7,8 @@ urlpatterns = [
         views.ListarProcesso.as_view(),
         login_url='adesao:login'), name='index'),
 
+    url(r'^calendario/$', views.calendario, name='calendario'),
+    
     url(r'^usuarios/',
         staff_member_required(
             views.ListarUsuarios.as_view(),
