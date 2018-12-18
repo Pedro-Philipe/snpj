@@ -23,7 +23,7 @@
                                 <td width="40%">{{ user.nome_usuario }}</td>
                                 <td>{{ user.data_cadastro}}</td>
                                 <td align="center">
-                                    <a href="http://127.0.0.1:8000/gestao/usuario/detalhes/{{ user.id }}">
+                                    <a href="{% url 'gestao:detalhesUsuario' user.user_id%}">
                                         <button type="button" class="btn btn-default btn-sm"> Mais sobre <span
                                                 class="glyphicon glyphicon-asterisk"></span></button>
                                     </a>
