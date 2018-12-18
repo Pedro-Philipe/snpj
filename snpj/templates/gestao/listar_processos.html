@@ -13,8 +13,6 @@
                         <th>COD</th>
                         <th>ASSISTIDO</th>
                         <th>TIPOLOGIA</th>
-                        <th>STATUS</th>
-                        <th>RESPOSAVEL</th>
                         <th>DATA DE RETORNO</th>
                         <th>DETALHES</th>
                     </tr>
@@ -23,12 +21,11 @@
                     {% for processo in object_list %}
                         <tr class="odd gradeX">
                             <td>{{ processo.id }}</td>
-                            <td>{{ processo.cpf_assistido }}</td>
+                            <td>{{ processo.assistido_id }}</td>
                             <td>{{ processo.tipologia }}</td>
-                            <td>{{ processo.responsavel_processo }}</td>
                             <td>{{ processo.data }}</td>
                             <td align="center">
-                                <a href="http://127.0.0.1:8000/gestao/detalhes/processo/{{ processo.id }}">
+                                <a href="{% url 'gestao:detalhar_processo' processo.id %}">
                                     <button type="button" class="btn btn-default btn-sm"> Mais sobre <span
                                             class="glyphicon glyphicon-asterisk"></span></button>
                                 </a>

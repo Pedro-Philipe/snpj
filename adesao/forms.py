@@ -69,21 +69,21 @@ class CadastrarAssistidoForm(forms.ModelForm):
     renda_familiar = forms.CharField(max_length=200, required=True)
     endereco_residencial = forms.CharField(max_length=200, required=True)
     endereco_trabalho = forms.CharField(max_length=200)
-    cep = forms.CharField(max_length=20, required=False)
-    telefone_celular = forms.CharField(max_length=20, required=False)
+    cep = forms.CharField(max_length=20)
+    telefone_celular = forms.CharField(max_length=20)
     telefone_fixo = forms.CharField(max_length=20)
     telefone_comercial = forms.CharField(max_length=200)
     email = forms.EmailField(max_length=200)
     observacoes = forms.CharField(widget=forms.Textarea())
     documentos = RestrictedFileField(
         content_types=compressed_content_types,
-        max_upload_size=5242880,
+        max_upload_size=50428800,
         required=True,
         widget=FileInput)
 
     class Meta:
         model = Assistido
-        fields = ('nome', 'representante_legal', 'rg', 'cpf', 'nacionalidade', 'estado_civil', 'profissao', 'renda_familiar', 'endereco_residencial', 'endereco_trabalho',
+        fields = ('nome', 'representante_legal', 'rg', 'cpf', 'nacionalidade', 'estado_civil', 'profissao', 'endereco_residencial', 'endereco_trabalho',
                   'cep', 'telefone_celular', 'telefone_fixo', 'telefone_comercial', 'email', 'observacoes')
 
     def clean_email(self):
