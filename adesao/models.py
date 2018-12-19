@@ -53,7 +53,7 @@ class Evento(models.Model):
 
 class Assistido(models.Model):
     nome = models.CharField(max_length=200, null=True)
-    representante_legal = models.CharField(max_length=200)
+    representante_legal = models.CharField(max_length=200, null=True, blank=True)
     rg = models.CharField(max_length=20, null=True)
     cpf = models.CharField(max_length=20, null=True)
     nacionalidade = models.CharField(max_length=200, null=True)
@@ -61,12 +61,12 @@ class Assistido(models.Model):
     profissao = models.CharField(max_length=200, null=True)
     renda_familiar = models.CharField(max_length=200, null=True)
     endereco_residencial = models.CharField(max_length=200, null=True)
-    endereco_trabalho = models.CharField(max_length=200, null=True)
+    endereco_trabalho = models.CharField(max_length=200, null=True, blank=True)
     cep = models.CharField(max_length=20, null=True)
     telefone_celular = models.CharField(max_length=20, null=True)
-    telefone_fixo = models.CharField(max_length=20)
-    telefone_comercial = models.CharField(max_length=200)
-    email = models.EmailField(max_length=200)
+    telefone_fixo = models.CharField(max_length=20, blank=True)
+    telefone_comercial = models.CharField(max_length=200, blank=True)
+    email = models.EmailField(max_length=200, blank=True)
     observacoes = models.TextField(null=True)
     documentos = models.FileField(
         max_length=255,
