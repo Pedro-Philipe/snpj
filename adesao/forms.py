@@ -67,13 +67,13 @@ class CadastrarAssistidoForm(forms.ModelForm):
     estado_civil = forms.CharField(max_length=50, required=True)
     profissao = forms.CharField(max_length=200, required=True)
     renda_familiar = forms.CharField(max_length=200, required=True)
-    endereco_residencial = forms.CharField(max_length=200, required=True)
-    endereco_trabalho = forms.CharField(max_length=200)
+    endereco_residencial = forms.CharField(max_length=200, required=False)
+    endereco_trabalho = forms.CharField(max_length=200, required=False)
     cep = forms.CharField(max_length=20)
     telefone_celular = forms.CharField(max_length=20)
     telefone_fixo = forms.CharField(max_length=20)
-    telefone_comercial = forms.CharField(max_length=200)
-    email = forms.EmailField(max_length=200)
+    telefone_comercial = forms.CharField(max_length=200, required=False)
+    email = forms.EmailField(max_length=200, required=False)
     observacoes = forms.CharField(widget=forms.Textarea())
     documentos = RestrictedFileField(
         content_types=compressed_content_types,
@@ -83,8 +83,8 @@ class CadastrarAssistidoForm(forms.ModelForm):
 
     class Meta:
         model = Assistido
-        fields = ('nome', 'representante_legal', 'rg', 'cpf', 'nacionalidade', 'estado_civil', 'profissao', 'endereco_residencial', 'endereco_trabalho',
-                  'cep', 'telefone_celular', 'telefone_fixo', 'telefone_comercial', 'email', 'observacoes')
+        fields = ('nome', 'rg', 'cpf',   'profissao', 'endereco_residencial', 'endereco_trabalho',
+                  'cep', 'telefone_celular', 'telefone_comercial', 'email', 'observacoes')
 
     def clean_email(self):
         try:
