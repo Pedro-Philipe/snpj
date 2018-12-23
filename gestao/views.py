@@ -29,9 +29,9 @@ def alterar_situacao(request, id):
 
     return redirect('gestao:detalhar', pk=id)
 
-def detalhar_processo(request, id):
-    processo = Processo.objects.get(id=id)
-    return render(request, 'gestao/upload_processo.html', context={'processo':processo})
+# def detalhar_processo(request, id):
+#     processo = Processo.objects.get(id=id)
+#     return render(request, 'gestao/upload_processo.html', context={'processo':processo})
 
 def detalhesUsuario(request, id):
     usuario = Usuario.objects.get(id=id)
@@ -41,6 +41,14 @@ def detalhesUsuario(request, id):
 def detalhesAssistido(request, id):
     assistido = Assistido.objects.get(id=id)
     return render(request, 'gestao/detalhe_assistidos.html', context={'assistido': assistido})
+
+class EditarProcesso(UpdateView):
+    template_name = 'gestao/upload_processo.html'
+    model = Processo
+    fields = '__all__'
+
+    def get_success_url(self):
+        return reverse('gestao:processos', args=[self.kwargs['pk']])
 
 class ListarUsuarios(ListView):
     model = Usuario
