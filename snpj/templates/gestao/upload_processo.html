@@ -1,38 +1,81 @@
 {% extends "gestao/base_gestao.html" %}
-{% load gestao_tags %}
+{% load widget_tweaks %}
 {% block content %}
-    <div class="dataTable_wrapper">
-        <h1 class="header text-center">Upload de Documentos</h1>
-        <div class="panel panel-primary">
-            <div class="panel-heading">Upload de arquivos do assistido no decorrer do processo</div>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <h1 class="header text-center">Editar Processo</h1>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Upload de arquivos do assistido no decorrer do processo</div>
             <div class="panel-body">
-                <h2>Detalhes do Processo</h2>
-                <div>
-                    <label for="{{ form.id_.id_for_label }}">Numero do Processo :</label>
-                    <input type="text" class="form-control" value="{{ processo.id }}" disabled>
-                </div>
-                <div>
-                    <label for="{{ form.id_.id_for_label }}">Tipologia :</label>
-                    <input type="text" class="form-control" value="{{ processo.tipologia }}" disabled>
-                </div>
-                <div>
-                    <label for="{{ form.id_.id_for_label }}">Data de retorno :</label>
-                    <input type="text" class="form-control" value="{{ processo.data }}" disabled>
-                </div>
-                <br/>
-                <div>
-                    <label for="{{ form.id_.id_for_label }}">Documentos :</label>
-                    <input type="text" class="form-control" value="{{ processo.documentos }}" disabled>
-                </div>
-                <br/>
-                <div class="form-group">
-                    <label for="caixa1">DOCUMENTOS ASSISTIDO : </label>
-                    {% if processo.documentos %}
-                    <a href="{{ processo.documentos.url }}"><button class="btn btn-success" >BAIXAR DOCUMENTOS</button></a>
-                    {% endif %}
-                    <br/>
-                </div>
+                <form method="post" autocomplete="off" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="col-sm-7">
+                            <label for="{{ form.cpf_assistido.id_for_label }}">CPF do Assistido: </label>
+                            {{ processo.assistido.cpf }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <label>Responsável pelo cadastro: </label>
+                                {{ processo.usuario.nome_usuario }}
+                    </div>
+                        <br/>
+                        <div class="form-group">
+                                <label for="{{ form.tipologia.id_for_label }}">Tipologia Processual</label>
+                                <select class="form-control" id="tipologia" name="tipologia">
+                                    <option value="0" selected="selected">Cível</option>
+                                    <option value="1">Criminal</option>
+                                    <option value="2">Familiar</option>
+                                    <option value="3">Trabalhista</option>
+                                </select>
+                                {{ form.tipologia.errors }}
+                        </div>
+                        <div class="form-group">
+                                <label for="{{ form.data.id_for_label }}">Data de Retorno</label>
+                                    {% render_field form.data class="form-control date" %} {{ form.data.errors }}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.hora_inicio.id_for_label }}">Hora de início</label>
+                            {% render_field form.hora_inicio class="form-control time" %} {{ form.hora_inicio.errors }}
+                            <label for="{{ form.hora_fim.id_for_label }}">Hora de término</label>
+                            {% render_field form.hora_fim class="form-control time" %} {{ form.hora_fim.errors }}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.descricao.id_for_label }}"> Descrição </label>
+                            {% render_field form.descricao class="form-control" %} {{ form.nome.errors }}
+                        </div>
+                        <br/>
+                        <div class="form-group">
+                            <label for="{{ form.documentos.id_for_label }}">Anexar Documentos do processo : </label>
+                            <p>{% render_field form.documentos %}</p>
+                            {{ form.documentos.errors }}
+                        </div>
+                        <div class="form-group">
+                                <div>
+                                    <br/>
+                                    <input type="submit" class="btn btn-primary btn-lg center-block" value="Salvar">
+                                </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
-{% endblock%}
+    </div>            
+{% endblock %}
+{% block js %}
+    {% verbatim %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#assistidos').select2();
+            $(".form-horizontal").submit(function () {
+                $(".cpf").formatter().resetPattern('{{99999999999}}');
+                $(".cep").formatter({
+                    'pattern': '{{99}}.{{999}}-{{999}}',
+                    'persistent': false,
+                });
+                $(".telefone").mask('(00)00000-0000');
+            });
+        });
+    </script>
+    {% endverbatim %}
+{% endblock js %}
