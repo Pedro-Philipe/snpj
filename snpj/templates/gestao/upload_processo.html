@@ -2,38 +2,37 @@
 {% load gestao_tags %}
 {% block content %}
     <div class="dataTable_wrapper">
-        <h1 class="header text-center">UPLOAD DE DOCUMENTOS</h1>
+        <h1 class="header text-center">Upload de Documentos</h1>
         <div class="panel panel-primary">
             <div class="panel-heading">Upload de arquivos do assistido no decorrer do processo</div>
             <div class="panel-body">
-                <h2>ANEXAR DOCUMENTOS DO PROCESSO</h2>
+                <h2>Detalhes do Processo</h2>
                 <div>
-                    <label for="{{ form.id_.id_for_label }}">NUMERO DO PROCESSO</label>
-                    <input type="text" class="form-control" value="{{ processo.id }}">
+                    <label for="{{ form.id_.id_for_label }}">Numero do Processo :</label>
+                    <input type="text" class="form-control" value="{{ processo.id }}" disabled>
                 </div>
                 <div>
-                    <label for="{{ form.id_.id_for_label }}">TIPOLOGIA</label>
-                    <input type="text" class="form-control" value="{{ processo.tipologia }}">
+                    <label for="{{ form.id_.id_for_label }}">Tipologia :</label>
+                    <input type="text" class="form-control" value="{{ processo.tipologia }}" disabled>
                 </div>
                 <div>
-                    <label for="{{ form.id_.id_for_label }}">DATA DE RETORNO</label>
-                    <input type="text" class="form-control" value="{{ processo.data }}">
+                    <label for="{{ form.id_.id_for_label }}">Data de retorno :</label>
+                    <input type="text" class="form-control" value="{{ processo.data }}" disabled>
+                </div>
+                <br/>
+                <div>
+                    <label for="{{ form.id_.id_for_label }}">Documentos :</label>
+                    <input type="text" class="form-control" value="{{ processo.documentos }}" disabled>
                 </div>
                 <br/>
                 <div class="form-group">
                     <label for="caixa1">DOCUMENTOS ASSISTIDO : </label>
-                    <button class="btn btn-success">BAIXAR DOCUMENTOS</button>
+                    {% if processo.documentos %}
+                    <a href="{{ processo.documentos.url }}"><button class="btn btn-success" >BAIXAR DOCUMENTOS</button></a>
+                    {% endif %}
                     <br/>
                 </div>
-                <div class="form-group">
-                    <label for="caixa1">ANEXAR DOCUMENTO : </label>
-                    <input type="file" class="form-control-file" id="caixa1">
-                    <br/>
-                    <span> OBS: Os documentos devem ser compactados .zip, e importados</span>
-                </div>
-                <br/>
             </div>
-            <br>
         </div>
     </div>
-{% endblock content %}
+{% endblock%}
