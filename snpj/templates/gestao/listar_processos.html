@@ -21,8 +21,16 @@
                     {% for processo in object_list %}
                         <tr class="odd gradeX">
                             <td>{{ processo.id }}</td>
-                            <td>{{ processo.assistido_id }}</td>
-                            <td>{{ processo.tipologia }}</td>
+                            <td>{{ processo.assistido.nome }}</td>
+                            {% if processo.tipologia == '0' %}
+                                <td>Cível</td>
+                                {% elif processo.tipologia == '1'%}
+                                <td>Criminal</td>
+                                {% elif processo.tipologia == '2'%}
+                                <td>Familiar</td>
+                                {% else %}
+                                <td>Trabalhista</td>
+                            {% endif %}
                             <td>{{ processo.data }}</td>
                             <td align="center">
                                 <a href="{% url 'gestao:editar_processo' processo.id %}">
