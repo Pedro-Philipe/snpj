@@ -25,6 +25,7 @@ from adesao.forms import CadastrarUsuarioForm,\
                          CadastrarAssistidoForm,\
                          CadastroProcessoForm
 
+from gestao.forms import EditarProcessoForm
 from adesao.models import Usuario, Evento, Assistido, Processo
 from adesao.utils import enviar_email_conclusao, verificar_anexo
 
@@ -36,7 +37,6 @@ def index(request):
     if request.user.is_authenticated():
         return redirect('adesao:home')
     return render(request, 'index.html')
-
 
 def fale_conosco(request):
     return render(request, 'fale_conosco.html')
@@ -195,10 +195,8 @@ class CadastrarProcesso(CreateView):
 class EditarProcesso(UpdateView):
     template_name = 'processo/editar_processo.html'
     model = Processo
-    fields = '__all__'
-
-    def get_success_url(self):
-        return reverse('adesao:detalhar_processo', args=[self.kwargs['pk']])
+    success_url = reverse_lazy('adesao:lista_processos')
+    form_class = EditarProcessoForm
 
 class DetalharProcesso(DetailView):
     template_name = 'agenda/detalhar_processo.html'
@@ -209,8 +207,6 @@ class ListaProcesso(ListView):
     model = Processo
     paginate_by = 12
 
-# Também deve se trocar o Model aqui, e a variavél como também troca na página de listar processo.
-# Usei o Assistido como exemplo, apenas para vc ter uma ideia do fluxo
 def upload_processo(request, id):
     assistido = Assistido.objects.get(id=id)
     return render(request, 'processo/upload_processo.html', context={'assistido':assistido})
