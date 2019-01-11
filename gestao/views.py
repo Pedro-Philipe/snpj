@@ -8,7 +8,8 @@ from django.views.generic.edit import FormView, UpdateView
 
 from adesao.models import Usuario, Assistido, Processo
 
-from .forms import AlterarUsuarioForm
+from .forms import AlterarUsuarioForm, \
+                   EditarProcessoForm
 
 import os
 from django.conf import settings
@@ -45,11 +46,9 @@ def detalhesAssistido(request, id):
 class EditarProcesso(UpdateView):
     template_name = 'gestao/upload_processo.html'
     model = Processo
-    fields = '__all__'
-
-    def get_success_url(self):
-        return reverse('gestao:processos', args=[self.kwargs['pk']])
-
+    success_url = reverse_lazy('gestao:processos')
+    form_class = EditarProcessoForm
+    
 class ListarUsuarios(ListView):
     model = Usuario
     template_name = 'gestao/listar_usuarios.html'

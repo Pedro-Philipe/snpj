@@ -9,27 +9,30 @@
             <div class="panel-body">
                 <form method="post" autocomplete="off" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div class="form-group">
-                        <div class="col-sm-7">
-                            <label for="{{ form.cpf_assistido.id_for_label }}">CPF do Assistido: </label>
-                            {{ processo.assistido.cpf }}
-                        </div>
+                    {{form.errors}}
+                    <div>
+                        <label for="{{ form.cpf_assistido.id_for_label }}">CPF do Assistido:</label>
+                        <input type="text" class="form-control" value="{{ processo.assistido.cpf }}" disabled>
                     </div>
-                    <div class="form-group">
-                            <label>Responsável pelo cadastro: </label>
-                                {{ processo.usuario.nome_usuario }}
+                    <div>
+                        <label for="{{ form.cpf_assistido.id_for_label }}">Nome:</label>
+                        <input type="text" class="form-control" value="{{ processo.assistido.nome }}" disabled>
                     </div>
-                        <br/>
-                        <div class="form-group">
-                                <label for="{{ form.tipologia.id_for_label }}">Tipologia Processual</label>
-                                <select class="form-control" id="tipologia" name="tipologia">
-                                    <option value="0" selected="selected">Cível</option>
-                                    <option value="1">Criminal</option>
-                                    <option value="2">Familiar</option>
-                                    <option value="3">Trabalhista</option>
-                                </select>
-                                {{ form.tipologia.errors }}
-                        </div>
+                    <div>
+                        <label for="{{ form.id_.id_for_label }}">Responsável pelo cadastro:</label>
+                        <input type="text" class="form-control" value="{{ processo.usuario.nome_usuario }}" disabled>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="{{ form.tipologia.id_for_label }}">Tipologia Processual</label>
+                            <select class="form-control" id="tipologia" name="tipologia">
+                                <option value="0" selected="selected">Cível</option>
+                                <option value="1">Criminal</option>
+                                <option value="2">Familiar</option>
+                                <option value="3">Trabalhista</option>
+                            </select>
+                            {{ form.tipologia.errors }}
+                    </div>
                         <div class="form-group">
                                 <label for="{{ form.data.id_for_label }}">Data de Retorno</label>
                                     {% render_field form.data class="form-control date" %} {{ form.data.errors }}
@@ -42,7 +45,7 @@
                         </div>
                         <div class="form-group">
                             <label for="{{ form.descricao.id_for_label }}"> Descrição </label>
-                            {% render_field form.descricao class="form-control" %} {{ form.nome.errors }}
+                            {% render_field form.descricao class="form-control" %} {{ form.descricao.errors }}
                         </div>
                         <br/>
                         <div class="form-group">
