@@ -26,12 +26,29 @@
                     <div class="form-group">
                         <label for="{{ form.tipologia.id_for_label }}">Tipologia Processual</label>
                             <select class="form-control" id="tipologia" name="tipologia">
+                                {% if processo.tipologia == '0' %}
                                 <option value="0" selected="selected">Cível</option>
                                 <option value="1">Criminal</option>
                                 <option value="2">Familiar</option>
                                 <option value="3">Trabalhista</option>
+                                {% elif processo.tipologia == '1'%}
+                                <option value="0">Cível</option>
+                                <option value="1" selected="selected">Criminal</option>
+                                <option value="2">Familiar</option>
+                                <option value="3">Trabalhista</option>
+                                {% elif processo.tipologia == '2'%}
+                                <option value="0">Cível</option>
+                                <option value="1">Criminal</option>
+                                <option value="2" selected="selected">Familiar</option>
+                                <option value="3">Trabalhista</option>
+                                {% else %}
+                                <option value="0">Cível</option>
+                                <option value="1">Criminal</option>
+                                <option value="2">Familiar</option>
+                                <option value="3" selected="selected">Trabalhista</option>
+                                {% endif %}
                             </select>
-                            {{ form.tipologia.errors }}
+                        {{ form.tipologia.errors }}
                     </div>
                         <div class="form-group">
                                 <label for="{{ form.data.id_for_label }}">Data de Retorno</label>
