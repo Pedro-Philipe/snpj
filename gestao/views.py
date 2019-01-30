@@ -8,7 +8,8 @@ from django.views.generic.edit import FormView, UpdateView
 
 from adesao.models import Usuario, Assistido, Processo
 
-from .forms import AlterarUsuarioForm
+from .forms import AlterarUsuarioForm, \
+                   EditarProcessoForm
 
 import os
 from django.conf import settings
@@ -29,9 +30,9 @@ def alterar_situacao(request, id):
 
     return redirect('gestao:detalhar', pk=id)
 
-def detalhar_processo(request, id):
-    processo = Processo.objects.get(id=id)
-    return render(request, 'gestao/upload_processo.html', context={'processo':processo})
+# def detalhar_processo(request, id):
+#     processo = Processo.objects.get(id=id)
+#     return render(request, 'gestao/upload_processo.html', context={'processo':processo})
 
 def detalhesUsuario(request, id):
     usuario = Usuario.objects.get(id=id)
@@ -42,6 +43,12 @@ def detalhesAssistido(request, id):
     assistido = Assistido.objects.get(id=id)
     return render(request, 'gestao/detalhe_assistidos.html', context={'assistido': assistido})
 
+class EditarProcesso(UpdateView):
+    template_name = 'gestao/upload_processo.html'
+    model = Processo
+    success_url = reverse_lazy('gestao:processos')
+    form_class = EditarProcessoForm
+    
 class ListarUsuarios(ListView):
     model = Usuario
     template_name = 'gestao/listar_usuarios.html'

@@ -22,10 +22,10 @@ urlpatterns = [
         staff_member_required(
             views.ListarProcesso.as_view(),
             login_url='adesao:login'), name='processos'),
-    url(r'^detalhes/processo/(?P<id>\d+)/$',
+    url(r'^editar-processo/(?P<pk>\d+)/$', 
         staff_member_required(
-            views.detalhar_processo,
-            login_url='adesao:login'), name='detalhar_processo'),
+            views.EditarProcesso.as_view(),
+            login_url='adesao:login'), name='editar_processo'),
     url(r'^assistido/detalhes/(?P<id>\d+)/$',
         staff_member_required(
             views.detalhesAssistido,

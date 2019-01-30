@@ -59,10 +59,27 @@
         <label for="{{ form.tipo.id_for_label }}" class="col-sm-3 control-label">Tipologia processual</label>
         <div class="col-sm-9">
           <select class="form-control" id="tipo" name="tipo">
-            <option value="0" selected="selected">Cível</option>
-            <option value="1">Criminal</option>
-            <option value="2">Familiar</option>
-            <option value="3">Trabalhista</option>
+            {% if processo.tipologia == '0' %}
+              <option value="0" selected="selected">Cível</option>
+              <option value="1">Criminal</option>
+              <option value="2">Familiar</option>
+              <option value="3">Trabalhista</option>
+              {% elif processo.tipologia == '1'%}
+              <option value="0">Cível</option>
+              <option value="1" selected="selected">Criminal</option>
+              <option value="2">Familiar</option>
+              <option value="3">Trabalhista</option>
+              {% elif processo.tipologia == '2'%}
+              <option value="0">Cível</option>
+              <option value="1">Criminal</option>
+              <option value="2" selected="selected">Familiar</option>
+              <option value="3">Trabalhista</option>
+              {% else %}
+              <option value="0">Cível</option>
+              <option value="1">Criminal</option>
+              <option value="2">Familiar</option>
+              <option value="3" selected="selected">Trabalhista</option>
+            {% endif %}
           </select>
           {{ form.tipo.errors }}
         </div>

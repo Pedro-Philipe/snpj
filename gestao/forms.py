@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import filesizeformat
 
 
-from adesao.models import Usuario, Uf
+from adesao.models import Usuario, Uf, Processo
 
 from ckeditor.widgets import CKEditorWidget
 
@@ -63,3 +63,8 @@ class AlterarUsuarioForm(ModelForm):
     class Meta:
         model = User
         fields = ('is_active', 'is_staff', 'email')
+
+class EditarProcessoForm(ModelForm):
+    class Meta:
+        model = Processo
+        fields = ('tipologia', 'data', 'hora_inicio', 'hora_fim', 'descricao', 'documentos')

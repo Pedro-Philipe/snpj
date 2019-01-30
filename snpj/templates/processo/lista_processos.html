@@ -18,12 +18,11 @@
             <tbody>
             {% for processo in object_list %}
                 <tr class="odd gradeX">
-                    <td width="20%">{{ processo.id }}</td>
+                    <td width="25%">{{ processo.id }}</td>
                     <td width="35%">{{ processo.assistido.nome }}</td>
-                    <td width="21%">{{ processo.assistido.cpf }}</td>
-                    <td width="23%">
-                        <a href="{% url 'adesao:editar_processo' processo.id %}">Editar</a> | 
-                        <a href="{% url 'adesao:detalhar_processo' processo.id %}">Visualizar</a>
+                    <td width="25%">{{ processo.assistido.cpf }}</td>
+                    <td align="center">
+                        <a href="{% url 'adesao:editar_processo' processo.id %}">Editar</a>
                     </td>
                 </tr>
             {% endfor %}
