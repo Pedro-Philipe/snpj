@@ -70,7 +70,6 @@ class Assistido(models.Model):
     observacoes = models.TextField(null=True)
     documentos = models.FileField(
         max_length=255,
-        blank=True,
         null=True,
         upload_to='documentos_assistido')
 

@@ -83,8 +83,8 @@ class CadastrarAssistidoForm(forms.ModelForm):
 
     class Meta:
         model = Assistido
-        fields = ('nome', 'rg', 'cpf',   'profissao', 'endereco_residencial', 'endereco_trabalho',
-                  'cep', 'telefone_celular', 'telefone_comercial', 'email', 'observacoes')
+        fields = ('nome', 'rg', 'cpf', 'profissao', 'endereco_residencial', 'endereco_trabalho',
+                  'cep', 'telefone_celular', 'telefone_comercial', 'email', 'observacoes', 'documentos')
 
     def clean_email(self):
         try:
