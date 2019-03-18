@@ -1,189 +1,197 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" dir="ltr">
 
 <head>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Lorem Ipsum</title>
-  {% load staticfiles %}
-  <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon" />
-  <link rel="apple-touch-icon" href="{% static 'img/touch_icon.png' %}">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Lorem Ipsum</title>
+    {% load staticfiles %}
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon"/>
+    <link rel="apple-touch-icon" href="{% static 'img/touch_icon.png' %}">
 
-  <!-- Plone CSS - only for preview, will be removed in rules.xml -->
-  <link media="screen" href="{% static 'css/plone.css' %}" type="text/css" rel="stylesheet" id="plone-css">
-  <!-- Theme CSS - only for preview, will be removed in rules and added in CSS registry -->
-  <!--<link media="all" href="{% static 'css/mainLogin.css' %}" type="text/css" rel="stylesheet" id="main-css"> -->
-  <link media="all" href="{% static 'css/insideLogin.css' %}" type="text/css" rel="stylesheet" id="main-css">
-{#  <link media="all" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" rel="stylesheet">#}
+    <!-- Plone CSS - only for preview, will be removed in rules.xml -->
+    <link media="screen" href="{% static 'css/plone.css' %}" type="text/css" rel="stylesheet" id="plone-css">
+    <!-- Theme CSS - only for preview, will be removed in rules and added in CSS registry -->
+    <!--<link media="all" href="{% static 'css/mainLogin.css' %}" type="text/css" rel="stylesheet" id="main-css"> -->
+    <link media="all" href="{% static 'css/insideLogin.css' %}" type="text/css" rel="stylesheet" id="main-css">
+    {#  <link media="all" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" rel="stylesheet">#}
 
-  <link media="all" href="{% static 'css/styleLogin.css' %}" type="text/css" rel="stylesheet"></head>
-  <link media="all" href="{% static 'css/required.css' %}" type="text/css" rel="stylesheet"></head>
-  <link media="all" href="{% static 'css/jquery-ui.min.css'%}" type="text/css" rel="stylesheet"></head>
-  <link media="all" href="http://ericjgagnon.github.io/wickedpicker/wickedpicker/wickedpicker.min.css" type="text/css" rel="stylesheet"></head>
+    <link media="all" href="{% static 'css/styleLogin.css' %}" type="text/css" rel="stylesheet">
+</head>
+<link media="all" href="{% static 'css/required.css' %}" type="text/css" rel="stylesheet">
+</head>
+<link media="all" href="{% static 'css/jquery-ui.min.css' %}" type="text/css" rel="stylesheet">
+</head>
+<link media="all" href="http://ericjgagnon.github.io/wickedpicker/wickedpicker/wickedpicker.min.css" type="text/css"
+      rel="stylesheet">
+</head>
 
-<script src="{% static 'js/jquery.min.js' %}" ></script>
+<script src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static 'js/jquery.mask.min.js' %}"></script>
 <script src="{% static 'js/jquery.formatter.min.js' %}"></script>
 <script src="{% static 'js/jquery-ui.min.js' %}"></script>
-<script src="{% static 'js/datepicker.js' %}" ></script>
+<script src="{% static 'js/datepicker.js' %}"></script>
 <script src="{% static 'js/leaflet.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/wickedpicker.js' %}"></script>
 
 <script type="text/javascript">
 
-  $(document).ready(function() {
+    $(document).ready(function () {
 
-    $("body").prepend('<div id="overlay" style="height: 100%; width: 100%; opacity: 0.3; z-index: 100; position: fixed; background: url({% static "img/spinner.gif"%}) no-repeat center center; background-color: gray; display: none;"></div>');
+        $("body").prepend('<div id="overlay" style="height: 100%; width: 100%; opacity: 0.3; z-index: 100; position: fixed; background: url({% static "img/spinner.gif"%}) no-repeat center center; background-color: gray; display: none;"></div>');
 
-    $(".add").click(function() {
-      $(".telefone2").fadeIn();
+        $(".add").click(function () {
+            $(".telefone2").fadeIn();
+        });
+
+        $(".date").datepicker({});
+
+        $('.time').wickedpicker({
+            twentyFour: true,
+            timeSeparator: ':',
+            title: 'Escolha o horário'
+        });
+
+        $('#id_confirmar_email').bind("cut copy paste", function (e) {
+            e.preventDefault();
+        });
+
+        {% verbatim %}
+            $(".cnpj").formatter({
+                'pattern': '{{99}}.{{999}}.{{999}}/{{9999}}-{{99}}',
+                'persistent': false,
+            });
+            $(".cpf").formatter({
+                'pattern': '{{999}}.{{999}}.{{999}}-{{99}}',
+                'persistent': false,
+            });
+            $(".cep").formatter({
+                'pattern': '{{99}}.{{999}}-{{999}}',
+                'persistent': false,
+            });
+
+            $(".telefone").mask('(00)00000-0000')
+
+        {% endverbatim %}
     });
-
-    $(".date").datepicker({
+    $("form").submit(function () {
+        $('.telefone').unmask();
+        $('#overlay').show();
+        return true;
     });
-
-    $('.time').wickedpicker({
-      twentyFour: true,
-      timeSeparator: ':',
-      title:'Escolha o horário'
-    });
-
-    $('#id_confirmar_email').bind("cut copy paste", function(e) {
-      e.preventDefault();
-    });
-
-    {% verbatim %}
-    $(".cnpj").formatter({
-      'pattern': '{{99}}.{{999}}.{{999}}/{{9999}}-{{99}}',
-      'persistent': false,
-    });
-    $(".cpf").formatter({
-      'pattern': '{{999}}.{{999}}.{{999}}-{{99}}',
-      'persistent': false,
-    });
-    $(".cep").formatter({
-      'pattern': '{{99}}.{{999}}-{{999}}',
-      'persistent': false,
-    });
-
-    $(".telefone").mask('(00)00000-0000')
-
-    {% endverbatim %}
-  });
-  $("form").submit(function() {
-    $('.telefone').unmask();
-    $('#overlay').show();
-    return true;
-  });
 </script>
 
 <body>
 <div id="particle-canvas"></div>
 
-  <div id="wrapper">
+<div id="wrapper">
 
     <!-- HEADER -->
 
     <div id="header" role="banner">
 
-      <div>
+        <div>
 
-        <div id="logo">
-          <a href="{% url 'adesao:index' %}" title="#">
-            <span id="portal-title">Nome da logo</span>
-            <span id="portal-description" style="color:#ffffff">Subtítulo</span>
-          </a>
+            <div id="logo">
+                <a href="{% url 'adesao:index' %}" title="#">
+                    <span id="portal-title">Nome da logo</span>
+                    <span id="portal-description" style="color:#ffffff">Subtítulo</span>
+                </a>
+
+            </div>
+
+
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+
+            <div id="social-icons">
+                <ul>
+                    <li id="portalredes-facebook" class="portalredes-item">
+                        <a href="#" title="Facebook" target="_blank">
+                        </a>
+                    </li>
+                    <li id="portalredes-twitter" class="portalredes-item">
+                        <a href="#" title="Twitter" target="_blank">
+                        </a>
+                    </li>
+                    <li id="portalredes-youtube" class="portalredes-item">
+                        <a href="#" title="Youtube" target="_blank">
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
         </div>
-
-
-        <br />
-        <br />
-        <br />
-        <br />
-
-
-        <div id="social-icons">
-          <ul>
-            <li id="portalredes-facebook" class="portalredes-item">
-              <a href="#" title="Facebook" target="_blank">
-              </a>
-            </li>
-            <li id="portalredes-twitter" class="portalredes-item">
-              <a href="#" title="Twitter" target="_blank">
-              </a>
-            </li>
-            <li id="portalredes-youtube" class="portalredes-item">
-              <a href="#" title="Youtube" target="_blank">
-              </a>
-            </li>
-          </ul>
+        <div id="sobre">
+            <ul>
+                <li id="link-sobre">
+                    <a href="#">Sobre</a>
+                </li>
+                |
+                <li id="link-sobre">
+                    <a href="#" target="_blank">Perguntas frequentes</a>
+                </li>
+                |
+                <li id="link-central">
+                    <a href="{% url 'adesao:faleconosco' %}">Fale conosco</a>
+                </li>
+            </ul>
         </div>
-
-      </div>
-      <div id="sobre">
-        <ul>
-          <li id="link-sobre">
-            <a href="#">Sobre</a>
-          </li>
-          |
-          <li id="link-sobre">
-            <a href="#" target="_blank">Perguntas frequentes</a>
-          </li>
-          |
-          <li id="link-central">
-            <a href="{% url 'adesao:faleconosco' %}">Fale conosco</a>
-          </li>
-        </ul>
-      </div>
     </div>
 
     <!-- content -->
 
     <div id="main" role="main">
-      <div id="plone-content">
-        <!-- Demo Plone Content -->
-        <div id="portal-columns" class="row">
-          <!-- Column 1 -->
-          <div id="navigation">
-            <a name="anavigation" id="anavigation"></a>
-            <span class="menuTrigger">Menu</span>
-            <div id="portal-column-one" class="cell width-1:4 position-0">
-              {% if request.user.is_authenticated %}
-              <div class="portletWrapper" id="" data-portlethash="">
-                <dl class="portlet portletNavigationTree">
-                  <dt class="portletHeader">
-                    <span class="portletTopLeft"></span>
-                    <a href="#" class="tile ui-droppable">Menu Principal</a>
-                    <span class="portletTopRight"></span>
-                  </dt>
-                  <dd class="portletItem lastItem">
-                      <ul class="navTree navTreeLevel0">
-                        <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
-                          <a href="{% url 'adesao:index' %}" title="" class="state-published navTreeFolderish contenttype-folder">
-                            <span>Inicio</span>
-                          </a>
-                        </li>
-                      </ul>
+        <div id="plone-content">
+            <!-- Demo Plone Content -->
+            <div id="portal-columns" class="row">
+                <!-- Column 1 -->
+                <div id="navigation">
+                    <a name="anavigation" id="anavigation"></a>
+                    <span class="menuTrigger">Menu</span>
+                    <div id="portal-column-one" class="cell width-1:4 position-0">
+                        {% if request.user.is_authenticated %}
+                            <div class="portletWrapper" id="" data-portlethash="">
+                                <dl class="portlet portletNavigationTree">
+                                    <dt class="portletHeader">
+                                        <span class="portletTopLeft"></span>
+                                        <a href="#" class="tile ui-droppable">Menu Principal</a>
+                                        <span class="portletTopRight"></span>
+                                    </dt>
+                                    <dd class="portletItem lastItem">
+                                        <ul class="navTree navTreeLevel0">
+                                            <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
+                                                <a href="{% url 'adesao:index' %}" title=""
+                                                   class="state-published navTreeFolderish contenttype-folder">
+                                                    <span>Inicio</span>
+                                                </a>
+                                            </li>
+                                        </ul>
 
 
-                      <ul class="navTree navTreeLevel0">
-                        <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
-                            <a href="{% url 'adesao:cadastrar_eventos' %}" title="" class="state-published navTreeFolderish contenttype-folder">
-                            <span>Criar evento</span>
-                          </a>
-                        </li>
-                      </ul>
+                                        <ul class="navTree navTreeLevel0">
+                                            <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
+                                                <a href="{% url 'adesao:cadastrar_eventos' %}" title=""
+                                                   class="state-published navTreeFolderish contenttype-folder">
+                                                    <span>Criar evento</span>
+                                                </a>
+                                            </li>
+                                        </ul>
 
-                      <ul class="navTree navTreeLevel0">
-                          <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
-                              <a href="{% url 'adesao:listar_eventos' %}" title="" class="state-published navTreeFolderish contenttype-folder">
-                                  <span>Eventos</span>
-                              </a>
-                          </li>
-                      </ul>
+                                        <ul class="navTree navTreeLevel0">
+                                            <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
+                                                <a href="{% url 'adesao:listar_eventos' %}" title=""
+                                                   class="state-published navTreeFolderish contenttype-folder">
+                                                    <span>Eventos</span>
+                                                </a>
+                                            </li>
+                                        </ul>
 
-                      <!-- <ul class="navTree navTreeLevel0">
+                                        <!-- <ul class="navTree navTreeLevel0">
                         <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
                             <a href="{% url 'adesao:cadastrar_assistido'%}" title="" class="state-published navTreeFolderish contenttype-folder">
                             <span>Cadastrar Assistido</span>
@@ -191,104 +199,116 @@
                         </li>
                       </ul> -->
 
-                      <ul class="navTree navTreeLevel0">
-                          <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
-                              <a href="{% url 'adesao:listar_assistidos'%}" title="" class="state-published navTreeFolderish contenttype-folder">
-                                  <span>Assistidos</span>
-                              </a>
-                          </li>
-                      </ul>
+                                        <ul class="navTree navTreeLevel0">
+                                            <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
+                                                <a href="{% url 'adesao:listar_assistidos' %}" title=""
+                                                   class="state-published navTreeFolderish contenttype-folder">
+                                                    <span>Assistidos</span>
+                                                </a>
+                                            </li>
+                                        </ul>
 
-                      <ul class="navTree navTreeLevel0">
-                          <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
-                              <a href="{% url 'adesao:criar_processo'%}" title="" class="state-published navTreeFolderish contenttype-folder">
-                                  <span>Criar Processo</span>
-                              </a>
-                          </li>
-                      </ul>
+                                        <ul class="navTree navTreeLevel0">
+                                            <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
+                                                <a href="{% url 'adesao:criar_processo' %}" title=""
+                                                   class="state-published navTreeFolderish contenttype-folder">
+                                                    <span>Criar Processo</span>
+                                                </a>
+                                            </li>
+                                        </ul>
 
-                      <ul class="navTree navTreeLevel0">
-                          <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
-                              <a href="{% url 'adesao:lista_processos'%}" title="" class="state-published navTreeFolderish contenttype-folder">
-                                  <span>Processos</span>
-                              </a>
-                          </li>
-                      </ul>
+                                        <ul class="navTree navTreeLevel0">
+                                            <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
+                                                <a href="{% url 'adesao:lista_processos' %}" title=""
+                                                   class="state-published navTreeFolderish contenttype-folder">
+                                                    <span>Processos</span>
+                                                </a>
+                                            </li>
+                                        </ul>
 
-                    <span class="portletBottomLeft"></span>
-                    <span class="portletBottomRight"></span>
-                  </dd>
-                </dl>
-              </div>
-              {% endif %}
-              {% block menu %}
-              {% endblock menu %}
-              {% if request.user.is_authenticated %}
-              <div class="portletWrapper" id="portletwrapper-706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f706f7274616c0a736f627265" data-portlethash="706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f706f7274616c0a736f627265">
-                <dl class="portlet portletNavigationTree">
-                  <dt class="portletHeader">
-                    <span class="portletTopLeft"></span>
-                    <a href="#" class="tile ui-droppable">Configurações</a>
-                    <span class="portletTopRight"></span>
-                  </dt>
-                  <dd class="portletItem lastItem">
-                    <ul class="navTree navTreeLevel0">
-                      <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
-                        <a href="{% url 'mudar_senha' %}" title="" class="state-published navTreeFolderish contenttype-folder">
-                          <span>Alterar Senha</span>
-                        </a>
-                      </li>
-                      <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-b">
-                        <a href="{% url 'adesao:logout' %}" title="" class="state-published navTreeFolderish contenttype-folder">
-                          <span>Sair</span>
-                        </a>
-                      </li>
-                    </ul>
-                    <span class="portletBottomLeft"></span>
-                    <span class="portletBottomRight"></span>
-                  </dd>
-                </dl>
-              </div>
-              {% endif %}
+                                        <span class="portletBottomLeft"></span>
+                                        <span class="portletBottomRight"></span>
+                                    </dd>
+                                </dl>
+                            </div>
+                        {% endif %}
+                        {% block menu %}
+                        {% endblock menu %}
+                        {% if request.user.is_authenticated %}
+                            <div class="portletWrapper"
+                                 id="portletwrapper-706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f706f7274616c0a736f627265"
+                                 data-portlethash="706c6f6e652e6c656674636f6c756d6e0a636f6e746578740a2f706f7274616c0a736f627265">
+                                <dl class="portlet portletNavigationTree">
+                                    <dt class="portletHeader">
+                                        <span class="portletTopLeft"></span>
+                                        <a href="#" class="tile ui-droppable">Configurações</a>
+                                        <span class="portletTopRight"></span>
+                                    </dt>
+                                    <dd class="portletItem lastItem">
+                                        <ul class="navTree navTreeLevel0">
+                                            <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-a">
+                                                <a href="{% url 'mudar_senha' %}" title=""
+                                                   class="state-published navTreeFolderish contenttype-folder">
+                                                    <span>Alterar Senha</span>
+                                                </a>
+                                            </li>
+                                            <li class="navTreeItem visualNoMarker navTreeFolderish section-sobre-b">
+                                                <a href="{% url 'adesao:logout' %}" title=""
+                                                   class="state-published navTreeFolderish contenttype-folder">
+                                                    <span>Sair</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <span class="portletBottomLeft"></span>
+                                        <span class="portletBottomRight"></span>
+                                    </dd>
+                                </dl>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row" style="width: 1000px; margin-left: 20%;">
+                    <div class="col-md-1 col-md-offset-5">
+                        <div id="content">{% block content %}{% endblock content %}</div>
+                    </div>
+                </div>
+                <!-- Conteudo -->
+                {#          <div id="portal-column-content" class="cell width-1:2 position-1:4">#}
+                {#            <a name="acontent" id="acontent"></a>#}
+                {##}
+                {#            <div id="main-content" class="">#}
+                {##}
+                {#              <div id="content">{% block content %}{% endblock content %}</div>#}
+                {#            </div>#}
+                {#          </div>#}
+
+                {% block content2 %}{% endblock content2 %}
             </div>
-          </div>
 
-          <!-- Conteudo -->
-          <div id="portal-column-content" class="cell width-1:2 position-1:4">
-            <a name="acontent" id="acontent"></a>
-
-            <div id="main-content" class="">
-
-              <div id="content">{% block content %}{% endblock content %}</div>
-            </div>
-          </div>
-
-          {% block content2 %}{% endblock content2 %}
-        </div>
-
-        <!-- /Demo Plone Content -->
+            <!-- /Demo Plone Content -->
 
         </div>
 
         <div class="clear"></div>
 
-      </div>
+    </div>
 
-      <!-- Footer -->
-      <div id="footer" role="contentinfo">
+    <!-- Footer -->
+    <div id="footer" role="contentinfo">
 
-          <div class="clear"></div>
-          <div id="footer-brasil" class="footer-logos">
-              <div>
-                  <a href="#" class="logo-right-footer">
-                      <img src="#" alt="Lorem Ipsum" />
-                  </a>
-                  <a href="#" class="logo-left-footer">
-                      <img src="#" alt="Lorem Ipsum" />
-                  </a>
-              </div>
-          </div>
-      </div>
+        <div class="clear"></div>
+        <div id="footer-brasil" class="footer-logos">
+            <div>
+                <a href="#" class="logo-right-footer">
+                    <img src="#" alt="Lorem Ipsum"/>
+                </a>
+                <a href="#" class="logo-left-footer">
+                    <img src="#" alt="Lorem Ipsum"/>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- /Footer-->
 

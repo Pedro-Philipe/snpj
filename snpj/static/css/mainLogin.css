@@ -91,7 +91,7 @@ body {
 	-webkit-font-smoothing: subpixel-antialiased;
 	-webkit-text-size-adjust: 100%;
 	cursor:default;
-  background-image:url("http://agedcare.com.my/wp-content/uploads/2016/01/31289912_m.jpg");
+    /*background-image:url("http://agedcare.com.my/wp-content/uploads/2016/01/31289912_m.jpg");*/
     background-size: cover;
     background-repeat: no-repeat;
 }

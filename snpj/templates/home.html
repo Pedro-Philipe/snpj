@@ -1,9 +1,11 @@
 {% extends "base.html" %} {% load i18n %} {% block content %}
-<h2>{% blocktrans %}Título da tela home{% endblocktrans %}
-  <a class="anchorjs-link" href="#auto-truncating">
-    <span class="anchorjs-icon"></span>
-  </a>
-</h2>
-
-home
+    <h2>{% blocktrans %}{% endblocktrans %}
+        <div class="col-sm-8" style="width: 80%;">
+            <h2 class="text-center">Tela Inicial</h2>
+        </div>
+        <span> Bem - vindo ao SNPJ!</span>
+        <a class="anchorjs-link" href="#auto-truncating">
+            <span class="anchorjs-icon"></span>
+        </a>
+    </h2>
 {% endblock content %}

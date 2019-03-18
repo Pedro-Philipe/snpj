@@ -2,7 +2,7 @@
 {% load gestao_tags %}
 {% block content %}
     <div class="dataTable_wrapper">
-        <h1 class="header text-center">DETALHES USUARIO</h1>
+        <h1 class="header text-center">Detalhe Usuário</h1>
         <br/>
         <div class="panel panel-primary">
             <div class="panel-heading">Detalhes dos usuarios cadastrados</div>
@@ -21,21 +21,39 @@
                 </div>
                 <div>
                     <label>CPF</label>
-                    <input type="text" class="form-control" value="{{ usuario }}" disabled>
+                    <input type="text" class="form-control" value="{{ user.username }}" disabled>
                 </div>
                 <div>
                     <label>Email</label>
-                    <input type="text" class="form-control" value="{{ user.email}}" disabled>
+                    <input type="text" class="form-control" value="{{ user.email }}" disabled>
                 </div>
                 <div>
                     <label>Administrador</label>
-                {% if user.is_staff %}
-                    <input type="text" class="form-control" value="Sim" disabled>
-                {% else %}
-                    <input type="text" class="form-control" value="Não" disabled>
-                {% endif%}
+                    <select class="form-control" id="perfil_usuario" name="perfil">
+                        {% if user.is_staff %}
+                            <option value="Sim" selected>Sim</option>
+                        {% else %}
+                            <option value="Não" selected>Não</option>
+                        {% endif %}
+                    </select>
                 </div>
-                
+                <div>
+                    <label>Desativar Usuario:</label>
+                    <select class="form-control" id="active_usuario" name="activer_user">
+                        {% if user.is_active %}
+                            <option value="Sim" selected>Sim</option>
+                        {% else %}
+                            <option value="Não" selected>Não</option>
+                        {% endif %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <br/>
+                        <input type="submit" class="btn btn-primary btn-small center-block" value="Salvar">
+                    </div>
+                </div>
+
                 <br/>
             </div>
         </div>
