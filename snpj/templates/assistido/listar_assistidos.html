@@ -2,76 +2,77 @@
 {% load gestao_tags %}
 {% csrf_token %}
 {% block content %}
-<div class="dataTable_wrapper" style="width: 80%;">
-  <table class="table table-striped table-bordered table-hover dt-responsive" id="dataTables-example">
-      <div align="center">
-          <h3>LISTA DE ASSISTIDOS</h3>
-      </div>
-    </br>
-    <div align="left">
-        <input id="searchInput" type="text" class="cpf form-control input-lg" placeholder="Digite o CPF" />
-        <a id="pesquisar" href="#">Buscar</a> | <a href="{{ request.path }}">Limpar</a>
-    </div>
-    </br>
-    {% if object_list%}
-    <thead>
-      <tr>
-        <th>NOME</th>
-        <th align="left">CPF</th>
-        <th align="center">&nbsp;</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for assistido in object_list %}
-        <tr class="odd gradeX">
-            <td width="43%">{{assistido.nome}}</td>
-            <td width="35%">{{assistido.cpf}}</td>
-            <td align="center">
-              <a 
-                type="button"
-                class="btn btn-info"
-                href="{% url 'adesao:editar_assistido' assistido.id %}">
-                Editar
-              </a> | <a href="{% url 'adesao:detalhar_assistido' assistido.id %}">Visualizar</a>
-            </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-      {% else %}
-    <div align="center">
-        <p>Nenhum dado encontrado.</p>
-    </div>
-    {% endif%}
+    <div class="dataTable_wrapper">
+        <table class="table table-striped table-bordered table-hover dt-responsive" id="dataTables-example">
+            <div align="center">
+                <h3>LISTA DE ASSISTIDOS</h3>
+            </div>
+            </br>
+            <div align="left">
+                <input id="searchInput" type="text" class="cpf form-control input-lg" placeholder="Digite o CPF"/>
+                <a id="pesquisar" href="#">Buscar</a> | <a href="{{ request.path }}">Limpar</a>
+            </div>
+            </br>
+            {% if object_list %}
+                <thead>
+                <tr>
+                    <th>NOME</th>
+                    <th align="left">CPF</th>
+                    <th align="center">&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for assistido in object_list %}
+                    <tr class="odd gradeX">
+                        <td width="43%">{{ assistido.nome }}</td>
+                        <td width="35%">{{ assistido.cpf }}</td>
+                        <td align="center">
+                            <a
+                                    type="button"
+                                    class="btn btn-info"
+                                    href="{% url 'adesao:editar_assistido' assistido.id %}">
+                                Editar
+                            </a> | <a href="{% url 'adesao:detalhar_assistido' assistido.id %}">Visualizar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            {% else %}
+                <div align="center">
+                    <p>Nenhum dado encontrado.</p>
+                </div>
+            {% endif %}
 
-  </table>
-  {% if is_paginated %}
-  <div style="float:right;">
-    {% if page_obj.has_previous %}
-      <a class="paginate_button previous" href="?{% url_replace 'page' page_obj.previous_page_number %}">Anterior</a>
-    {% endif %}
-      <a>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</a>
-    {% if page_obj.has_next %}
-      <a class="paginate_button next" href="?{% url_replace 'page' page_obj.next_page_number %}">Próximo</a>
-    {% endif %}
-  </div>
-  </div>
-  {% endif %}
-  <br>
-</div>
+        </table>
+        {% if is_paginated %}
+            <div style="float:right;">
+                {% if page_obj.has_previous %}
+                    <a class="paginate_button previous" href="?{% url_replace 'page' page_obj.previous_page_number %}">Anterior</a>
+                {% endif %}
+                <a>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</a>
+                {% if page_obj.has_next %}
+                    <a class="paginate_button next"
+                       href="?{% url_replace 'page' page_obj.next_page_number %}">Próximo</a>
+                {% endif %}
+            </div>
+            </div>
+        {% endif %}
+    <br>
+    </div>
 {% endblock content %}
 {% block js %}
     <script type="text/javascript">
         $(document).ready(function () {
-          {% verbatim %}
-          $(".cpf").formatter({
-            'pattern': '{{999}}.{{999}}.{{999}}-{{99}}',
-            'persistent': false,
-          });
-          {% endverbatim %}
+            {% verbatim %}
+                $(".cpf").formatter({
+                    'pattern': '{{999}}.{{999}}.{{999}}-{{99}}',
+                    'persistent': false,
+                });
+            {% endverbatim %}
 
-          $("#pesquisar").click(function () {
-              location.href = '{{ request.path }}?q='+ $('#searchInput').val();
-          });
+            $("#pesquisar").click(function () {
+                location.href = '{{ request.path }}?q=' + $('#searchInput').val();
+            });
         });
     </script>
 {% endblock js %}

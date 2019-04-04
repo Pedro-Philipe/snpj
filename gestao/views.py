@@ -9,7 +9,8 @@ from django.views.generic.edit import FormView, UpdateView
 from adesao.models import Usuario, Assistido, Processo
 
 from .forms import AlterarUsuarioForm, \
-                   EditarProcessoForm
+                   EditarProcessoForm, \
+                   UpdateUsuarioForm
 
 import os
 from django.conf import settings
@@ -34,9 +35,13 @@ def alterar_situacao(request, id):
 #     processo = Processo.objects.get(id=id)
 #     return render(request, 'gestao/upload_processo.html', context={'processo':processo})
 
-def detalhesUsuario(request, id):
+def detalhesUsuario(request, id ):
     usuario = Usuario.objects.get(id=id)
     user = User.objects.get(id=id)
+    form = UpdateUsuarioForm(request.POST, instance=usuario)
+    if form.is_valid():
+        form.save()
+        return redirect("/gestao/usuarios")
     return render(request, 'gestao/detalhe_usuario.html', context={'usuario':usuario, 'user':user})
 
 def detalhesAssistido(request, id):
@@ -48,7 +53,21 @@ class EditarProcesso(UpdateView):
     model = Processo
     success_url = reverse_lazy('gestao:processos')
     form_class = EditarProcessoForm
-    
+
+class UpdateUsuario(UpdateView):
+    template_name = 'gestao/detalhe_usuario.html'
+    model = User
+    success_url = reverse_lazy('gestao:usuarios')
+    form_class = UpdateUsuarioForm
+
+def update(request, id):
+    usuario = Usuario.objects.get(id=id)
+    form = UpdateUsuarioForm(request.POST, instance = usuario)
+    if form.is_valid():
+        form.save()
+        return redirect("/gestao/usuarios")
+    return render(request, 'gestao/detalhe_usuario.html', {'usuario': usuario})
+
 class ListarUsuarios(ListView):
     model = Usuario
     template_name = 'gestao/listar_usuarios.html'

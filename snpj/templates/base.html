@@ -268,20 +268,15 @@
                     </div>
                 </div>
 
-                <div class="row" style="width: 1000px; margin-left: 20%;">
-                    <div class="col-md-1 col-md-offset-5">
+                <!-- Conteudo -->
+                <div id="portal-column-content" class="cell width-1:2 position-1:4">
+                    <a name="acontent" id="acontent"></a>
+
+                    <div id="main-content" class="">
+
                         <div id="content">{% block content %}{% endblock content %}</div>
                     </div>
                 </div>
-                <!-- Conteudo -->
-                {#          <div id="portal-column-content" class="cell width-1:2 position-1:4">#}
-                {#            <a name="acontent" id="acontent"></a>#}
-                {##}
-                {#            <div id="main-content" class="">#}
-                {##}
-                {#              <div id="content">{% block content %}{% endblock content %}</div>#}
-                {#            </div>#}
-                {#          </div>#}
 
                 {% block content2 %}{% endblock content2 %}
             </div>
