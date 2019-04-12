@@ -9,7 +9,7 @@
 
             <div class="form-group">
                 <div class="col-sm-7">
-                    <label for="{{ form.cpf.id_for_label }}" class="required">Cpf</label>
+                    <label for="{{ form.cpf.id_for_label }}" class="required">CPF</label>
                     {% render_field form.cpf class="form-control cpf" %} {% if form.cpf.errors %}
                     <div class="alert alert-danger">
                         {{ form.cpf.errors }}
@@ -119,6 +119,7 @@
                     {% render_field form.observacoes class="form-control" %} {{ form.observacoes.errors }}
                 </div>
             </div>
+            <br>
             <div class="form-group">
                 <div class="col-sm-7">
                     <label for="{{ form.documentos.id_for_label }}" class="required">Anexar Documentos Pessoais : </label>

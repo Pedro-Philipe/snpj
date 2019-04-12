@@ -2,42 +2,67 @@
 {% load gestao_tags %}
 {% block content %}
     <div class="dataTable_wrapper">
-        <h1 class="header text-center">DETALHES USUARIO</h1>
+        <h1 class="header text-center">Detalhe Usuário</h1>
         <br/>
-        <div class="panel panel-primary">
-            <div class="panel-heading">Detalhes dos usuarios cadastrados</div>
-            <div class="panel-body">
-                <div>
-                    <label>Matrícula</label>
-                    <input type="text" class="form-control" value="{{ usuario.id }}" disabled>
+        <form method="post" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.errors }}
+            <div class="panel panel-primary">
+                <div class="panel-heading">Detalhes dos usuarios cadastrados</div>
+                <div class="panel-body">
+                    <div>
+                        <label>Matrícula</label>
+                        <input type="text" class="form-control" value="{{ usuario.id }}" disabled>
+                    </div>
+                    <div>
+                        <label>Nome</label>
+                        <input type="text" class="form-control" value="{{ usuario.nome_usuario }}" disabled>
+                    </div>
+                    <div>
+                        <label>Data de Cadastro</label>
+                        <input type="text" class="form-control" value="{{ usuario.data_cadastro }}" disabled>
+                    </div>
+                    <div>
+                        <label>CPF</label>
+                        <input type="text" class="form-control" value="{{ user.username }}" disabled>
+                    </div>
+                    <div>
+                        <label>Email</label>
+                        <input type="text" class="form-control" value="{{ user.email }}" disabled>
+                    </div>
+                    <div>
+                        <label>Administrador</label>
+                        <select class="form-control" id="perfil_usuario" name="perfil">
+                            {% if user.is_staff %}
+                                <option value="Sim" selected>Sim</option>
+                                <option value="Não">Não</option>
+                            {% else %}
+                                <option value="Sim">Sim</option>
+                                <option value="Não" selected>Não</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                    <div>
+                        <label>Usuario Desativado:</label>
+                        <select class="form-control" id="active_usuario" name="activer_user">
+                            {% if user.is_active %}
+                                <option value="true">Sim</option>
+                                <option value="false" selected>Não</option>
+                            {% else %}
+                                <option value="true" selected>Sim</option>
+                                <option value="false">Não</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <br/>
+                            <input type="submit" class="btn btn-primary btn-small center-block" value="Salvar">
+                        </div>
+                    </div>
+                    <br/>
                 </div>
-                <div>
-                    <label>Nome</label>
-                    <input type="text" class="form-control" value="{{ usuario.nome_usuario }}" disabled>
-                </div>
-                <div>
-                    <label>Data de Cadastro</label>
-                    <input type="text" class="form-control" value="{{ usuario.data_cadastro }}" disabled>
-                </div>
-                <div>
-                    <label>CPF</label>
-                    <input type="text" class="form-control" value="{{ usuario }}" disabled>
-                </div>
-                <div>
-                    <label>Email</label>
-                    <input type="text" class="form-control" value="{{ user.email}}" disabled>
-                </div>
-                <div>
-                    <label>Administrador</label>
-                {% if user.is_staff %}
-                    <input type="text" class="form-control" value="Sim" disabled>
-                {% else %}
-                    <input type="text" class="form-control" value="Não" disabled>
-                {% endif%}
-                </div>
-                
-                <br/>
             </div>
-        </div>
+        </form>
     </div>
 {% endblock %}

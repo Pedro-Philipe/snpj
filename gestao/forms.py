@@ -5,11 +5,9 @@ from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.template.defaultfilters import filesizeformat
 
-
 from adesao.models import Usuario, Uf, Processo
 
 from ckeditor.widgets import CKEditorWidget
-
 
 content_types = [
     'image/png',
@@ -45,7 +43,7 @@ class RestrictedFileField(forms.FileField):
                     raise forms.ValidationError(
                         'O arquivo deve ter menos de %s. Tamanho atual %s'
                         % (filesizeformat(self.max_upload_size),
-                            filesizeformat(file._size)))
+                           filesizeformat(file._size)))
             else:
                 raise forms.ValidationError(
                     'Arquivos desse tipo não são aceitos.')
@@ -64,7 +62,13 @@ class AlterarUsuarioForm(ModelForm):
         model = User
         fields = ('is_active', 'is_staff', 'email')
 
+
 class EditarProcessoForm(ModelForm):
     class Meta:
         model = Processo
         fields = ('tipologia', 'data', 'hora_inicio', 'hora_fim', 'descricao', 'documentos')
+
+class UpdateUsuarioForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = "__all__"

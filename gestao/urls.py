@@ -8,12 +8,11 @@ urlpatterns = [
         login_url='adesao:login'), name='index'),
 
     url(r'^calendario/$', views.calendario, name='calendario'),
-    
+
     url(r'^usuarios/',
         staff_member_required(
             views.ListarUsuarios.as_view(),
             login_url='adesao:login'), name='usuarios'),
-
     url(r'^assistidos/',
         staff_member_required(
             views.ListarAssistido.as_view(),
@@ -22,7 +21,7 @@ urlpatterns = [
         staff_member_required(
             views.ListarProcesso.as_view(),
             login_url='adesao:login'), name='processos'),
-    url(r'^editar-processo/(?P<pk>\d+)/$', 
+    url(r'^editar-processo/(?P<pk>\d+)/$',
         staff_member_required(
             views.EditarProcesso.as_view(),
             login_url='adesao:login'), name='editar_processo'),
