@@ -1,14 +1,16 @@
 {% extends "gestao/base_gestao.html" %}
 {% load gestao_tags %}
+{% load widget_tweaks %}
+{% csrf_token %}
 {% block content %}
     <div class="dataTable_wrapper">
         <h1 class="header text-center">Lista de Assistidos</h1>
         <div class="panel panel-primary">
             <div class="panel-heading">Lista de assistidos para acompanhamento</div>
-            <div align="left">
-                <input id="searchInput" type="text" class="cpf form-control input-lg" placeholder="Digite o CPF"/>
-                <a id="pesquisar" href="#">Buscar</a> | <a href="{{ request.path }}">Limpar</a>
-            </div>
+{#            <div align="left">#}
+{#                <input id="searchInput" type="text" class="cpf form-control input-lg" placeholder="Digite o CPF"/>#}
+{#                <a id="pesquisar" href="#">Buscar</a> | <a href="{{ request.path }}">Limpar</a>#}
+{#            </div>#}
             <div class="panel-body">
                 <table class="table table-bordered" id="dataTables-example">
                     {% if object_list %}
@@ -61,3 +63,19 @@
     </div>
     </div>
 {% endblock content %}
+{% block js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            {% verbatim %}
+                $(".cpf").formatter({
+                    'pattern': '{{999}}.{{999}}.{{999}}-{{99}}',
+                    'persistent': false
+                });
+            {% endverbatim %}
+
+            $("#pesquisar").click(function () {
+                location.href = '{{ request.path }}?q=' + $('#searchInput').val();
+            });
+        });
+    </script>
+{% endblock js %}
